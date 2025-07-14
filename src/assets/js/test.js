@@ -77,8 +77,8 @@ testRunner.addTest('Terminal Engine Initialization', async () => {
 // Test 2: Quiz data loading
 testRunner.addTest('Quiz Data Loading', async () => {
     const responses = await Promise.all([
-        fetch('/assets/data/quiz-ko.json'),
-        fetch('/assets/data/quiz-en.json')
+        fetch('../../assets/data/quiz-ko.json'),
+        fetch('../../assets/data/quiz-en.json')
     ]);
     
     if (!responses[0].ok || !responses[1].ok) {
