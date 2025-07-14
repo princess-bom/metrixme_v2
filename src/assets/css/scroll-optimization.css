@@ -166,10 +166,10 @@ body {
 @supports (padding: max(0px)) {
   body {
     /* 노치/Dynamic Island 고려한 패딩 */
-    padding-top: max(20px, env(safe-area-inset-top));
-    padding-bottom: max(20px, env(safe-area-inset-bottom));
-    padding-left: max(5px, env(safe-area-inset-left));
-    padding-right: max(5px, env(safe-area-inset-right));
+    padding-top: max(5px, env(safe-area-inset-top));
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
   }
   
   .terminal-container {

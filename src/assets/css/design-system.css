@@ -694,8 +694,8 @@ body {
     height: min(100dvh, calc(100vh - 140px));
     display: flex;
     flex-direction: column;
-    padding-top: max(16px, env(safe-area-inset-top));
-    padding-bottom: max(24px, env(safe-area-inset-bottom));
+    padding-top: max(5px, env(safe-area-inset-top));
+    padding-bottom: max(8px, env(safe-area-inset-bottom));
   }
   
   .terminal-header {
