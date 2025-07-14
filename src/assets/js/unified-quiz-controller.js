@@ -73,10 +73,10 @@ class UnifiedQuizController {
      */
     async loadQuizData() {
         try {
-            const response = await fetch(`/assets/data/quiz-${this.language}-fouraxis.json`);
+            const response = await fetch(`../../assets/data/quiz-${this.language}-fouraxis.json`);
             if (!response.ok) {
                 // 4축 데이터가 없으면 기존 데이터 사용
-                const fallbackResponse = await fetch(`/assets/data/quiz-${this.language}.json`);
+                const fallbackResponse = await fetch(`../../assets/data/quiz-${this.language}.json`);
                 if (!fallbackResponse.ok) {
                     throw new Error(`Failed to load quiz data: ${response.status}`);
                 }

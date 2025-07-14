@@ -13,7 +13,7 @@ class QuizEngine {
     // 퀴즈 데이터 로드
     async loadQuizData(shuffleQuestions = true) {
         try {
-            const response = await fetch(`/assets/data/quiz-${this.language}.json`);
+            const response = await fetch(`../../assets/data/quiz-${this.language}.json`);
             if (!response.ok) {
                 throw new Error(`Failed to load quiz data: ${response.status}`);
             }
