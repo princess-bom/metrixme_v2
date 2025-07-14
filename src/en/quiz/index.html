@@ -65,20 +65,41 @@
             background: #000000 !important;
             color: #00FF00 !important;
             font-family: 'Monaco', 'Menlo', 'Courier New', 'D2Coding', monospace;
-            min-height: 100vh;
+            min-height: 100dvh;
             overflow-x: hidden;
             box-sizing: border-box;
         }
 
-        /* body 정렬은 terminal.css에서 관리 - 중복 제거 */
-
-        /* 모바일 최적화 - 미디어 쿼리 767px로 통일 */
-        @media (max-width: 767px) {
+        /* 모바일 전체화면 처리 */
+        @media (max-width: 1023px) {
+            body {
+                padding: 0;
+            }
             
             .terminal-container {
-                margin: 0;
-                width: 100%;
-                border-radius: 8px;
+                width: 100vw !important;
+                max-width: 100vw !important;
+                margin: 0 !important;
+                border-radius: 0 !important;
+            }
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding: 0;
+                padding-top: env(safe-area-inset-top);
+                padding-bottom: env(safe-area-inset-bottom);
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+                min-height: 100dvh;
+            }
+            
+            .terminal-container {
+                width: 100vw !important;
+                max-width: 100vw !important;
+                border-radius: 0 !important;
+                min-height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom)) !important;
+                margin: 0 !important;
             }
             
             .terminal-header {
