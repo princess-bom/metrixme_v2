@@ -662,7 +662,7 @@ body {
 /* 반응형 */
 @media (max-width: 1023px) {
   body {
-    padding: 20px;
+    padding: 0;
   }
   
   .terminal-container {
@@ -682,7 +682,7 @@ body {
 
 @media (max-width: 767px) {
   body {
-    padding: 16px;
+    padding: 0;
     align-items: center;
     justify-content: center;
   }
