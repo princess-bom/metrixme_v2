@@ -528,6 +528,28 @@
     <!-- 기존 퀴즈 엔진 (하위 호환성) -->
     <script type="module" src="../../assets/js/quiz.js"></script>
     <script>
+        // 전문가 조언: 브라우저별 특수 처리
+        const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+        if (/KAKAOTALK/i.test(userAgent)) {
+            document.body.classList.add('is-kakaotalk-webview');
+            console.log('KakaoTalk WebView detected');
+        }
+
+        // 전문가 조언: JavaScript 기반 동적 높이 조정 (100dvh 폴백)
+        function forceFullscreenHeight() {
+            // 실제 뷰포트 높이 (주소창, 하단바 등 제외된 순수 가시 영역)
+            const actualVh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${actualVh}px`);
+            console.log('Dynamic height adjusted:', actualVh * 100 + 'px', 'innerHeight:', window.innerHeight);
+        }
+
+        // 초기 로드 시 한 번 실행
+        forceFullscreenHeight();
+        // 뷰포트 크기 변경 시 (가로/세로 전환, 브라우저 UI 변경) 다시 실행
+        window.addEventListener('resize', forceFullscreenHeight);
+        // iOS에서 주소창이 숨겨지거나 나타날 때 발생하는 'resize' 이벤트에 반응
+        window.addEventListener('orientationchange', forceFullscreenHeight);
+
         document.addEventListener('DOMContentLoaded', function() {
             // 컬러 테마 관리 객체
             const ColorManager = {
