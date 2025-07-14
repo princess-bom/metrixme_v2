@@ -15,7 +15,7 @@ html {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 /* 기본 바디 스타일 - terminal.css에서 정렬 관리하므로 제거 */
@@ -27,6 +27,8 @@ body {
   color: #00FF00;
   overflow-x: hidden;
   min-height: 100dvh;
+  /* Safe Area 처리 */
+  padding-bottom: max(20px, env(safe-area-inset-bottom));
   /* display, align-items, justify-content, padding은 terminal.css에서 관리 */
 }
 
@@ -401,8 +403,8 @@ body {
 ========================= */
 
 .terminal-container {
-  width: 1024px;
-  max-width: 1024px;
+  width: 100%;
+  max-width: min(1024px, calc(100vw - 20px));
   background: #1A1A1A;
   border-radius: 12px;
   box-shadow: 

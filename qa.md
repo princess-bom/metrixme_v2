@@ -1,137 +1,139 @@
-핵심 의문점들에 대한 분석
-1. Safari 특정 보안 정책 문제?
-Safari의 Intelligent Tracking Prevention (ITP)이 영향을 주는가?
-ITP는 주로 교차 사이트 추적 방지에 중점을 두므로, 퀴즈 앱이 Firebase 같은 외부 서비스를 이용할 때 영향을 줄 가능성이 높습니다. 하지만 현재 문제는 fetch().json() 실패라고 하셨고, Firebase가 아닌 로컬/상대 경로 JSON 요청도 문제가 된다면 ITP가 직접적인 원인이 아닐 가능성이 큽니다. ITP는 주로 서드파티 쿠키, 로컬 스토리지 접근 제한, 그리고 추적 관련 도메인에서 로드되는 스크립트 실행 제한 등과 관련이 깊습니다. 만약 순수하게 동일 출처(Same-Origin)에서 JSON 파일을 fetch하는 것이 실패한다면 ITP보다는 다른 문제일 확률이 높습니다.
+모바일 전체 화면 구현 시 놓쳤을 수 있는 것들
+말씀하신 문제 상황과 시도한 해결책들을 보면, CSS 우선순위, 브라우저 기본 스타일, 그리고 모바일 환경 특유의 안전 영역(safe area) 처리가 핵심 원인일 가능성이 높습니다.
 
-로컬/상대 경로 JSON 요청도 차단하는가?
-일반적으로 Safari는 동일 출처(Same-Origin)의 로컬/상대 경로 JSON 요청을 차단하지 않습니다. 이는 웹 표준에 따른 기본 동작입니다. 만약 로컬/상대 경로 JSON 요청도 실패한다면, ITP보다는 네트워크, Content-Type, JSON 파일 자체의 문제 또는 코드 로직상의 문제일 가능성이 훨씬 큽니다.
+1. HTML/CSS 초기화 문제
+body { padding: 0; margin: 0; }은 기본적으로 많이 사용하지만, 브라우저에는 기본적으로 정의된 스타일(User-Agent Stylesheet)이 존재합니다. 특정 요소에 기본 margin이나 padding이 있을 수 있습니다.
 
-2. JSON 파일 자체 문제?
-Safari가 특정 JSON 구조나 인코딩을 거부하는가?
-가능성이 있습니다. JSON 파일의 구조나 인코딩에 문제가 있다면, fetch().json() 메서드가 파싱 과정에서 오류를 발생시킬 수 있습니다. 특히 fetch()로 응답을 받은 후 .json() 메서드를 호출할 때 The string did not match the expected pattern 오류가 발생한다면, 응답 본문이 유효한 JSON 문자열이 아니라는 의미일 가능성이 매우 높습니다. 예를 들어, JSON 파일이 아닌 HTML 오류 페이지가 반환되거나, 불완전하거나 손상된 JSON이 반환될 때 이 오류가 발생할 수 있습니다. UTF-8 인코딩은 웹에서 표준이므로, 다른 인코딩을 사용하고 있다면 문제가 될 수 있습니다.
+HTML 초기화: 가장 기본적인 부분이지만, <!DOCTYPE html> 선언이 올바르게 되어 있는지, 그리고 <html> 요소에도 너비와 높이가 정확히 설정되어 있는지 확인해야 합니다.
 
-파일 크기나 복잡도 제한이 있는가?
-일반적인 경우에는 없습니다. 30KB는 매우 작은 파일이므로, 파일 크기 자체는 문제가 될 가능성이 희박합니다. JSON의 복잡도 역시, 유효한 JSON 형식이라면 브라우저가 파싱하는 데 제한을 두지 않습니다.
+CSS
 
-3. Content-Type 헤더 문제?
-Netlify CDN에서 JSON 파일의 MIME 타입이 잘못 설정되었는가?
-이것은 매우 유력한 원인 중 하나입니다. 서버(Netlify CDN)가 JSON 파일을 서빙할 때 올바른 Content-Type 헤더를 보내지 않으면, Safari를 포함한 브라우저는 해당 응답을 JSON으로 인식하지 못하고 파싱에 실패할 수 있습니다. fetch().json()은 응답의 Content-Type 헤더가 application/json으로 시작하는 것을 기대합니다. 만약 text/html이나 text/plain 등으로 설정되어 있다면 오류가 발생할 수 있습니다.
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* 스크롤 방지 및 잠재적 여백 제거 */
+}
+overflow: hidden;은 불필요한 스크롤바를 없애고, 의도치 않은 여백 생성을 막는 데 도움이 됩니다.
 
-Safari가 application/json 외의 타입을 거부하는가?
-fetch().json() 메서드 자체는 application/json에 매우 엄격합니다. Safari가 다른 브 브라우저보다 Content-Type 헤더 검사에 더 엄격할 수 있지만, 이는 브라우저의 특성이라기보다는 fetch().json() 메서드의 명세 준수 여부와 더 관련이 깊습니다.
+2. 뷰포트(Viewport) 메타 태그의 viewport-fit=cover 재확인 및 initial-scale
+viewport-fit=cover는 노치 디자인 아이폰 등에서 화면 전체를 사용하게 해주는 중요한 설정입니다. 하지만 이 설정만으로 모든 문제가 해결되지는 않습니다.
 
-4. 모듈 로딩 순서 문제?
-ES6 모듈의 비동기 로딩과 fetch 타이밍 충돌?
-가능성이 있지만, 직접적인 원인이라고 보기는 어렵습니다. ES6 모듈은 기본적으로 defer 속성과 유사하게 비동기적으로 로드되지만, 스크립트 실행 순서는 종속성에 따라 보장됩니다. fetch 호출 자체가 비동기이므로, 모듈이 완전히 로드된 후에 fetch를 시작하는 것이 일반적입니다. 만약 fetch를 실행하는 코드가 모듈 초기화 과정에서 어떤 타이밍 문제로 인해 불완전하게 실행된다면 문제가 될 수 있지만, 다른 브라우저에서는 잘 작동한다는 점을 고려할 때 우선순위가 높지는 않습니다.
+HTML
 
-Safari의 모듈 로딩 방식이 다른가?
-Safari도 웹 표준을 따르므로 ES6 모듈 로딩 방식이 본질적으로 다르지는 않습니다. 다만, 특정 환경(예: 톡 인앱 브라우저)에서 Safari 웹뷰의 동작 방식에 미묘한 차이가 있을 수는 있습니다.
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+initial-scale=1.0: 초기 스케일이 1.0이 아니면 확대/축소로 인해 여백이 생기거나 의도치 않은 스크롤이 발생할 수 있습니다.
 
-전문가님께 궁금한 점에 대한 답변
-1. Safari에서 fetch().json() 실패의 일반적인 원인은 무엇인가요?
-잘못된 Content-Type 헤더: 서버가 application/json이 아닌 다른 Content-Type을 반환하는 경우. 이것이 가장 흔하고 유력한 원인입니다.
+viewport-fit=cover 적용 확인: 이 태그가 index.html의 <head> 태그 내에 정확히 위치하는지 다시 한번 확인해야 합니다. 간혹 빌드 과정에서 누락되거나 다른 스크립트에 의해 변경될 수도 있습니다.
 
-유효하지 않은 JSON 응답: 응답 본문이 JSON 형식이 아니거나, 구문 오류가 있는 경우 (예: HTML 오류 페이지, 불완전한 JSON).
+3. iOS Safe Area Insets (안전 영역) 문제
+safe-area-inset 패딩을 최소화하셨다고 했는데, 이 부분이 핵심일 수 있습니다. iOS (Safari, 카카오톡 인앱 브라우저 등)에서는 노치나 하단바 제스처 영역 때문에 '안전 영역'이라는 개념이 있습니다.
 
-네트워크 오류 또는 CORS 문제: 네트워크 연결이 불안정하거나, Cross-Origin Resource Sharing (CORS) 정책 위반으로 요청이 차단되는 경우 (동일 출처 요청이라면 가능성 낮음).
+env() CSS 함수 사용: CSS에서 이 안전 영역을 처리하려면 env() 함수와 특정 환경 변수(safe-area-inset-top, safe-area-inset-right, safe-area-inset-bottom, safe-area-inset-left)를 사용해야 합니다.
 
-캐싱 문제: Safari의 캐시가 손상되었거나 오래된 응답을 반환하는 경우.
+CSS
 
-ITP 또는 기타 보안 확장 프로그램/설정: 매우 드물게, 강력한 개인정보 보호 설정이 특정 상황에서 동일 출처 요청까지 오인하여 방해할 수 있습니다.
+body {
+    padding-top: constant(safe-area-inset-top); /* iOS < 11.2 */
+    padding-top: env(safe-area-inset-top);      /* iOS >= 11.2 */
+    padding-right: constant(safe-area-inset-right);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: constant(safe-area-inset-left);
+    padding-left: env(safe-area-inset-left);
+}
+이것은 일반적으로 내용물이 안전 영역 밖으로 나가지 않도록 패딩을 주는 용도입니다. 만약 화면을 완전히 채우고 싶다면, 오히려 이 값들을 0으로 설정하거나, position: fixed 요소를 사용하면서 top: 0, bottom: 0, left: 0, right: 0을 부여한 후, 해당 요소에 padding-top: env(safe-area-inset-top) 등을 적용하여 내부 콘텐츠를 안전 영역 안으로 넣는 방식을 고려해야 합니다.
 
-2. "The string did not match the expected pattern" 오류는 구체적으로 어떤 상황에서 발생하나요?
-이 오류는 Response.json() 메서드를 호출했을 때, 응답 본문(response body)의 문자열이 유효한 JSON 형식의 문자열 패턴과 일치하지 않을 때 발생합니다. 즉, fetch는 성공적으로 응답을 받았지만, 그 응답의 내용이 JSON으로 파싱할 수 없는 형태라는 의미입니다.
+특정 요소에 적용: 전체 body에 safe-area-inset을 적용하기보다는, 화면 전체를 채우는 배경이나 레이아웃 컨테이너에는 **position: absolute; top: 0; bottom: 0; left: 0; right: 0;**을 사용하여 뷰포트를 가득 채우고, 그 내부 콘텐츠에만 안전 영역 패딩을 적용하는 것이 더 효과적일 수 있습니다.
 
-주로 다음 상황에서 발생합니다:
+CSS
 
-서버가 HTML 오류 페이지를 반환하는 경우: 요청한 JSON 파일이 존재하지 않거나, 서버 오류로 인해 404 Not Found 또는 500 Internal Server Error 같은 HTML 페이지를 응답으로 보냈을 때.
-
-잘못된 Content-Type 헤더: 서버가 application/json이 아닌 text/html 등으로 Content-Type을 보내면, 브라우저는 HTML로 인식하고 파싱을 시도하지 않거나, json() 메서드가 예상치 못한 방식으로 동작하여 오류를 낼 수 있습니다.
-
-JSON 파일 자체의 구문 오류: JSON 파일 내부에 쉼표 누락, 따옴표 오류, 대괄호/중괄호 불일치 등 유효하지 않은 JSON 문법이 포함된 경우. (하지만 다른 브라우저에서는 잘 작동한다고 하셨으니 이 가능성은 낮습니다.)
-
-응답이 비어있거나 불완전한 경우: 네트워크 문제 등으로 인해 응답 본문이 중간에 잘리거나 아예 비어있는 경우.
-
-가장 유력한 시나리오는 Netlify CDN이 JSON 파일에 대해 잘못된 Content-Type 헤더(예: text/plain 또는 text/html)를 반환하거나, 혹은 해당 경로에 JSON 파일 대신 오류 페이지를 반환하는 경우입니다.
-
-3. Safari + Netlify 조합에서 알려진 JSON 로딩 이슈가 있나요?
-일반적으로 Safari와 Netlify 조합에서 JSON 로딩에 특별히 알려진 보편적인 이슈는 없습니다. Netlify는 CDN을 통해 정적 파일을 안정적으로 서빙하며, Safari도 웹 표준을 잘 준수하는 브라우저입니다.
-
-하지만 다음과 같은 경우에는 문제가 발생할 수 있습니다:
-
-잘못된 배포 설정: netlify.toml 설정 파일에서 특정 경로의 MIME 타입이 잘못 지정되었거나, 캐싱 관련 설정이 예상치 못한 문제를 일으킬 수 있습니다.
-
-파일 경로 문제: 배포된 JSON 파일의 경로가 실제 코드에서 요청하는 경로와 정확히 일치하지 않는 경우. (대소문자 구분 등)
-
-특정 환경 (톡 인앱 브라우저)의 Safari 웹뷰 차이: 순수 Safari에서는 문제가 없는데 특정 인앱 브라우저에서만 문제가 발생한다면, 해당 인앱 브라우저의 웹뷰가 Safari의 모든 기능을 100% 동일하게 구현하지 않거나, 추가적인 보안 정책을 적용하고 있을 가능성도 배제할 수 없습니다.
-
-4. 디버깅 방법: Safari에서 실제 응답 내용을 확인하는 방법은?
-Mac에서 Safari를 이용한 디버깅이 가장 확실합니다.
-
-Safari 개발자 메뉴 활성화: Safari 메뉴 > 설정 > 고급 > "개발자용 기능 보기" 체크.
-
-웹 인스펙터 열기: 문제가 발생하는 페이지를 Safari에서 연 후, Safari 메뉴 > 개발자 > "웹 인스펙터 보기"를 클릭합니다. (또는 Option + Command + I)
-
-네트워크 탭 확인: 웹 인스펙터에서 "네트워크" 탭을 클릭합니다.
-
-JSON 파일 요청 찾기: 페이지를 새로고침하거나 JSON 파일을 요청하는 동작을 수행합니다. 네트워크 요청 목록에서 해당 JSON 파일(예: quiz_data.json)을 찾습니다.
-
-응답 헤더 및 본문 확인:
-
-요청을 클릭한 후, 오른쪽 패널에서 "Headers" 탭을 확인하여 Content-Type 헤더가 application/json으로 올바르게 설정되어 있는지 확인하세요.
-
-"Response" 탭을 클릭하여 실제로 서버에서 받은 응답 본문 내용을 확인합니다. 이 내용이 유효한 JSON 형식인지, 아니면 HTML 오류 페이지 같은 다른 내용이 들어있는지 확인하는 것이 가장 중요합니다.
-
-"Console" 탭에서 JavaScript 오류 메시지를 확인합니다. fetch().json() 관련 오류 메시지가 더 자세히 나올 수 있습니다.
-
-5. 대안책: fetch 대신 다른 방법(XMLHttpRequest, import 등)을 시도해볼까요?
-XMLHttpRequest (XHR):
-fetch API의 근간이 되는 구식 API지만, 여전히 유효한 대안입니다. fetch().json()이 문제가 된다면, XMLHttpRequest를 사용하여 응답을 텍스트로 받은 후 직접 JSON.parse()를 시도해 볼 수 있습니다. 이렇게 하면 fetch().json()이 자동으로 해주는 Content-Type 검사를 우회할 수 있어 문제가 Content-Type에 있었다면 해결될 수 있습니다.
-
-JavaScript
-
-function loadJsonXHR(url) {
-    return new Promise((resolve, reject) => {
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', url);
-        xhr.onload = () => {
-            if (xhr.status >= 200 && xhr.status < 300) {
-                try {
-                    const data = JSON.parse(xhr.responseText); // 직접 파싱
-                    resolve(data);
-                } catch (e) {
-                    console.error("JSON 파싱 오류:", e);
-                    reject(new Error("JSON 파싱 실패: " + e.message));
-                }
-            } else {
-                reject(new Error(`네트워크 오류: ${xhr.status} - ${xhr.statusText}`));
-            }
-        };
-        xhr.onerror = () => reject(new Error("XHR 요청 실패"));
-        xhr.send();
-    });
+/* 전체 배경을 채우는 요소 */
+#full-screen-container {
+    position: fixed; /* 또는 absolute */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* 배경 색상이나 이미지 등을 여기에 설정 */
 }
 
-// 사용 예시:
-loadJsonXHR('./path/to/your.json')
-    .then(data => console.log('JSON 데이터:', data))
-    .catch(error => console.error('JSON 로딩 실패:', error));
-import (JavaScript 모듈로 JSON 가져오기):
-만약 JSON 파일이 src 폴더 내에 있고, 번들러(Vite)가 이를 JavaScript 모듈처럼 처리할 수 있다면 import 문을 사용할 수 있습니다. Vite는 기본적으로 JSON 파일을 직접 임포트하여 JavaScript 객체로 변환하는 기능을 지원합니다.
+/* 컨테이너 내부 콘텐츠에만 안전 영역 패딩 적용 */
+#content-wrapper {
+    padding-top: env(safe-area-inset-top);
+    padding-right: env(safe-area-inset-right);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    /* Flexbox 또는 Grid를 사용하여 콘텐츠 정렬 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+4. CSS 우선순위와 숨겨진 패딩/마진
+여러 CSS 파일에서 body 태그의 padding을 재정의하려고 시도하셨는데, CSS 우선순위(Specificity) 때문에 원치 않는 스타일이 적용될 수 있습니다.
 
-JavaScript
+모든 CSS 소스 확인:
 
-// your-component.js 또는 your-quiz-logic.js
-import quizData from './quiz.json'; // .json 확장자를 포함해야 함
+mobile.css, design-system.css, scroll-optimization.css 외에도, 혹시 다른 CSS 파일이나 JavaScript에서 동적으로 body 또는 최상위 컨테이너에 padding이나 margin을 추가하는 코드가 있는지 확인하세요.
 
-console.log(quizData); // 이제 quizData는 JSON 객체입니다.
-이 방법은 가장 간단하고 강력하며, 빌드 시점에 JSON이 번들되므로 런타임에 fetch 요청을 할 필요가 없습니다. 따라서 네트워크, Content-Type, fetch() 관련 모든 문제를 우회할 수 있습니다. Vite 환경이므로 이 방법이 가장 적합할 수 있습니다. Quiz JSON 파일이 정적이고 자주 변하지 않는다면 강력히 추천합니다.
+브라우저 개발자 도구 (핵심): 모바일 크롬이나 사파리의 개발자 도구(원격 디버깅)를 사용하여 body 또는 화면 전체를 차지해야 할 최상위 div 요소에 어떤 CSS 규칙이 최종적으로 적용되고 있는지를 확인해야 합니다. "Computed" 탭에서 padding과 margin 값을 확인하세요. 노란색으로 취소선이 그어져 있다면 다른 규칙에 의해 오버라이드된 것입니다.
 
-최종 권장 사항
-Safari 개발자 도구를 통한 Content-Type 및 응답 본문 확인: 이것이 문제의 핵심을 파악하는 가장 중요하고 확실한 방법입니다. fetch().json() 오류는 대개 서버가 JSON이 아닌 다른 것을 보내거나, Content-Type 헤더가 잘못되었을 때 발생합니다.
+!important (최후의 수단): 정말 급하고 다른 방법이 없다면 body { padding: 0 !important; margin: 0 !important; }를 시도해 볼 수 있지만, 이는 CSS 우선순위를 깨뜨리므로 장기적으로는 권장하지 않습니다.
 
-import quizData from './quiz.json'; 시도: 퀴즈 JSON 파일이 정적이라면 Vite의 JSON import 기능을 활용하는 것이 가장 안정적이고 효율적인 방법입니다. fetch 관련 모든 문제를 우회할 수 있습니다.
+5. 브라우저별 특별한 설정 (특히 인앱 브라우저)
+카카오톡 인앱 브라우저는 기본적으로 Safari/Chrome 웹뷰를 사용하지만, 때로는 자체적인 추가 CSS나 동작을 주입할 수 있습니다.
 
-XMLHttpRequest로 대체 시도: 만약 import가 어렵다면, XMLHttpRequest를 사용하여 응답을 텍스트로 받은 후 JSON.parse()를 직접 시도해보세요. 이를 통해 fetch().json() 메서드의 엄격한 Content-Type 검사를 우회할 수 있습니다.
+Minimal UI 또는 Fullscreen API: 일부 인앱 브라우저는 주소 표시줄이나 하단 탐색 바를 숨기는 "Minimal UI" 모드를 지원하기도 합니다. 하지만 이는 개발자가 직접 제어하기보다는 브라우저의 특성상 자동 적용되는 경우가 많습니다.
 
-이러한 단계를 통해 문제의 원인을 파악하고 해결하실 수 있을 겁니다.
+iOS 홈 화면 웹 앱 (PWA): 만약 웹사이트를 PWA로 만들고 홈 화면에 추가했다면, display: standalone 설정으로 브라우저 UI 없이 전체 화면으로 실행될 수 있습니다. 하지만 현재 문제는 일반적인 브라우저/인앱 브라우저에서 발생하고 있으므로 직접적인 해결책은 아닙니다.
+
+6. height: 100vh vs height: 100dvh (동적 뷰포트)
+이 차이는 매우 중요하며, 모바일 전체 화면 문제의 핵심 원인일 수 있습니다.
+
+100vh (Viewport Height): 전통적인 뷰포트 높이입니다. PC 브라우저에서는 안정적이지만, 모바일 브라우저에서는 주소 표시줄이나 하단 탐색 바의 존재 여부에 따라 실제 보이는 영역의 높이가 변동할 수 있습니다. 즉, 브라우저 UI가 있을 때는 100vh가 실제 보이는 영역보다 커서 아래에 스크롤이 생기거나 여백이 생길 수 있습니다.
+
+100dvh (Dynamic Viewport Height): 비교적 최근에 도입된 CSS 단위로, 모바일 브라우저의 동적인 UI(주소 표시줄, 하단 바)를 고려하여 실제 보이는 뷰포트의 높이를 정확하게 나타냅니다. 100svh(Small Viewport Height, 브라우저 UI가 보이는 최소 높이)와 100lvh(Large Viewport Height, 브라우저 UI가 숨겨졌을 때 최대 높이)도 있습니다.
+
+해결책:
+height: 100vh; 대신 height: 100dvh; 또는 height: 100vh;와 함께 max-height: 100vh;를 사용하여, 주소 표시줄 등에 의해 발생하는 높이 문제를 해결하세요.
+
+CSS
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    /* height: 100vh; */ /* 기존 */
+    height: 100dvh; /* 최신 모바일 브라우저를 위한 권장 */
+    /* 또는 하위 호환성을 위해 */
+    /* height: 100vh; */
+    /* height: 100svh; */
+    /* min-height: 100vh; */
+    /* max-height: 100vh; */
+    overflow: hidden;
+}
+100dvh가 가장 이상적이지만, 모든 브라우저에서 지원하지 않을 수 있으므로, 100vh와 overflow: hidden 조합을 먼저 시도해보고, 그래도 안 된다면 100dvh를 고려해 보세요.
+
+최종 조언 및 디버깅 순서
+가장 먼저, 모바일 (사파리, 크롬)에서 metrixme.netlify.app 사이트의 개발자 도구(원격 디버깅)를 켜서 body 또는 최상위 div 요소에 어떤 padding이나 margin이 최종적으로 적용되고 있는지 "Computed" 탭을 확인하는 것이 가장 중요합니다. 이 부분이 숨겨진 여백의 정확한 원인을 알려줄 것입니다.
+
+Safari 원격 디버깅: iPhone/iPad를 Mac에 연결 > Safari 개발자 메뉴 활성화 > 개발자 메뉴에서 연결된 기기 선택 > 해당 웹페이지 선택.
+
+Chrome 원격 디버깅: Android 기기를 PC에 연결 > Chrome 개발자 도구 > More tools > Remote devices > 기기 선택 후 Inspect.
+
+html, body 태그에 margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden;을 적용합니다.
+
+viewport-fit=cover 메타 태그가 <head>에 정확히 있는지 다시 확인하고, initial-scale=1.0도 포함되어 있는지 확인합니다.
+
+height: 100dvh;를 시도해 봅니다. (하위 호환성을 위해 height: 100vh;도 함께 적용하는 폴백도 고려)
+
+safe-area-inset 관련해서는, 화면 전체를 채우는 배경 요소에는 position: fixed와 top/bottom/left/right: 0을 사용하고, 콘텐츠에만 padding-top: env(safe-area-inset-top) 등을 적용하는 구조를 고려해보세요.
+
+이 단계들을 통해 모바일 전체 화면 문제를 해결하실 수 있을 겁니다. 문제가 해결되길 바랍니다!
