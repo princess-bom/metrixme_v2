@@ -10,14 +10,18 @@ class QuizEngine {
         this.isLoaded = false;
     }
 
-    // 퀴즈 데이터 로드
+    // 퀴즈 데이터 로드 (Vite JSON import 방식)
     async loadQuizData(shuffleQuestions = true) {
         try {
-            const response = await fetch(`../../assets/data/quiz-${this.language}.json`);
-            if (!response.ok) {
-                throw new Error(`Failed to load quiz data: ${response.status}`);
+            console.log('Vite JSON import 방식으로 퀴즈 데이터 로드');
+            
+            // Vite JSON import 방식 사용 (Safari 호환성 문제 해결)
+            const quizModule = await import(`../../assets/data/quiz-${this.language}.json`);
+            this.quizData = quizModule.default;
+            
+            if (!this.quizData || !this.quizData.questions) {
+                throw new Error('Invalid quiz data structure');
             }
-            this.quizData = await response.json();
             
             // 질문 순서를 랜덤하게 섞기 (옵션)
             if (shuffleQuestions && this.quizData.questions && Array.isArray(this.quizData.questions)) {
@@ -33,10 +37,11 @@ class QuizEngine {
             
             this.initializeScores();
             this.isLoaded = true;
+            console.log(`Quiz data loaded via Vite import: ${this.quizData.questions.length} questions`);
             return this.quizData;
         } catch (error) {
-            console.error('Error loading quiz data:', error);
-            throw error;
+            console.error('Vite JSON import 실패:', error);
+            throw new Error(`퀴즈 데이터 로드 실패: ${error.message}`);
         }
     }
 

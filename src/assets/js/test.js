@@ -74,28 +74,35 @@ testRunner.addTest('Terminal Engine Initialization', async () => {
     }
 });
 
-// Test 2: Quiz data loading
+// Test 2: Quiz data loading (Vite JSON import 방식)
 testRunner.addTest('Quiz Data Loading', async () => {
-    const responses = await Promise.all([
-        fetch('../../assets/data/quiz-ko.json'),
-        fetch('../../assets/data/quiz-en.json')
-    ]);
-    
-    if (!responses[0].ok || !responses[1].ok) {
-        throw new Error('Quiz data files not accessible');
-    }
-    
-    const [koData, enData] = await Promise.all([
-        responses[0].json(),
-        responses[1].json()
-    ]);
-    
-    if (!koData.questions || !enData.questions) {
-        throw new Error('Quiz data missing questions');
-    }
-    
-    if (koData.questions.length !== 20 || enData.questions.length !== 20) {
-        throw new Error('Quiz should have exactly 20 questions');
+    try {
+        console.log('Testing Vite JSON import for quiz data...');
+        
+        // Vite JSON import 방식으로 테스트
+        const [koModule, enModule] = await Promise.all([
+            import('../../assets/data/quiz-ko.json'),
+            import('../../assets/data/quiz-en.json')
+        ]);
+        
+        const koData = koModule.default;
+        const enData = enModule.default;
+        
+        if (!koData || !enData) {
+            throw new Error('Quiz data modules failed to load');
+        }
+        
+        if (!koData.questions || !enData.questions) {
+            throw new Error('Quiz data missing questions');
+        }
+        
+        if (koData.questions.length !== 20 || enData.questions.length !== 20) {
+            throw new Error('Quiz should have exactly 20 questions');
+        }
+        
+        console.log('Vite JSON import test successful');
+    } catch (error) {
+        throw new Error(`Quiz data loading failed: ${error.message}`);
     }
 });
 

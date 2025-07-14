@@ -69,32 +69,44 @@ class UnifiedQuizController {
     }
 
     /**
-     * 퀴즈 데이터 로드 (4축 시스템)
+     * 퀴즈 데이터 로드 (Vite JSON import 방식)
      */
     async loadQuizData() {
         try {
-            const response = await fetch(`../../assets/data/quiz-${this.language}-fouraxis.json`);
-            if (!response.ok) {
-                // 4축 데이터가 없으면 기존 데이터 사용
-                const fallbackResponse = await fetch(`../../assets/data/quiz-${this.language}.json`);
-                if (!fallbackResponse.ok) {
-                    throw new Error(`Failed to load quiz data: ${response.status}`);
-                }
-                this.quizData = await fallbackResponse.json();
-                this.systemType = 'legacy';
-            } else {
-                this.quizData = await response.json();
+            console.log('Vite JSON import 방식으로 퀴즈 데이터 로드 시작');
+            
+            // Vite JSON import 방식 사용 (Safari 호환성 문제 해결)
+            let quizModule;
+            try {
+                // 4축 데이터 우선 시도
+                quizModule = await import(`../../assets/data/quiz-${this.language}-fouraxis.json`);
+                this.quizData = quizModule.default;
                 this.systemType = 'four-axis';
                 
                 // 4축 시스템에서 퀴즈 랜덤화
                 this.randomizeQuiz();
+                console.log(`4축 JSON import 성공: ${this.systemType} system`);
+                
+            } catch (fourAxisError) {
+                console.warn('4축 데이터 로드 실패, 기존 데이터로 fallback:', fourAxisError);
+                
+                // 기존 데이터로 fallback
+                quizModule = await import(`../../assets/data/quiz-${this.language}.json`);
+                this.quizData = quizModule.default;
+                this.systemType = 'legacy';
+                console.log(`기존 JSON import 성공: ${this.systemType} system`);
             }
             
-            console.log(`Quiz data loaded: ${this.systemType} system`);
+            if (!this.quizData || !this.quizData.questions) {
+                throw new Error('Invalid quiz data structure');
+            }
+            
+            console.log(`Quiz data loaded: ${this.systemType} system, ${this.quizData.questions.length} questions`);
             return this.quizData;
+            
         } catch (error) {
-            console.error('Error loading quiz data:', error);
-            throw error;
+            console.error('Vite JSON import 실패:', error);
+            throw new Error(`퀴즈 데이터 로드 실패: ${error.message}`);
         }
     }
 
