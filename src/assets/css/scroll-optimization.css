@@ -1,0 +1,376 @@
+/**
+ * Matrix Me - 스크롤 최적화 CSS
+ * iOS Safari와 Android Chrome에서 최적화된 스크롤 경험 제공
+ */
+
+/* 기본 스크롤 최적화 */
+html {
+  /* iOS Safari 스크롤 바운스 효과 제거 */
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  
+  /* 스크롤 체인 방지 (상위 요소로 스크롤 전파 방지) */
+  overscroll-behavior: none;
+  -ms-scroll-chaining: none;
+  
+  /* 스크롤 스냅 동작 부드럽게 */
+  scroll-behavior: smooth;
+}
+
+body {
+  /* 전체 페이지 스크롤 바운스 효과 제거 */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  
+  /* 터치 액션 최적화 */
+  touch-action: pan-y;
+  
+  /* iOS Safari 줌 방지 (이미 viewport에서 설정되었지만 추가 보안) */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* 터미널 컨테이너 스크롤 최적화 */
+.terminal-container {
+  /* 하드웨어 가속 활성화 */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+  
+  /* 스크롤 최적화 */
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.terminal-content {
+  /* 스크롤 컨테이너 최적화 */
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  
+  /* 터치 스크롤 반응성 개선 */
+  touch-action: pan-y;
+  
+  /* 하드웨어 가속 */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: scroll-position;
+}
+
+/* 퀴즈 질문 컨테이너 스크롤 최적화 */
+.matrix-question-box {
+  /* 스무스 스크롤 */
+  scroll-behavior: smooth;
+  -webkit-scroll-behavior: smooth;
+  
+  /* 스크롤 바운스 방지 */
+  overscroll-behavior: contain;
+}
+
+/* 답변 옵션 스크롤 최적화 */
+.quiz-options,
+#answer-options {
+  /* 세로 스크롤만 허용 */
+  touch-action: pan-y;
+  
+  /* 스크롤 성능 최적화 */
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  
+  /* 하드웨어 가속 */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: scroll-position;
+}
+
+/* 개별 옵션 터치 최적화 */
+.quiz-option {
+  /* 터치 반응 최적화 */
+  touch-action: manipulation;
+  
+  /* 터치 지연 제거 */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+  /* 하드웨어 가속 활성화 */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}
+
+/* 키보드 팝업 시 레이아웃 처리 */
+@supports (height: 100dvh) {
+  body {
+    /* 동적 뷰포트 높이 사용 (키보드 팝업 고려) */
+    min-height: 100dvh;
+  }
+  
+  .terminal-container {
+    max-height: 100dvh;
+  }
+}
+
+/* iOS Safari 전용 최적화 */
+@supports (-webkit-appearance: none) {
+  html, body {
+    /* iOS Safari 스크롤 바운스 완전 제거 */
+    position: fixed;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .terminal-container {
+    /* 컨테이너가 스크롤 담당 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    
+    /* 스크롤 인디케이터 스타일링 */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 255, 0, 0.3) transparent;
+  }
+  
+  .terminal-container::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  .terminal-container::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .terminal-container::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 0, 0.3);
+    border-radius: 2px;
+  }
+  
+  .terminal-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 255, 0, 0.5);
+  }
+}
+
+/* 안전 영역(safe-area) 고려한 패딩 */
+@supports (padding: max(0px)) {
+  body {
+    /* 노치/Dynamic Island 고려한 패딩 */
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    padding-left: max(5px, env(safe-area-inset-left));
+    padding-right: max(5px, env(safe-area-inset-right));
+  }
+  
+  .terminal-container {
+    /* 안전 영역 내에서 최대 높이 */
+    max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+  }
+}
+
+/* 모바일 전용 스크롤 최적화 */
+@media (max-width: 768px) {
+  /* 터치 스크롤 성능 향상 */
+  * {
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+  }
+  
+  /* 스크롤 컨테이너 최적화 */
+  .terminal-content {
+    /* 모바일에서 스크롤 영역 명확히 정의 */
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100vh - 120px); /* 헤더 공간 제외 */
+    
+    /* 스크롤 인디케이터 */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 255, 0, 0.3) transparent;
+  }
+  
+  /* 퀴즈 진행 화면 스크롤 최적화 */
+  #quiz-progress {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  /* 질문 전환 시 스무스 스크롤 */
+  .matrix-question-box {
+    scroll-margin-top: 20px;
+  }
+  
+  /* 답변 옵션 영역 스크롤 */
+  #answer-options {
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding: 10px;
+  }
+}
+
+/* 작은 화면 추가 최적화 */
+@media (max-width: 480px) {
+  .terminal-content {
+    max-height: calc(100vh - 100px);
+    padding: 10px;
+  }
+  
+  #answer-options {
+    max-height: 50vh;
+  }
+  
+  /* 키보드 팝업 대응 */
+  .matrix-input-section {
+    position: sticky;
+    bottom: 0;
+    background: #000000;
+    padding: 10px 0;
+    border-top: 1px solid #333;
+  }
+}
+
+/* 가로 모드 최적화 */
+@media (orientation: landscape) and (max-height: 600px) {
+  .terminal-content {
+    max-height: calc(100vh - 80px);
+    padding: 8px;
+  }
+  
+  #answer-options {
+    max-height: 40vh;
+  }
+  
+  .matrix-question-box {
+    margin-bottom: 10px;
+  }
+}
+
+/* 스크롤 애니메이션 최적화 */
+@media (prefers-reduced-motion: no-preference) {
+  /* 부드러운 스크롤 애니메이션 */
+  html, .terminal-content, #answer-options {
+    scroll-behavior: smooth;
+    -webkit-scroll-behavior: smooth;
+  }
+  
+  /* 질문 전환 애니메이션 */
+  .matrix-question-box {
+    transition: transform 0.3s ease-out;
+  }
+  
+  .matrix-question-box.transitioning {
+    transform: translateY(-10px);
+  }
+}
+
+/* 접근성 - 애니메이션 감소 설정 */
+@media (prefers-reduced-motion: reduce) {
+  html, .terminal-content, #answer-options {
+    scroll-behavior: auto;
+    -webkit-scroll-behavior: auto;
+  }
+  
+  .matrix-question-box {
+    transition: none;
+  }
+}
+
+/* 포커스 스크롤 최적화 */
+.quiz-option:focus,
+.matrix-next-button:focus {
+  /* 포커스된 요소가 뷰포트에 보이도록 스크롤 */
+  scroll-margin: 20px;
+  scroll-margin-block: 20px;
+}
+
+/* 스크롤 성능 최적화를 위한 레이어 프로모션 */
+.terminal-container,
+.terminal-content,
+.quiz-options,
+.matrix-question-box {
+  /* GPU 레이어로 승격하여 스크롤 성능 향상 */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+}
+
+/* 터치 피드백 최적화 */
+.quiz-option:active {
+  /* 터치 시 즉각적인 피드백 */
+  transform: translateZ(0) scale(0.98);
+  transition: transform 0.1s ease-out;
+}
+
+/* iOS Safari 전용 바운스 제거 */
+@supports (-webkit-touch-callout: none) {
+  body {
+    /* iOS에서 전체 페이지 바운스 방지 */
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .terminal-container {
+    /* 컨테이너만 스크롤 가능 */
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+}
+
+/* 키보드 팝업 대응 스타일 */
+body.keyboard-open {
+  /* 키보드 팝업 시 전체 레이아웃 조정 */
+  height: 100vh;
+  overflow: hidden;
+}
+
+body.keyboard-open .terminal-content {
+  /* 키보드 공간 확보 */
+  padding-bottom: 120px;
+  max-height: calc(100vh - 200px);
+}
+
+body.keyboard-open .matrix-input-section {
+  /* 입력 영역을 하단에 고정 */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #000000;
+  border-top: 1px solid #333;
+  z-index: 1000;
+  padding: 15px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* 동적 뷰포트 지원 브라우저용 */
+@supports (height: 100dvh) {
+  body.keyboard-open {
+    height: 100dvh;
+  }
+  
+  body.keyboard-open .terminal-content {
+    max-height: calc(100dvh - 200px);
+  }
+}

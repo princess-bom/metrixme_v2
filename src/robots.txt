@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://matrixme.app/sitemap.xml
+
+# Allow all pages
+Allow: /ko/
+Allow: /en/
+Allow: /ko/quiz/
+Allow: /en/quiz/
+Allow: /ko/result/
+Allow: /en/result/
+Allow: /ko/share/
+Allow: /en/share/

@@ -1,0 +1,761 @@
+{
+  "language": "en",
+  "title": "Matrix Me - English AI Type Quiz",
+  "description": "Discover your AI personality type through 20 honest questions!",
+  "questions": [
+    {
+      "id": 1,
+      "section": "Workplace Scenarios",
+      "question": "Monday morning, your boss drops: \"Hey, can you handle this report?\"",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"Sure thing!\" *starts typing from scratch*",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"What format would you like?\" *plans structure first, then uses AI for details*",
+          "scores": { "bridgebuilder": 3, "wisecounsel": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"ChatGPT, how should I approach this?\" *AI consultation first*",
+          "scores": { "wisecounsel": 2, "aiaddict": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"AI, write this report for me\" *almost full delegation*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"Without AI, I'm literally helpless...\" *complete dependency*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "section": "Workplace Scenarios",
+      "question": "Friend shows you: \"This new AI app is INSANE!\"",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"Cool, I'm good with what I have\" *not interested*",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Hmm, maybe I'll check it out later\" *cautious interest*",
+          "scores": { "bridgebuilder": 3, "anxietybot": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Ooh what does it do?\" *curious*",
+          "scores": { "earlybird": 3, "visionary": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"OMG downloading NOW!\" *instant install*",
+          "scores": { "earlybird": 3, "visionary": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"Wait, I know 5 better ones!\" *already expert level*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "section": "Workplace Scenarios",
+      "question": "AI delivers: \"Perfect presentation complete!\"",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"Thanks, now I'll rewrite this properly\" *start over*",
+          "scores": { "controlfreak": 3, "vibechecker": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Good start... let me fix these parts\" *major editing*",
+          "scores": { "controlfreak": 2, "wisecounsel": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Nice! Just need to tweak a few things\" *minor edits*",
+          "scores": { "wisecounsel": 2, "efficiencyking": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"Perfect! Submitting as-is\" *full trust*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"Is this actually good enough...?\" *self-doubt*",
+          "scores": { "anxietybot": 3, "scaredycat": 2 }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "section": "Workplace Scenarios",
+      "question": "Writing an important email, your first move?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"I'll craft this myself\" *manual composition*",
+          "scores": { "traditionalist": 3, "controlfreak": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"AI, just check my grammar\" *minimal AI use*",
+          "scores": { "efficiencyking": 2, "minimalist": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Let me think about tone first\" *strategic approach*",
+          "scores": { "wisecounsel": 3, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"AI, what should I say?\" *full AI consultation*",
+          "scores": { "aiaddict": 2, "evangelist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"AI knows best\" *complete trust*",
+          "scores": { "aiaddict": 3, "evangelist": 3 }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "section": "Workplace Scenarios",
+      "question": "Starting a new project, what's your first action?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "Grab a notebook and brainstorm",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "Google research first",
+          "scores": { "traditionalist": 2, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"AI, give me some ideas...\" *collaborative approach*",
+          "scores": { "wisecounsel": 2, "aiaddict": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"AI, plan this entire project\" *full delegation*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"How did people do projects before AI?\" *dependency realization*",
+          "scores": { "aiaddict": 3, "evangelist": 3 }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "section": "Tech Behavior",
+      "question": "You discover your friend has 25 AI apps installed:",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"That's... a lot\" *overwhelmed*",
+          "scores": { "minimalist": 3, "traditionalist": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Show me the cool ones!\" *selective interest*",
+          "scores": { "earlybird": 3, "visionary": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"I just need ChatGPT\" *minimalist approach*",
+          "scores": { "efficiencyking": 3, "minimalist": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"Rookie numbers!\" *you have more*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"Are these safe to use?\" *security concerns*",
+          "scores": { "bridgebuilder": 2, "scaredycat": 3 }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "section": "Tech Behavior",
+      "question": "Breaking news: \"GPT-5 Released!\"",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"So what?\" *indifferent*",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"I'll wait for reviews\" *cautious*",
+          "scores": { "bridgebuilder": 3, "anxietybot": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"What's new?\" *immediate research*",
+          "scores": { "earlybird": 3, "visionary": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"MUST. TRY. NOW.\" *instant action*",
+          "scores": { "earlybird": 2, "aiaddict": 3 }
+        },
+        {
+          "letter": "e",
+          "text": "Already signed up for beta",
+          "scores": { "visionary": 3, "evangelist": 2 }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "section": "Tech Behavior",
+      "question": "Monthly AI subscription budget?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "$0 (free only or none)",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "Occasional $5 day passes",
+          "scores": { "minimalist": 2, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "$20-30 (one or two subscriptions)",
+          "scores": { "efficiencyking": 3, "wisecounsel": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "$50-80 (several subscriptions)",
+          "scores": { "aiaddict": 2, "earlybird": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"I don't want to calculate...\" *probably $100+*",
+          "scores": { "aiaddict": 3, "earlybird": 3 }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "section": "Tech Behavior",
+      "question": "Someone asks for AI tool recommendations:",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"I don't really know any\"",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"ChatGPT is all you need\"",
+          "scores": { "efficiencyking": 3, "minimalist": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Depends what you need it for\" *thoughtful response*",
+          "scores": { "wisecounsel": 3, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"OMG yes! Let me show you...\" *enthusiastic*",
+          "scores": { "evangelist": 3, "earlybird": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"Here's my complete list!\" *sends comprehensive guide*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "section": "Tech Behavior",
+      "question": "Bored weekend, you're most likely to:",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "Read a book, go for a walk",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "Watch Netflix, maybe stumble upon AI documentary",
+          "scores": { "minimalist": 2, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"AI, suggest weekend projects\"",
+          "scores": { "aiaddict": 2, "visionary": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "Research and test new AI tools",
+          "scores": { "earlybird": 3, "visionary": 3 }
+        },
+        {
+          "letter": "e",
+          "text": "Share AI discoveries in online communities",
+          "scores": { "evangelist": 3, "aiaddict": 2 }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "section": "Office Politics",
+      "question": "Boss says: \"This should be quick with AI, right?\"",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"I'll make sure it's thorough\" *quality focus*",
+          "scores": { "controlfreak": 3, "wisecounsel": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"AI will help, but I'll review everything\" *balanced*",
+          "scores": { "wisecounsel": 2, "efficiencyking": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"AI's got this!\" *confident delegation*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"I prefer doing it manually\" *traditional approach*",
+          "scores": { "traditionalist": 3, "anxietybot": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"What if the AI makes mistakes?\" *worry*",
+          "scores": { "anxietybot": 3, "detective": 3 }
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "section": "Office Politics",
+      "question": "AI report has a suspicious data point:",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"Something's off, starting over\"",
+          "scores": { "controlfreak": 3, "detective": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Let me verify this section\" *targeted checking*",
+          "scores": { "wisecounsel": 3, "controlfreak": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Looks reasonable to me\" *acceptance*",
+          "scores": { "aiaddict": 2, "evangelist": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"AI wouldn't be wrong\" *blind trust*",
+          "scores": { "aiaddict": 3, "evangelist": 3 }
+        },
+        {
+          "letter": "e",
+          "text": "\"I knew I shouldn't trust AI\" *vindicated skepticism*",
+          "scores": { "detective": 2, "anxietybot": 2 }
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "section": "Office Politics",
+      "question": "Team AI strategy meeting:",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"I'll review all AI outputs\" *quality control*",
+          "scores": { "controlfreak": 3, "wisecounsel": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Let's define clear AI/human roles\" *structured approach*",
+          "scores": { "wisecounsel": 3, "efficiencyking": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"AI for everything!\" *maximalist*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"Traditional methods are safer\" *conservative*",
+          "scores": { "traditionalist": 3, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"Let's pilot test first\" *cautious*",
+          "scores": { "earlybird": 2, "visionary": 2 }
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "section": "Office Politics",
+      "question": "1 hour to deadline, AI work is 70% quality:",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"70% isn't acceptable, redoing it\"",
+          "scores": { "controlfreak": 3, "vibechecker": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Quick fixes for the worst parts\"",
+          "scores": { "wisecounsel": 3, "efficiencyking": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"This works, shipping it\"",
+          "scores": { "aiaddict": 2, "evangelist": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"70% is amazing, submitting!\"",
+          "scores": { "aiaddict": 3, "minimalist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"What if they notice the issues?\" *worry*",
+          "scores": { "anxietybot": 3, "scaredycat": 2 }
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "section": "Office Politics",
+      "question": "Colleague asks: \"How'd you learn AI so fast?\"",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"I keep it secret...\"",
+          "scores": { "stealthexpert": 3, "minimalist": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"YouTube tutorials mostly\"",
+          "scores": { "efficiencyking": 2, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Just experimented\"",
+          "scores": { "earlybird": 2, "visionary": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"Let me send you my learning resources!\"",
+          "scores": { "evangelist": 3, "earlybird": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"I don't really use it much\"",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "section": "Personality Deep Dive",
+      "question": "\"AI will replace human workers\" - your reaction?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"AI is just a tool\"",
+          "scores": { "traditionalist": 3, "wisecounsel": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Some jobs maybe, but humans add value\"",
+          "scores": { "wisecounsel": 2, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"It's already happening everywhere\"",
+          "scores": { "aiaddict": 2, "visionary": 3 }
+        },
+        {
+          "letter": "d",
+          "text": "\"Obviously! AI is superior\"",
+          "scores": { "aiaddict": 3, "evangelist": 3 }
+        },
+        {
+          "letter": "e",
+          "text": "\"That's terrifying...\"",
+          "scores": { "scaredycat": 3, "traditionalist": 2 }
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "section": "Personality Deep Dive",
+      "question": "AI gives you surprisingly perfect advice:",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"Lucky coincidence\"",
+          "scores": { "detective": 3, "traditionalist": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Interesting, but probably not repeatable\"",
+          "scores": { "bridgebuilder": 2, "anxietybot": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"AI is getting pretty smart\"",
+          "scores": { "wisecounsel": 2, "efficiencyking": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"This is why I love AI!\"",
+          "scores": { "aiaddict": 2, "evangelist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"AI understands me better than I do\"",
+          "scores": { "aiaddict": 3, "evangelist": 3 }
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "section": "Personality Deep Dive",
+      "question": "Friend asks: \"Could you survive without AI?\"",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"Absolutely, did it for years\"",
+          "scores": { "traditionalist": 3, "scaredycat": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"It'd be inconvenient but manageable\"",
+          "scores": { "minimalist": 2, "bridgebuilder": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Would be pretty difficult now...\"",
+          "scores": { "aiaddict": 2, "earlybird": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"Honestly, it would be really hard\"",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"Please don't make me think about that\"",
+          "scores": { "aiaddict": 3, "evangelist": 3 }
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "section": "Personality Deep Dive",
+      "question": "AI output feels \"robotic\":",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"This needs a human touch\" *full rewrite*",
+          "scores": { "vibechecker": 3, "controlfreak": 2 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Let me add some personality\" *editing mode*",
+          "scores": { "vibechecker": 2, "wisecounsel": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Good enough for the purpose\" *acceptance*",
+          "scores": { "efficiencyking": 2, "minimalist": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"AI output is perfect as-is\" *no editing needed*",
+          "scores": { "aiaddict": 3, "evangelist": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"Robotic? I don't see it\" *blind to AI tells*",
+          "scores": { "aiaddict": 2, "specialist": 2 }
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "section": "Personality Deep Dive",
+      "question": "If this quiz result doesn't match your self-image:",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "\"I'm retaking until it's right!\"",
+          "scores": { "controlfreak": 2, "vibechecker": 3 }
+        },
+        {
+          "letter": "b",
+          "text": "\"Let me try once more for comparison\"",
+          "scores": { "detective": 3, "anxietybot": 2 }
+        },
+        {
+          "letter": "c",
+          "text": "\"Results are results\" *acceptance*",
+          "scores": { "wisecounsel": 2, "efficiencyking": 2 }
+        },
+        {
+          "letter": "d",
+          "text": "\"Fun quiz, but how accurate is it?\"",
+          "scores": { "bridgebuilder": 2, "scaredycat": 2 }
+        },
+        {
+          "letter": "e",
+          "text": "\"I'm sharing this with everyone!\"",
+          "scores": { "evangelist": 3, "earlybird": 2 }
+        }
+      ]
+    }
+  ],
+  "types": {
+    "controlfreak": {
+      "code": "controlfreak",
+      "name": "Control Freak",
+      "korean": "조종왕",
+      "description": "Masters who control and optimize everything",
+      "color": "#FF0040"
+    },
+    "earlybird": {
+      "code": "earlybird",
+      "name": "Early Bird",
+      "korean": "얼리버드",
+      "description": "Pioneers who try new things first",
+      "color": "#8A2BE2"
+    },
+    "traditionalist": {
+      "code": "traditionalist",
+      "name": "Traditionalist",
+      "korean": "아날로그인간",
+      "description": "Cautious people who prefer traditional methods",
+      "color": "#FF8C00"
+    },
+    "stealthexpert": {
+      "code": "stealthexpert",
+      "name": "Stealth Expert",
+      "korean": "숨덕후",
+      "description": "Secret specialists who quietly utilize AI",
+      "color": "#696969"
+    },
+    "efficiencyking": {
+      "code": "efficiencyking",
+      "name": "Efficiency King",
+      "korean": "알짜배기",
+      "description": "The king of efficiency who only uses what's necessary",
+      "color": "#00FF7F"
+    },
+    "vibechecker": {
+      "code": "vibechecker",
+      "name": "Vibe Checker",
+      "korean": "느낌충",
+      "description": "Intuitive users who judge by sense and feeling",
+      "color": "#FF1493"
+    },
+    "aiaddict": {
+      "code": "aiaddict",
+      "name": "AI Addict",
+      "korean": "완전체",
+      "description": "Complete dependency type who can't live without AI",
+      "color": "#1E90FF"
+    },
+    "specialist": {
+      "code": "specialist",
+      "name": "Specialist",
+      "korean": "장인",
+      "description": "Craftsmen who pursue perfection in their own way",
+      "color": "#FF4500"
+    },
+    "anxietybot": {
+      "code": "anxietybot",
+      "name": "Anxiety Bot",
+      "korean": "소심쟁이",
+      "description": "Cautious type who uses AI carefully",
+      "color": "#E6E6FA"
+    },
+    "visionary": {
+      "code": "visionary",
+      "name": "Visionary",
+      "korean": "미래인",
+      "description": "Endless curiosity toward future technology",
+      "color": "#00FFFF"
+    },
+    "minimalist": {
+      "code": "minimalist",
+      "name": "Minimalist",
+      "korean": "미니멀러",
+      "description": "People who achieve maximum effect with minimal tools",
+      "color": "#C0C0C0"
+    },
+    "evangelist": {
+      "code": "evangelist",
+      "name": "Evangelist",
+      "korean": "광신도",
+      "description": "Enthusiastic supporters who spread AI possibilities",
+      "color": "#FFD700"
+    },
+    "bridgebuilder": {
+      "code": "bridgebuilder",
+      "name": "Bridge Builder",
+      "korean": "돌다리왕",
+      "description": "Type who carefully reviews and proceeds safely",
+      "color": "#32CD32"
+    },
+    "wisecounsel": {
+      "code": "wisecounsel",
+      "name": "Wise Counsel",
+      "korean": "현자",
+      "description": "Wisely utilize AI with a balanced perspective",
+      "color": "#9370DB"
+    },
+    "detective": {
+      "code": "detective",
+      "name": "Detective",
+      "korean": "의심덩어리",
+      "description": "Detective type who doubts and verifies everything",
+      "color": "#DC143C"
+    },
+    "scaredycat": {
+      "code": "scaredycat",
+      "name": "Scaredy Cat",
+      "korean": "겁쟁이",
+      "description": "Type who wants to avoid AI because it's scary",
+      "color": "#DCDCDC"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "Matrix Me - AI Personality Quiz",
+  "short_name": "Matrix Me",
+  "description": "Discover your AI personality type through a terminal-style quiz with ASCII art results",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00FF00",
+  "orientation": "portrait-primary",
+  "categories": ["entertainment", "productivity", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/assets/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

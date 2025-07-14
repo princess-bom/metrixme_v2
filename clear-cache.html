@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>캐시 클리어 도구</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #00ff00;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        button {
+            background: #000;
+            color: #00ff00;
+            border: 1px solid #00ff00;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #00ff00;
+            color: #000;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #666;
+            border-radius: 4px;
+            background: #111;
+        }
+        .log {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #333;
+            padding: 10px;
+            background: #0a0a0a;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🗑️ Matrix Me 캐시 클리어 도구</h1>
+        
+        <div class="status">
+            <h3>현재 상태:</h3>
+            <div id="cache-status">캐시 상태 확인 중...</div>
+        </div>
+        
+        <div>
+            <h3>캐시 관리:</h3>
+            <button onclick="clearAllCaches()">모든 캐시 클리어</button>
+            <button onclick="unregisterSW()">서비스 워커 언등록</button>
+            <button onclick="reloadPage()">페이지 새로고침</button>
+            <button onclick="hardReload()">강제 새로고침</button>
+        </div>
+        
+        <div>
+            <h3>개발 도구:</h3>
+            <button onclick="checkCacheStatus()">캐시 상태 확인</button>
+            <button onclick="testNavigation()">네비게이션 테스트</button>
+            <button onclick="clearLocalStorage()">로컬 스토리지 클리어</button>
+        </div>
+        
+        <div class="status">
+            <h3>로그:</h3>
+            <div id="log" class="log"></div>
+        </div>
+        
+        <div>
+            <h3>빠른 링크:</h3>
+            <a href="/" style="color: #00ff00;">← 메인 페이지로 돌아가기</a>
+        </div>
+    </div>
+
+    <script>
+        const log = document.getElementById('log');
+        const cacheStatus = document.getElementById('cache-status');
+        
+        function addLog(message) {
+            const timestamp = new Date().toLocaleTimeString();
+            log.textContent += `[${timestamp}] ${message}\n`;
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        async function clearAllCaches() {
+            addLog('모든 캐시 클리어 시작...');
+            
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                addLog(`발견된 캐시: ${cacheNames.length}개`);
+                
+                for (const cacheName of cacheNames) {
+                    await caches.delete(cacheName);
+                    addLog(`캐시 삭제 완료: ${cacheName}`);
+                }
+                
+                addLog('모든 캐시 클리어 완료!');
+            } else {
+                addLog('캐시 API를 사용할 수 없습니다.');
+            }
+            
+            await updateCacheStatus();
+        }
+        
+        async function unregisterSW() {
+            addLog('서비스 워커 언등록 시작...');
+            
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                addLog(`발견된 서비스 워커: ${registrations.length}개`);
+                
+                for (const registration of registrations) {
+                    await registration.unregister();
+                    addLog('서비스 워커 언등록 완료');
+                }
+                
+                addLog('모든 서비스 워커 언등록 완료!');
+            } else {
+                addLog('서비스 워커를 사용할 수 없습니다.');
+            }
+        }
+        
+        function reloadPage() {
+            addLog('페이지 새로고침...');
+            window.location.reload();
+        }
+        
+        function hardReload() {
+            addLog('강제 새로고침...');
+            window.location.reload(true);
+        }
+        
+        async function checkCacheStatus() {
+            addLog('캐시 상태 확인 중...');
+            await updateCacheStatus();
+        }
+        
+        async function updateCacheStatus() {
+            let status = '캐시 상태:\n';
+            
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                
+                if (cacheNames.length === 0) {
+                    status += '- 캐시 없음\n';
+                } else {
+                    for (const cacheName of cacheNames) {
+                        const cache = await caches.open(cacheName);
+                        const keys = await cache.keys();
+                        status += `- ${cacheName}: ${keys.length}개 항목\n`;
+                    }
+                }
+            } else {
+                status += '- 캐시 API 사용 불가\n';
+            }
+            
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                status += `서비스 워커: ${registrations.length}개 등록됨\n`;
+            } else {
+                status += '서비스 워커 사용 불가\n';
+            }
+            
+            cacheStatus.textContent = status;
+            addLog('캐시 상태 확인 완료');
+        }
+        
+        function testNavigation() {
+            addLog('네비게이션 테스트 시작...');
+            
+            // 뒤로 가기/앞으로 가기 이벤트 감지
+            window.addEventListener('popstate', () => {
+                addLog('popstate 이벤트 감지됨');
+            });
+            
+            // 페이지 표시 이벤트 감지
+            window.addEventListener('pageshow', (event) => {
+                addLog(`pageshow 이벤트: persisted=${event.persisted}`);
+            });
+            
+            // 페이지 숨김 이벤트 감지
+            window.addEventListener('pagehide', (event) => {
+                addLog(`pagehide 이벤트: persisted=${event.persisted}`);
+            });
+            
+            addLog('네비게이션 이벤트 리스너 등록 완료');
+        }
+        
+        function clearLocalStorage() {
+            addLog('로컬 스토리지 클리어...');
+            localStorage.clear();
+            sessionStorage.clear();
+            addLog('로컬 스토리지 클리어 완료');
+        }
+        
+        // 페이지 로드 시 상태 확인
+        window.addEventListener('load', () => {
+            addLog('캐시 클리어 도구 로드 완료');
+            updateCacheStatus();
+        });
+    </script>
+</body>
+</html>

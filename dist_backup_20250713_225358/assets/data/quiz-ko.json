@@ -1,0 +1,1061 @@
+{
+  "language": "ko",
+  "title": "Matrix Me - AI 유형 진단 퀴즈",
+  "description": "당신의 AI 활용 유형을 16가지 중에서 정확히 진단합니다.",
+  "questions": [
+    {
+      "id": 1,
+      "section": "일상 상황편",
+      "question": "친구가 \"야, 이 새로운 AI 완전 대박이야!\"라고 보여주면?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "그래? 나는 지금 쓰는 거로 충분해",
+          "scores": {
+            "efficiencyking": 3,
+            "traditionalist": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "흠... 나중에 필요하면 써볼게",
+          "scores": {
+            "bridgebuilder": 3,
+            "anxietybot": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "오? 뭔데? 한번 보여줘봐",
+          "scores": {
+            "controlfreak": 2,
+            "wisecounsel": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "헉! 바로 다운받아야지!",
+          "scores": {
+            "earlybird": 3,
+            "visionary": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "잠깐, 나 이거보다 더 좋은 거 5개 알아!",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "section": "일상 상황편",
+      "question": "월요일 아침, 이번 주 업무 계획을 세울 때?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "노트에 손으로 끄적끄적",
+          "scores": {
+            "traditionalist": 3,
+            "scaredycat": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "\"ChatGPT야, 이번 주 어떻게 보낼까?\"",
+          "scores": {
+            "aiaddict": 2,
+            "earlybird": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "내가 대략 짜고 AI한테 검토 요청",
+          "scores": {
+            "controlfreak": 3,
+            "wisecounsel": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "\"AI야, 계획 다 세워줘!\"",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "계획? 그냥 그때그때...",
+          "scores": {
+            "vibechecker": 3,
+            "minimalist": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "section": "일상 상황편",
+      "question": "중요한 이메일 써야 할 때 당신의 첫 반응은?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "처음부터 끝까지 내가 직접!",
+          "scores": {
+            "traditionalist": 3,
+            "controlfreak": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "AI 초안 받고 → \"이건 좀...\" → 전체 갈아엎기",
+          "scores": {
+            "controlfreak": 3,
+            "vibechecker": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "\"AI야, 이런 느낌으로 써줘\" → 약간 수정",
+          "scores": {
+            "wisecounsel": 2,
+            "efficiencyking": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "\"AI야, 이메일 써줘\" → 바로 전송",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "\"진짜 이거 써도 되나?\" → 30분 고민",
+          "scores": {
+            "anxietybot": 3,
+            "scaredycat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "section": "일상 상황편",
+      "question": "AI가 \"완벽한 기획서 완성했습니다!\"라고 하면?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "고마워, 이제 내가 다시 쓸게",
+          "scores": {
+            "controlfreak": 3,
+            "vibechecker": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "좋긴 한데... 여기 좀 바꿔야겠다",
+          "scores": {
+            "controlfreak": 2,
+            "wisecounsel": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "오케이! 몇 군데만 손보자",
+          "scores": {
+            "wisecounsel": 2,
+            "efficiencyking": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "완벽해! 바로 제출하자",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "진짜 괜찮을까... 한번 더 체크해봐야겠다",
+          "scores": {
+            "anxietybot": 3,
+            "detective": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "section": "일상 상황편",
+      "question": "새 프로젝트 시작할 때 첫 번째로 하는 일은?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "종이에 마인드맵 끄적끄적",
+          "scores": {
+            "traditionalist": 3,
+            "scaredycat": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "\"구글링부터 하자\" 전통적 정보 수집",
+          "scores": {
+            "traditionalist": 2,
+            "bridgebuilder": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "\"ChatGPT야, 조언 좀...\" AI와 브레인스토밍",
+          "scores": {
+            "wisecounsel": 2,
+            "aiaddict": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "\"AI야, 계획 다 세워줘!\" 완전 위임",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "\"음... 일단 생각해보자\" 혼자 고민 먼저",
+          "scores": {
+            "minimalist": 2,
+            "stealthexpert": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "section": "IT 덕후 상황편",
+      "question": "친구 휴대폰에서 AI 앱을 20개 발견했을 때?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "와... 이건 좀 과한데?",
+          "scores": {
+            "minimalist": 3,
+            "traditionalist": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "오! 이거 뭐야? 저거는? 호기심 폭발",
+          "scores": {
+            "earlybird": 3,
+            "visionary": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "나는 ChatGPT 하나면 충분해",
+          "scores": {
+            "efficiencyking": 3,
+            "minimalist": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "잠깐, 나 이거보다 더 좋은 거 알아!",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "이런 것도 있구나... 안전한가?",
+          "scores": {
+            "bridgebuilder": 2,
+            "scaredycat": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "section": "IT 덕후 상황편",
+      "question": "\"GPT-5 출시!\" 뉴스를 봤을 때 반응은?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "그래서? 나랑 무슨 상관?",
+          "scores": {
+            "traditionalist": 3,
+            "scaredycat": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "리뷰 좀 보고 결정해야지",
+          "scores": {
+            "bridgebuilder": 3,
+            "anxietybot": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "오! 뭐가 바뀌었지? 바로 검색",
+          "scores": {
+            "earlybird": 3,
+            "visionary": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "대박! 바로 써봐야지!",
+          "scores": {
+            "earlybird": 2,
+            "aiaddict": 3
+          }
+        },
+        {
+          "letter": "e",
+          "text": "이미 베타 테스터 신청 완료",
+          "scores": {
+            "visionary": 3,
+            "evangelist": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "section": "IT 덕후 상황편",
+      "question": "AI 구독료로 한 달에 쓰는 돈은?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "0원 (무료만 사용 or 아예 안 씀)",
+          "scores": {
+            "traditionalist": 3,
+            "scaredycat": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "가끔 필요할 때만 일일 결제",
+          "scores": {
+            "minimalist": 2,
+            "bridgebuilder": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "2-3만원 (한두 개만 엄선해서)",
+          "scores": {
+            "efficiencyking": 3,
+            "wisecounsel": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "5-8만원 (필요한 건 다 구독)",
+          "scores": {
+            "aiaddict": 2,
+            "earlybird": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "계산하기 무서움... 10만원은 넘을 듯",
+          "scores": {
+            "aiaddict": 3,
+            "earlybird": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "section": "IT 덕후 상황편",
+      "question": "AI 도구 추천 요청받으면?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "잘 모르겠어, 구글링 해봐",
+          "scores": {
+            "traditionalist": 3,
+            "scaredycat": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "ChatGPT 하나면 충분해",
+          "scores": {
+            "efficiencyking": 3,
+            "minimalist": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "상황에 따라 달라, 신중한 조언",
+          "scores": {
+            "wisecounsel": 3,
+            "bridgebuilder": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "이거 써봐! 완전 좋아! 열정적 추천",
+          "scores": {
+            "evangelist": 3,
+            "earlybird": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "리스트 보내줄게!",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "section": "IT 덕후 상황편",
+      "question": "주말에 심심할 때 할 가능성이 높은 것은?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "책 읽기, 산책 같은 오프라인 취미",
+          "scores": {
+            "traditionalist": 3,
+            "scaredycat": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "넷플릭스 보다가 우연히 AI 다큐 시청",
+          "scores": {
+            "minimalist": 2,
+            "bridgebuilder": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "\"주말 프로젝트 뭘까?\" AI한테 물어보기",
+          "scores": {
+            "aiaddict": 2,
+            "visionary": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "새로운 AI 도구 찾아서 이것저것 실험",
+          "scores": {
+            "earlybird": 3,
+            "visionary": 3
+          }
+        },
+        {
+          "letter": "e",
+          "text": "AI 커뮤니티에서 노하우 공유하기",
+          "scores": {
+            "evangelist": 3,
+            "aiaddict": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "section": "직장 상황편",
+      "question": "상사가 \"이거 AI로 금방 되지?\"라고 하면?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "네, 하지만 검토는 제가 꼼꼼히 하겠습니다",
+          "scores": {
+            "controlfreak": 3,
+            "wisecounsel": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "AI 결과를 참고해서 작성하겠습니다",
+          "scores": {
+            "wisecounsel": 2,
+            "efficiencyking": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "AI가 다 해줄 거예요!",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "음... 직접 하는 게 더 확실할 것 같은데요",
+          "scores": {
+            "traditionalist": 3,
+            "anxietybot": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "AI 결과가 틀리면 어떡하죠?",
+          "scores": {
+            "anxietybot": 3,
+            "detective": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "section": "직장 상황편",
+      "question": "AI가 만든 보고서에서 수상한 부분 발견했을 때?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "역시... 전체 다시 써야겠다",
+          "scores": {
+            "controlfreak": 3,
+            "detective": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "이 부분만 수정하고 다른 곳도 체크해보자",
+          "scores": {
+            "wisecounsel": 3,
+            "controlfreak": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "대충 맞는 것 같은데? 넘어가기",
+          "scores": {
+            "aiaddict": 2,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "AI가 틀릴 리 없는데... 내가 잘못 이해했나?",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 3
+          }
+        },
+        {
+          "letter": "e",
+          "text": "와... AI도 실수하네, 놀라면서도 수정",
+          "scores": {
+            "anxietybot": 2,
+            "detective": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "section": "직장 상황편",
+      "question": "팀 프로젝트에서 AI 활용 방향 정할 때?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "AI 결과물은 제가 다 검수하겠습니다",
+          "scores": {
+            "controlfreak": 3,
+            "wisecounsel": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "역할 분담을 명확히 하죠",
+          "scores": {
+            "wisecounsel": 3,
+            "efficiencyking": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "AI한테 다 맡기고 우리는 검토만",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "전통적인 방식이 더 안전할 것 같은데요",
+          "scores": {
+            "traditionalist": 3,
+            "bridgebuilder": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "일단 해보고 문제되면 바꿔요",
+          "scores": {
+            "earlybird": 2,
+            "visionary": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "section": "직장 상황편",
+      "question": "마감 1시간 전, AI 결과물이 70점 수준일 때?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "70점은 안 돼! 다시 한다!",
+          "scores": {
+            "controlfreak": 3,
+            "vibechecker": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "핵심 부분만이라도 빠르게 수정",
+          "scores": {
+            "wisecounsel": 3,
+            "efficiencyking": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "이 정도면 괜찮지, 제출하자",
+          "scores": {
+            "aiaddict": 2,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "70점도 감사합니다! 바로 제출",
+          "scores": {
+            "aiaddict": 3,
+            "minimalist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "혹시 문제되면 어떡하지... 고민",
+          "scores": {
+            "anxietybot": 3,
+            "scaredycat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "section": "직장 상황편",
+      "question": "동료가 \"AI 쓰는 거 어떻게 배웠어?\"라고 물으면?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "그냥... 필요할 때마다 검색해서",
+          "scores": {
+            "stealthexpert": 3,
+            "minimalist": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "유튜브 보고, 블로그 읽고...",
+          "scores": {
+            "efficiencyking": 2,
+            "bridgebuilder": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "일단 써보면서 익혔어",
+          "scores": {
+            "earlybird": 2,
+            "visionary": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "앗! 좋은 강의 있는데 링크 보내줄게!",
+          "scores": {
+            "evangelist": 3,
+            "earlybird": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "별로 안 써서 잘 모르겠어",
+          "scores": {
+            "traditionalist": 3,
+            "scaredycat": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 16,
+      "section": "성격 테스트편",
+      "question": "\"AI가 인간을 대체할 거야\"라는 말을 들으면?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "AI는 그냥 도구일 뿐이야",
+          "scores": {
+            "traditionalist": 3,
+            "wisecounsel": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "일부는 그럴 수도 있지만 한계가 있어",
+          "scores": {
+            "wisecounsel": 2,
+            "bridgebuilder": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "이미 많은 부분에서 대체하고 있지",
+          "scores": {
+            "aiaddict": 2,
+            "visionary": 3
+          }
+        },
+        {
+          "letter": "d",
+          "text": "당연하지! AI가 더 정확하고 빠르잖아",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 3
+          }
+        },
+        {
+          "letter": "e",
+          "text": "무서운 얘기네... 나는 안 쓸래",
+          "scores": {
+            "scaredycat": 3,
+            "traditionalist": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "section": "성격 테스트편",
+      "question": "AI와 대화하다가 놀라울 정도로 정확한 조언 받았을 때?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "우연의 일치겠지",
+          "scores": {
+            "detective": 3,
+            "traditionalist": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "신기하긴 한데 늘 이럴 순 없겠지",
+          "scores": {
+            "bridgebuilder": 2,
+            "anxietybot": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "오... AI가 생각보다 똑똑하네?",
+          "scores": {
+            "wisecounsel": 2,
+            "efficiencyking": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "역시 AI야! 정말 도움된다",
+          "scores": {
+            "aiaddict": 2,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "AI가 나보다 날 더 잘 아는 것 같아",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "section": "성격 테스트편",
+      "question": "친구가 \"AI 없어도 살 수 있어?\"라고 물으면?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "당연하지, 원래도 잘 살았어",
+          "scores": {
+            "traditionalist": 3,
+            "scaredycat": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "불편하겠지만 충분히 가능해",
+          "scores": {
+            "minimalist": 2,
+            "bridgebuilder": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "음... 좀 힘들 것 같은데?",
+          "scores": {
+            "aiaddict": 2,
+            "earlybird": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "솔직히 많이 어려울 듯",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "상상도 하기 싫어!",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 3
+          }
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "section": "성격 테스트편",
+      "question": "AI 결과물의 '느낌'이 이상할 때?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "뭔가 AI티가 나네... 다시 쓰자",
+          "scores": {
+            "vibechecker": 3,
+            "controlfreak": 2
+          }
+        },
+        {
+          "letter": "b",
+          "text": "괜찮긴 한데 조금 아쉬워",
+          "scores": {
+            "vibechecker": 2,
+            "wisecounsel": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "이 정도면 쓸 만하지",
+          "scores": {
+            "efficiencyking": 2,
+            "minimalist": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "AI가 만든 거니까 완벽하겠지",
+          "scores": {
+            "aiaddict": 3,
+            "evangelist": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "느낌? 그런 거 중요해?",
+          "scores": {
+            "aiaddict": 2,
+            "specialist": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": 20,
+      "section": "성격 테스트편",
+      "question": "이 테스트 결과가 마음에 안 든다면?",
+      "answers": [
+        {
+          "letter": "a",
+          "text": "다시 해서 원하는 결과 나올 때까지!",
+          "scores": {
+            "controlfreak": 2,
+            "vibechecker": 3
+          }
+        },
+        {
+          "letter": "b",
+          "text": "한 번 더 해보고 비교해보자",
+          "scores": {
+            "detective": 3,
+            "anxietybot": 2
+          }
+        },
+        {
+          "letter": "c",
+          "text": "결과는 결과지, 받아들이자",
+          "scores": {
+            "wisecounsel": 2,
+            "efficiencyking": 2
+          }
+        },
+        {
+          "letter": "d",
+          "text": "재밌긴 한데 정확한가?",
+          "scores": {
+            "bridgebuilder": 2,
+            "scaredycat": 2
+          }
+        },
+        {
+          "letter": "e",
+          "text": "친구들한테도 해보라고 해야지!",
+          "scores": {
+            "evangelist": 3,
+            "earlybird": 2
+          }
+        }
+      ]
+    }
+  ],
+  "types": {
+    "controlfreak": {
+      "code": "controlfreak",
+      "name": "조종왕",
+      "english": "Control Freak",
+      "description": "모든 것을 통제하고 최적화하는 마스터",
+      "color": "#FF0040"
+    },
+    "earlybird": {
+      "code": "earlybird",
+      "name": "얼리버드",
+      "english": "Early Bird",
+      "description": "새로운 것을 먼저 시도하는 선구자",
+      "color": "#8A2BE2"
+    },
+    "traditionalist": {
+      "code": "traditionalist",
+      "name": "아날로그인간",
+      "english": "Traditionalist",
+      "description": "전통적인 방식을 선호하는 신중한 사람",
+      "color": "#FF8C00"
+    },
+    "stealthexpert": {
+      "code": "stealthexpert",
+      "name": "숨덕후",
+      "english": "Stealth Expert",
+      "description": "조용히 AI를 활용하는 은밀한 전문가",
+      "color": "#696969"
+    },
+    "efficiencyking": {
+      "code": "efficiencyking",
+      "name": "알짜배기",
+      "english": "Efficiency King",
+      "description": "꼭 필요한 것만 골라 쓰는 효율성 왕",
+      "color": "#00FF7F"
+    },
+    "vibechecker": {
+      "code": "vibechecker",
+      "name": "느낌충",
+      "english": "Vibe Checker",
+      "description": "감각과 느낌으로 판단하는 직관적 사용자",
+      "color": "#FF1493"
+    },
+    "aiaddict": {
+      "code": "aiaddict",
+      "name": "완전체",
+      "english": "AI Addict",
+      "description": "AI 없이는 살 수 없는 완전 의존형",
+      "color": "#1E90FF"
+    },
+    "specialist": {
+      "code": "specialist",
+      "name": "장인",
+      "english": "Specialist",
+      "description": "자신만의 방식으로 완벽을 추구하는 장인",
+      "color": "#FF4500"
+    },
+    "anxietybot": {
+      "code": "anxietybot",
+      "name": "소심쟁이",
+      "english": "Anxiety Bot",
+      "description": "조심스럽게 AI를 사용하는 신중한 타입",
+      "color": "#E6E6FA"
+    },
+    "visionary": {
+      "code": "visionary",
+      "name": "미래인",
+      "english": "Visionary",
+      "description": "미래 기술을 향한 끝없는 호기심",
+      "color": "#00FFFF"
+    },
+    "minimalist": {
+      "code": "minimalist",
+      "name": "미니멀러",
+      "english": "Minimalist",
+      "description": "최소한의 도구로 최대 효과를 내는 사람",
+      "color": "#C0C0C0"
+    },
+    "evangelist": {
+      "code": "evangelist",
+      "name": "광신도",
+      "english": "Evangelist",
+      "description": "AI의 가능성을 전파하는 열성적 지지자",
+      "color": "#FFD700"
+    },
+    "bridgebuilder": {
+      "code": "bridgebuilder",
+      "name": "돌다리왕",
+      "english": "Bridge Builder",
+      "description": "신중하게 검토하고 안전하게 진행하는 타입",
+      "color": "#32CD32"
+    },
+    "wisecounsel": {
+      "code": "wisecounsel",
+      "name": "현자",
+      "english": "Wise Counsel",
+      "description": "균형 잡힌 시각으로 AI를 현명하게 활용",
+      "color": "#9370DB"
+    },
+    "detective": {
+      "code": "detective",
+      "name": "의심덩어리",
+      "english": "Detective",
+      "description": "모든 것을 의심하고 검증하는 탐정형",
+      "color": "#DC143C"
+    },
+    "scaredycat": {
+      "code": "scaredycat",
+      "name": "겁쟁이",
+      "english": "Scaredy Cat",
+      "description": "AI가 무서워서 피하고 싶은 타입",
+      "color": "#DCDCDC"
+    }
+  }
+}

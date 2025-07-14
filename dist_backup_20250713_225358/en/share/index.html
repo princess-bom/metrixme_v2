@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    <title>Matrix Me - Share Result</title>
+    <meta name="description" content="Share your AI personality test result as an image!">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Matrix Me - AI Personality Result">
+    <meta property="og:description" content="My AI personality type has been revealed!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://matrixme.app/en/share/">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="AI test result, AI personality result, share, image download">
+    
+    <!-- html2canvas CDN -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* 터미널 컬러 팔레트 */
+            --bg-terminal: #0a0a0a;
+            --bg-header: #111111;
+            --bg-content: #000000;
+            --bg-card: #1a1a1a;
+            
+            /* 네온 컬러 */
+            --neon-cyan: #00ccff;
+            --neon-blue: #1e90ff;
+            --neon-green: #00ff88;
+            --neon-yellow: #ffd700;
+            --neon-pink: #ff0066;
+            --neon-red: #ff3333;
+            
+            /* 텍스트 */
+            --text-primary: #ffffff;
+            --text-secondary: #e6e6fa;
+            --text-terminal: #00ff00;
+            --text-muted: #888888;
+            
+            /* 테두리 */
+            --border-default: #333333;
+            --border-blue: #1e90ff;
+            --border-green: #00ff88;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Courier New', monospace;
+            background: var(--bg-content);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* 공유 카드 컨테이너 */
+        .share-container {
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+
+        /* 공유 카드 */
+        .share-card {
+            background: var(--bg-card);
+            border: 2px solid var(--neon-blue);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 
+                0 0 20px rgba(30, 144, 255, 0.3),
+                0 0 40px rgba(30, 144, 255, 0.1);
+        }
+
+        /* 로고 섹션 */
+        .logo-section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-default);
+            padding-bottom: 20px;
+        }
+
+        .logo-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px currentColor;
+        }
+
+        .logo-subtitle {
+            font-size: 14px;
+            color: var(--neon-green);
+            text-shadow: 0 0 8px currentColor;
+        }
+
+        /* 시스템 메시지 */
+        .system-message {
+            font-size: 14px;
+            color: var(--neon-pink);
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px currentColor;
+        }
+
+        /* 타입 정보 섹션 */
+        .type-section {
+            background: rgba(30, 144, 255, 0.1);
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .type-code {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            margin-bottom: 8px;
+            text-shadow: 0 0 15px currentColor;
+        }
+
+        .type-name {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .type-description {
+            font-size: 16px;
+            color: var(--text-primary);
+            font-weight: 500;
+            line-height: 1.3;
+        }
+
+        /* 통계 섹션 */
+        .stats-section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-default);
+            padding-bottom: 20px;
+        }
+
+        .stat-line {
+            font-size: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .stat-line:last-child {
+            margin-bottom: 0;
+        }
+
+        .stat-label {
+            color: #00FF41;
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+        .stat-value {
+            color: var(--neon-green);
+            font-weight: 700;
+            margin-left: 8px;
+            text-shadow: 0 0 8px currentColor;
+        }
+
+        .rarity-value {
+            color: #FFD700;
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+        /* CTA 섹션 */
+        .cta-section {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .cta-title {
+            margin-bottom: 5px;
+        }
+
+        .cta-url {
+            color: var(--neon-cyan);
+            font-weight: 700;
+            text-shadow: 0 0 8px currentColor;
+        }
+
+        /* 액션 버튼들 */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--bg-card);
+            border: 2px solid;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-download {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        .btn-download:hover {
+            background: var(--neon-green);
+            color: var(--bg-content);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .btn-retest {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .btn-retest:hover {
+            background: var(--neon-cyan);
+            color: var(--bg-content);
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.5);
+        }
+
+        .btn-result {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .btn-result:hover {
+            background: var(--neon-pink);
+            color: var(--bg-content);
+            box-shadow: 0 0 20px rgba(255, 0, 102, 0.5);
+        }
+
+        .btn-copy {
+            border-color: var(--neon-yellow);
+            color: var(--neon-yellow);
+        }
+
+        .btn-copy:hover {
+            background: var(--neon-yellow);
+            color: var(--bg-content);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            body {
+                padding: max(10px, env(safe-area-inset-top, 10px)) 10px max(10px, env(safe-area-inset-bottom, 10px)) 10px;
+            }
+            
+            .share-card {
+                padding: 20px;
+            }
+            
+            .logo-title {
+                font-size: 20px;
+            }
+            
+            .type-code {
+                font-size: 28px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* 로딩 상태 */
+        .loading {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+    </style>
+  <script type="module" crossorigin src="../../assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
+  <script type="module" crossorigin src="../../assets/result-engine-D2clF4To.js"></script>
+</head>
+<body>
+    <div class="share-container">
+        <div id="share-card" class="share-card">
+            <!-- 로고 섹션 -->
+            <div class="logo-section">
+                <div class="logo-title">MATRIX ME</div>
+                <div class="logo-subtitle">AI DNA Analysis System</div>
+            </div>
+            
+            <!-- 시스템 메시지 -->
+            <div class="system-message">> USER TYPE DETECTED:</div>
+            
+            <!-- 타입 정보 섹션 -->
+            <div class="type-section">
+                <div class="type-code" id="type-code">Loading...</div>
+                <div class="type-name" id="type-name">Loading...</div>
+                <div class="type-description" id="type-description">"Loading..."</div>
+            </div>
+            
+            <!-- 통계 섹션 -->
+            <div class="stats-section">
+                <div class="stat-line">
+                    <span class="stat-label">> Neural Match:</span>
+                    <span class="stat-value" id="confidence">---%</span>
+                    <span class="stat-value">CONFIRMED</span>
+                </div>
+                <div class="stat-line">
+                    <span class="stat-label">> Rarity:</span>
+                    <span class="rarity-value" id="rarity">Loading...</span>
+                </div>
+            </div>
+            
+            <!-- CTA 섹션 -->
+            <div class="cta-section">
+                <div class="cta-title">Discover your AI DNA type</div>
+                <div class="cta-url">MATRIXME.APP</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 액션 버튼들 -->
+    <div class="action-buttons">
+        <button class="btn btn-download" onclick="downloadAsImage()">
+            [Download as Image]
+        </button>
+        <button class="btn btn-copy" onclick="copyResultLink()">
+            [Copy Link]
+        </button>
+        <a href="../result/" class="btn btn-result">
+            [View Details]
+        </a>
+        <a href="../quiz/" class="btn btn-retest">
+            [Retake Test]
+        </a>
+    </div>
+
+    <!-- Result Engine and Type Definitions -->
+    
+    <script>
+        // 결과 엔진 인스턴스
+        let resultEngine = null;
+        
+        // 페이지 로드 시 데이터 로딩
+        async function loadShareData() {
+            try {
+                // ResultEngine 클래스가 로드될 때까지 대기
+                if (typeof window.ResultEngine === 'undefined') {
+                    await new Promise(resolve => {
+                        const checkEngine = () => {
+                            if (typeof window.ResultEngine !== 'undefined') {
+                                resolve();
+                            } else {
+                                setTimeout(checkEngine, 100);
+                            }
+                        };
+                        checkEngine();
+                    });
+                }
+
+                // 결과 엔진 초기화
+                resultEngine = new window.ResultEngine();
+                
+                // 현재 URL에서 결과 데이터 생성
+                const resultData = await resultEngine.generateCurrentResult();
+                
+                // 공유 카드 데이터 업데이트
+                updateShareCard(resultData);
+                
+            } catch (error) {
+                console.error('Error loading share data:', error);
+                // 에러 발생시 기본 메시지 표시
+                document.getElementById('type-code').textContent = 'ERROR';
+                document.getElementById('type-name').textContent = 'Unable to load data';
+                document.getElementById('type-description').textContent = '"Please refresh the page"';
+            }
+        }
+        
+        // 공유 카드 데이터 업데이트
+        function updateShareCard(data) {
+            // 타입 코드 업데이트
+            document.getElementById('type-code').textContent = data.typeCode;
+            
+            // 타입 이름 업데이트 (풀네임 + 하이라이트)
+            const typeNameElement = document.getElementById('type-name');
+            const fullName = data.fullName || data.typeName.split('(')[1]?.replace(')', '') || 'Unknown';
+            
+            // 각 단어의 첫 글자를 하이라이트하여 타입 코드 표시
+            const words = fullName.split(/[\s-]+/).filter(word => word.length > 0);
+            const firstLetters = words.map(word => word.charAt(0).toUpperCase()).join('');
+            const typeCode = data.typeCode || '';
+            
+            // 첫 글자들이 타입 코드와 일치하고, 단어가 4개인 경우 하이라이트 적용
+            if (words.length === 4 && firstLetters === typeCode) {
+                // 각 단어의 첫 글자를 하이라이트
+                const highlightedText = words.map(word => 
+                    `<span style="color: #00BFFF; font-weight: bold; font-size: 1.2em;">${word.charAt(0)}</span>${word.slice(1)}`
+                ).join(' ');
+                typeNameElement.innerHTML = highlightedText;
+            } else {
+                // 타입 코드와 일치하지 않거나 단어 수가 다르면 일반 텍스트로 표시
+                typeNameElement.textContent = fullName;
+            }
+            
+            // 타입 설명 업데이트 (따옴표 제거)
+            let description = data.description || data.typeName.split('(')[0].trim();
+            if (data.profile && typeof data.profile === 'string') {
+                description = data.profile;
+            }
+            document.getElementById('type-description').textContent = description;
+            
+            // 신뢰도 업데이트
+            document.getElementById('confidence').textContent = `${data.confidence}%`;
+            
+            // 희귀도 업데이트 (영어 전용)
+            let rarityText = data.rarity || 'Unknown';
+            // 한국어 희귀도 텍스트를 영어로 변환
+            if (rarityText.includes('상위')) {
+                const percentage = rarityText.match(/\d+/)?.[0] || '';
+                if (percentage) {
+                    rarityText = `Top ${percentage}%`;
+                }
+            }
+            document.getElementById('rarity').textContent = rarityText;
+            
+            // 상세 결과 보기 링크에 URL 파라미터 추가
+            const resultLink = document.querySelector('.btn-result');
+            if (resultLink && data.typeCode) {
+                const currentParams = new URLSearchParams(window.location.search);
+                resultLink.href = `../result/?${currentParams.toString()}`;
+            }
+        }
+        
+        // 이미지로 저장 기능
+        async function downloadAsImage() {
+            try {
+                const shareCard = document.getElementById('share-card');
+                const canvas = await html2canvas(shareCard, {
+                    backgroundColor: '#1a1a1a',
+                    scale: 2, // 고해상도
+                    useCORS: true,
+                    allowTaint: true
+                });
+                
+                // 이미지 다운로드
+                const link = document.createElement('a');
+                link.download = `matrix-me-${document.getElementById('type-code').textContent.toLowerCase()}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                
+            } catch (error) {
+                console.error('Error generating image:', error);
+                alert('An error occurred while generating the image. Please try again.');
+            }
+        }
+
+        // 결과 링크 복사 기능 - Firebase shareId 기반 클린 URL 생성
+        async function copyResultLink(event) {
+            try {
+                let resultUrl;
+                
+                // sessionStorage에서 shareId 확인하여 클린 URL 생성
+                const shareId = sessionStorage.getItem('matrixme-shareId');
+                
+                if (shareId) {
+                    // shareId가 있으면 실제 클린 URL 생성
+                    console.log('🎯 ShareId 발견:', shareId);
+                    
+                    // 실제 클린 URL 생성 (로컬에서도 작동)
+                    const baseUrl = window.location.origin;
+                    resultUrl = `${baseUrl}/en/result/${shareId}`;
+                    
+                    console.log('🔗 클린 URL 생성됨:', resultUrl);
+                } else {
+                    // shareId가 없으면 기존 방식
+                    console.warn('⚠️ ShareId를 찾을 수 없음, 기존 방식 사용');
+                    const currentUrl = window.location.href;
+                    resultUrl = currentUrl.replace('/share/', '/result/');
+                }
+                
+                // 클립보드에 복사
+                await navigator.clipboard.writeText(resultUrl);
+                
+                // 버튼 텍스트 임시 변경으로 피드백
+                const button = event ? event.target : document.querySelector('.btn-copy');
+                const originalText = button.textContent;
+                button.textContent = '[Copied!]';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error copying link:', error);
+                alert('An error occurred while copying the link. Please try again.');
+            }
+        }
+
+        // 페이지 로드 시 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            loadShareData();
+        });
+    </script>
+</body>
+</html>

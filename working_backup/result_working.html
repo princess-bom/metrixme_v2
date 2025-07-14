@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    <title>Matrix Me - 진단 결과</title>
+    <meta name="description" content="당신의 AI 활용 유형 진단 결과를 확인하세요!">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Matrix Me - AI 유형 진단 결과">
+    <meta property="og:description" content="나의 AI 활용 유형이 공개되었습니다!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://matrixme.app/ko/result/">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Matrix Me - AI 유형 진단 결과">
+    <meta name="twitter:description" content="나의 AI 활용 유형이 공개되었습니다!">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="AI 테스트 결과, AI 성향 진단 결과, AI 유형, 조종왕, 얼리버드, 완전체">
+    
+    <!-- hreflang 태그 -->
+    <link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/result/">
+    <link rel="alternate" hreflang="en" href="https://matrixme.app/en/result/">
+    <link rel="alternate" hreflang="x-default" href="https://matrixme.app/en/result/">
+    
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Quiz",
+      "name": "Matrix Me AI 활용 유형 진단 결과",
+      "description": "당신의 AI 활용 유형 진단 결과를 확인하세요 - 16가지 성향 중 하나",
+      "inLanguage": "ko",
+      "about": {
+        "@type": "Thing",
+        "name": "AI 활용 유형 결과",
+        "description": "개인의 AI 도구 사용 성향과 특성 분석 결과"
+      },
+      "potentialAction": {
+        "@type": "ShareAction",
+        "name": "결과 공유하기"
+      }
+    }
+    </script>
+    
+    <!-- Figma Design CSS -->
+    <style>
+        :root {
+            /* 피그마 정확한 컬러 팔레트 */
+            --bg-terminal: #0a0a0a;
+            --bg-header: #111111;
+            --bg-content: #000000;
+            --bg-card: #1a1a1a;
+            
+            /* 네온 컬러 */
+            --neon-cyan: #00ccff;
+            --neon-blue: #1e90ff;
+            --neon-green: #00ff88;
+            --neon-yellow: #ffd700;
+            --neon-pink: #ff0066;
+            --neon-red: #ff3333;
+            
+            /* 텍스트 */
+            --text-primary: #ffffff;
+            --text-secondary: #e6e6fa;
+            --text-terminal: #00ff00;
+            --text-muted: #888888;
+            
+            /* 테두리 */
+            --border-default: #333333;
+            --border-blue: #1e90ff;
+            --border-green: #00ff88;
+            --border-cyan: #00ccff;
+            --border-pink: #ff0066;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Courier New', monospace;
+            background: var(--bg-content);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* 메인 터미널 컨테이너 - 랜딩페이지 스타일 적용 */
+        .terminal-window {
+            width: 100%;
+            max-width: 900px;
+            background: #1A1A1A;
+            border-radius: 12px;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 0, 0.3),
+                0 0 40px rgba(0, 255, 0, 0.1),
+                0 0 80px rgba(0, 255, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 터미널 헤더 - 랜딩페이지 스타일 적용 */
+        .terminal-header {
+            background: #0A0A0A;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #333;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .control.red { background: #FF5F57; }
+        .control.yellow { background: #FFBD2E; }
+        .control.green { background: #28CA42; }
+
+        .terminal-title {
+            color: #00CCFF;
+            font-size: 13px;
+            font-weight: 500;
+            text-shadow: 0 0 10px currentColor;
+            flex: 1;
+        }
+
+        .terminal-header-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-language-toggle,
+        .terminal-color-toggle {
+            background: transparent;
+            border: 1px solid #333;
+            color: #888;
+            padding: 2px 6px;
+            border-radius: 2px;
+            font-family: inherit;
+            font-size: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .terminal-language-toggle:hover,
+        .terminal-color-toggle:hover {
+            border-color: #666;
+            color: #fff;
+        }
+
+        .terminal-color-toggle:hover {
+            background: #00CCFF !important;
+            color: #000 !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* 콘텐츠 영역 */
+        .content-area {
+            padding: 20px;
+            min-height: 500px;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #000000;
+        }
+
+        /* 레포트 헤더 */
+        .report-header {
+            margin-bottom: 20px;
+        }
+
+        .terminal-prompt {
+            color: var(--text-terminal);
+            font-size: 16px;
+            line-height: 19.2px;
+            margin-bottom: 6px;
+        }
+
+        .completion-status {
+            color: var(--neon-green);
+            font-size: 16px;
+            line-height: 19.2px;
+            margin-bottom: 0px;
+        }
+
+        .terminal-cursor {
+            color: var(--text-terminal);
+            font-size: 16px;
+            line-height: 19.2px;
+        }
+
+        .terminal-cursor::after {
+            content: "_";
+            color: var(--neon-green);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* 타입 결과 섹션 */
+        .type-result {
+            margin-top: -4px;
+            margin-bottom: 20px;
+        }
+
+        .type-info {
+            margin-bottom: 6px;
+            font-size: 0; /* 공백 제거 */
+        }
+        
+        .type-label, .type-name {
+            font-size: 16px; /* 폰트 크기 복원 */
+        }
+
+        .type-label {
+            color: var(--neon-blue);
+            font-weight: 700;
+            line-height: 19.2px;
+            font-size: 16px;
+            height: 23px;
+        }
+
+        .type-name {
+            color: var(--neon-blue);
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        /* 모바일에서만 줄바꿈 */
+        .mobile-only {
+            display: none;
+        }
+        
+        /* 데스크톱에서만 표시 */
+        .desktop-only {
+            display: inline;
+        }
+
+        @media (min-width: 769px) {
+            .type-label {
+                line-height: 25.9px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .mobile-only {
+                display: block;
+            }
+            
+            .desktop-only {
+                display: none;
+            }
+        }
+
+        .probability {
+            margin-bottom: 12px;
+        }
+
+        .match-label {
+            color: var(--neon-cyan);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .percentage {
+            color: var(--neon-blue);
+            font-size: 16px;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .status {
+            color: var(--neon-green);
+            font-size: 16px;
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        .rarity {
+            color: var(--neon-yellow);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* 결과 요약 카드 - report.md 스타일 */
+        .result-summary-card {
+            background: var(--bg-card);
+            border: 2px solid #00FF41;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+
+        .summary-type-box {
+            background: rgba(0, 191, 255, 0.1);
+            border: 2px solid #00BFFF;
+            border-radius: 6px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .summary-korean-name {
+            font-size: 36px;
+            font-weight: 700;
+            color: #FF1493;
+            margin-bottom: 12px;
+            text-align: center;
+            text-shadow: none;
+        }
+
+        .summary-type-code {
+            font-size: 20px;
+            font-weight: 700;
+            color: #00BFFF;
+            margin-bottom: 8px;
+            text-shadow: none !important;
+        }
+
+        .summary-type-name {
+            font-size: 14px;
+            color: #CCCCCC;
+            margin-bottom: 12px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            max-width: 100%;
+        }
+
+        .summary-description {
+            font-size: 16px;
+            color: #FFFFFF;
+            font-weight: 500;
+            line-height: 1.4;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        .summary-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .summary-stat {
+            font-size: 16px;
+            line-height: 1.4;
+        }
+
+        .summary-neural {
+            color: #00FF41;
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+        .summary-rarity {
+            color: #FFD700;
+            font-weight: 700;
+            text-shadow: none;
+        }
+
+
+        @media (max-width: 768px) {
+            .result-summary-card {
+                padding: 16px;
+            }
+            
+            .summary-type-box {
+                padding: 12px;
+            }
+            
+            .summary-korean-name {
+                font-size: 28px;
+            }
+            
+            .summary-type-code {
+                font-size: 16px;
+            }
+            
+            .summary-stat {
+                font-size: 14px;
+            }
+        }
+
+        /* 프로필 카드 */
+        .profile-card {
+            background: var(--bg-card);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.3);
+        }
+
+        .profile-title {
+            color: var(--neon-blue);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .profile-line {
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 19.2px;
+            margin-bottom: 10px;
+        }
+
+        /* 2x2 그리드 레이아웃 */
+        .main-content {
+            display: grid;
+            grid-template-rows: auto auto;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .top-row,
+        .bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .section {
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            color: var(--neon-cyan);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .section-title.weak {
+            color: var(--neon-pink);
+        }
+
+        /* 일상 루틴 */
+        .routine-item {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 16.8px;
+            margin-bottom: 8px;
+        }
+
+        /* 무기고 */
+        .arsenal-item {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 16.8px;
+            margin-bottom: 8px;
+        }
+
+        /* 강점/약점 */
+        .strength-item {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 16.8px;
+            margin-bottom: 8px;
+        }
+
+        .strength-item::before {
+            content: "✓ ";
+            color: var(--neon-green);
+        }
+
+        .weakness-item {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 16.8px;
+            margin-bottom: 8px;
+        }
+
+        .weakness-item::before {
+            content: "✗ ";
+            color: var(--neon-red);
+        }
+
+        /* 궁합 섹션 */
+        .compatibility {
+            margin-bottom: 20px;
+        }
+
+        .compatibility-title {
+            color: var(--neon-pink);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .good-match {
+            color: var(--neon-yellow);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .bad-match {
+            color: var(--neon-pink);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .surprise-match {
+            color: var(--neon-cyan);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        /* 액션 버튼들 */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: var(--bg-card);
+            border: 2px solid;
+            border-radius: 4px;
+            padding: 14px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            will-change: transform;
+        }
+
+        .btn-share {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        .btn-retest {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .btn-others {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        /* 반응형 디자인 */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .terminal-window {
+                width: calc(100% - 40px);
+                height: auto;
+                margin: 20px;
+            }
+            
+            .terminal-header {
+                width: calc(100% - 48px);
+            }
+            
+            .title-text {
+                font-size: 12px;
+            }
+            
+            .matrix-type {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding: 0 !important;
+                align-items: flex-start;
+                min-height: 100vh;
+                overflow-y: auto !important;
+                height: auto !important;
+            }
+            
+            .terminal-window {
+                width: 100%;
+                height: auto;
+                min-height: auto !important;
+                margin: 0;
+                font-size: 14px;
+                border-radius: 0;
+                box-shadow: none;
+                overflow: visible !important;
+            }
+            
+            .terminal-header {
+                padding: 10px 15px;
+                border-radius: 0;
+            }
+            
+            .content-area {
+                padding: 15px;
+                padding-bottom: 80px !important;
+                min-height: auto !important;
+                overflow: visible !important;
+            }
+            
+            .traffic-lights {
+                gap: 4px;
+            }
+            
+            .light {
+                width: 8px;
+                height: 8px;
+                border-radius: 4px;
+            }
+            
+            .title-text {
+                font-size: 10px;
+                margin-left: 8px;
+            }
+            
+            .matrix-type {
+                font-size: 10px;
+            }
+            
+            .type-info {
+                text-align: left;
+            }
+            
+            .type-label {
+                display: block;
+                margin-bottom: 8px;
+            }
+            
+            .type-name {
+                font-size: 16px;
+                display: block;
+                margin-left: 0;
+            }
+            
+            .rarity {
+                text-align: left;
+                line-height: 1.4;
+            }
+            
+            .profile-card {
+                padding: 16px;
+                text-align: left;
+            }
+            
+            .profile-line {
+                line-height: 1.5;
+                word-break: keep-all;
+                overflow-wrap: break-word;
+            }
+            
+            .section-title {
+                font-size: 14px;
+                line-height: 1.4;
+                padding-top: 2px;
+            }
+            
+            .top-row,
+            .bottom-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+
+        /* 네온 글로우 효과 */
+        .neon-glow {
+            text-shadow: 
+                0 0 5px currentColor,
+                0 0 10px currentColor,
+                0 0 15px currentColor;
+        }
+
+        /* GPU 가속 최적화 */
+        .terminal-window {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        /* 카피라이트 스타일 */
+        .copyright-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+        }
+        
+        .copyright-text {
+            color: #666;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            margin: 0;
+            text-shadow: none;
+        }
+        
+        @media (max-width: 768px) {
+            .copyright-section {
+                margin-top: 20px;
+                padding-top: 15px;
+            }
+            
+            .copyright-text {
+                font-size: 10px;
+            }
+        }
+    </style>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="../../assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
+  <script type="module" crossorigin src="../../assets/result-engine-D2clF4To.js"></script>
+  <script type="module" crossorigin src="../../assets/firebase-service-B11fG6tX.js"></script>
+</head>
+<body>
+    <div class="terminal-window">
+        <!-- 터미널 헤더 -->
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <span class="control red"></span>
+                <span class="control yellow"></span>
+                <span class="control green"></span>
+            </div>
+            <div class="terminal-title">
+                <span class="title-part1">MATRIX ME</span>
+                <span class="title-separator"> - </span>
+                <span class="title-part2" id="matrix-type">로딩 중...</span>
+            </div>
+            <div class="terminal-header-buttons">
+                <button class="terminal-color-toggle" id="ko-result-color-toggle">
+                    C
+                </button>
+                <button class="terminal-language-toggle" id="ko-result-language-toggle">
+                    EN
+                </button>
+            </div>
+        </div>
+        
+        <!-- 콘텐츠 영역 -->
+        <div class="content-area">
+            <!-- 레포트 헤더 -->
+            <div class="report-header">
+                <div class="terminal-prompt">> MATRIX ME AI DNA Analysis Report</div>
+            </div>
+            
+            <!-- 결과 요약 카드 -->
+            <div class="result-summary-card">
+                <div class="summary-type-box">
+                    <div class="summary-korean-name" id="summary-korean-name">로딩 중...</div>
+                    <div class="summary-type-code" id="summary-type-code">MATRIX TYPE: 로딩 중...</div>
+                    <div class="summary-type-name" id="summary-type-name">로딩 중...</div>
+                    <div class="summary-description" id="summary-description">로딩 중...</div>
+                </div>
+                <div class="summary-stats">
+                    <div class="summary-stat">
+                        <span class="summary-neural">> Neural Match: <span id="summary-confidence">---%</span> CONFIRMED</span>
+                    </div>
+                    <div class="summary-stat">
+                        <span class="summary-rarity">> 희귀도: <span id="summary-rarity">로딩 중...</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            
+            
+            <!-- 궁합 섹션 -->
+            <div class="compatibility" id="compatibility-section">
+                <!-- 궁합 내용이 JavaScript로 로딩됩니다 -->
+            </div>
+            
+            <!-- 2x2 그리드 레이아웃 (메인 콘텐츠) -->
+            <div class="main-content" id="main-content">
+                <!-- 메인 콘텐츠가 JavaScript로 로딩됩니다 -->
+            </div>
+            
+            <!-- 액션 버튼들 -->
+            <div class="action-buttons">
+                <button class="btn btn-share" onclick="shareResult()">
+                    <span>[MATRIX 결과 공유하기]</span>
+                </button>
+                <button class="btn btn-retest" onclick="retakeTest()">
+                    <span>[다시 테스트]</span>
+                </button>
+            </div>
+            
+            <!-- 카피라이트 -->
+            <div class="copyright-section">
+                <p class="copyright-text">© 2025 Matrix Me. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Engine and Type Definitions -->
+    <script src="/assets/js/console-override.js"></script>
+    
+    <script>
+        // 타이핑 효과 함수
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+
+        // 결과 엔진 인스턴스
+        let resultEngine = null;
+        let currentResultData = null; // 현재 결과 데이터 저장
+
+        // 동적 결과 데이터 로딩
+        async function loadResultData() {
+            try {
+                console.log('🔍 결과 데이터 로딩 시작...');
+                
+                // URL 파라미터 직접 읽기
+                const urlParams = new URLSearchParams(window.location.search);
+                console.log('📋 URL 파라미터:', window.location.search);
+                
+                // 4축 점수 읽기
+                const dScore = parseInt(urlParams.get('D'));
+                const eScore = parseInt(urlParams.get('E'));
+                const tScore = parseInt(urlParams.get('T'));
+                const cScore = parseInt(urlParams.get('C'));
+                const typeParam = urlParams.get('type');
+                const koreanParam = decodeURIComponent(urlParams.get('korean') || '');
+                
+                console.log('🎯 파라미터 파싱 결과:', {
+                    D: dScore, E: eScore, T: tScore, C: cScore,
+                    type: typeParam, korean: koreanParam
+                });
+                
+                // 타입 매핑 (HLLH -> SAGE)
+                const typeMapping = {
+                    'HHHH': 'CTRL', 'HHHL': 'FLOW', 'HHLH': 'BETA', 'HHLL': 'NOVA',
+                    'HLHH': 'PICK', 'HLHL': 'SYNC', 'HLLH': 'SAGE', 'HLLL': 'ECHO',
+                    'LHHH': 'HYPE', 'LHHL': 'HIDE', 'LHLH': 'VIBE', 'LHLL': 'PURE',
+                    'LLHH': 'MESH', 'LLHL': 'SCAN', 'LLLH': 'BASE', 'LLLL': 'CORE'
+                };
+                
+                // 실제 타입 코드 결정
+                let actualTypeCode = 'FLOW'; // 기본값
+                if (typeParam) {
+                    actualTypeCode = typeMapping[typeParam.toUpperCase()] || typeParam.toUpperCase();
+                }
+                
+                console.log('✅ 최종 타입 코드:', actualTypeCode);
+                
+                // 한국어 타입 정보 (간단한 매핑)
+                const koreanTypeInfo = {
+                    'SAGE': { korean: '현자', fullName: 'Sophisticated Analytical Guidance Expert' },
+                    'CTRL': { korean: '조종왕', fullName: 'Compulsive Technology Refactoring Lord' },
+                    'FLOW': { korean: '완전체', fullName: 'Full-throttle Legendary Output Wizard' },
+                    'BETA': { korean: '얼리버드', fullName: 'Budget Experimental Testing Addict' },
+                    'ECHO': { korean: '미니멀러', fullName: 'Efficient Control Heavy Optimizer' }
+                };
+                
+                const typeInfo = koreanTypeInfo[actualTypeCode] || koreanTypeInfo['FLOW'];
+                
+                // 결과 데이터 구성
+                currentResultData = {
+                    typeCode: actualTypeCode,
+                    typeName: `${actualTypeCode} (${typeInfo.fullName})`,
+                    typeKorean: koreanParam || typeInfo.korean,
+                    fullName: typeInfo.fullName,
+                    confidence: 95,
+                    rarity: '로딩 완료',
+                    scores: { D: dScore, E: eScore, T: tScore, C: cScore },
+                    profile: [`${typeInfo.korean} 타입입니다.`, '상세 정보를 로딩 중입니다...'],
+                    routine: ['일상 루틴 로딩 중...'],
+                    arsenal: ['무기고 로딩 중...'],
+                    strengths: ['강점 로딩 중...'],
+                    weaknesses: ['약점 로딩 중...'],
+                    headerTitle: `${actualTypeCode} MATRIX`,
+                    profileTitle: `MATRIX PROFILE TYPE : ${typeInfo.korean}`,
+                    rarityText: `희귀도: 계산 중...`,
+                    routineTitle: `> ${typeInfo.korean} 일상 루틴:`,
+                    arsenalTitle: `> ${typeInfo.korean}의 무기고:`
+                };
+                
+                console.log('📊 최종 결과 데이터:', currentResultData);
+                
+                // 페이지 데이터 업데이트
+                updatePageContent(currentResultData);
+                
+                // Firebase 서비스 초기화 (백그라운드에서)
+                setTimeout(async () => {
+                    try {
+                        console.log../../assets/firebase-service-D0raGRnh.js                       const { firebaseService } = await import('../../assets/js/firebase-service.js');
+                        if (firebaseService) {
+                            await firebaseService.initialize();
+                            window.firebaseService = firebaseService;
+                            console.log('✅ Firebase 서비스 백그라운드 초기화 완료');
+                        }
+                    } catch (error) {
+                        console.warn('⚠️ Firebase 백그라운드 로딩 실패:', error);
+                    }
+                }, 1000);
+                
+            } catch (error) {
+                console.error('❌ 결과 데이터 로딩 실패:', error);
+                // 에러 발생시 로딩 실패 메시지 표시
+                document.getElementById('summary-korean-name').textContent = '로딩 실패';
+                document.getElementById('summary-type-code').textContent = '오류 발생';
+                document.getElementById('summary-description').textContent = '페이지를 새로고침해 주세요';
+            }
+        }
+
+        // 페이지 콘텐츠 업데이트
+        function updatePageContent(data) {
+            // 결과 요약 카드 업데이트
+            const summaryKoreanName = document.getElementById('summary-korean-name');
+            if (summaryKoreanName) {
+                // 한국어 이름 또는 타입 코드 표시
+                const koreanName = data.typeKorean || data.typeName.split('(')[0].trim();
+                summaryKoreanName.textContent = koreanName;
+            }
+            
+            const summaryTypeCode = document.getElementById('summary-type-code');
+            if (summaryTypeCode) {
+                summaryTypeCode.textContent = `MATRIX TYPE: ${data.typeCode}`;
+            }
+            
+            const summaryTypeName = document.getElementById('summary-type-name');
+            if (summaryTypeName) {
+                // fullName이 있으면 사용하고, 없으면 typeName에서 추출
+                const fullName = data.fullName || data.typeName.split('(')[1]?.replace(')', '') || 'Unknown';
+                
+                // 타입 코드 하이라이트 로직 (F.L.O.W -> Full-throttle Legendary Output Wizard)
+                const typeCode = data.typeCode || '';
+                
+                if (typeCode && fullName) {
+                    // 모든 대문자를 하이라이트하는 정규식 사용
+                    const highlightedText = fullName.replace(/[A-Z]/g, (match) => {
+                        return `<span style="color: #00BFFF; font-weight: bold; font-size: 1.2em;">${match}</span>`;
+                    });
+                    summaryTypeName.innerHTML = highlightedText;
+                } else {
+                    summaryTypeName.textContent = fullName;
+                }
+            }
+            
+            const summaryDescription = document.getElementById('summary-description');
+            if (summaryDescription && data.profile) {
+                let description = '';
+                if (typeof data.profile === 'string') {
+                    description = data.profile;
+                } else if (Array.isArray(data.profile) && data.profile.length > 0) {
+                    description = data.profile[0];
+                } else {
+                    description = data.description || '로딩 중...';
+                }
+                // 마침표 뒤에 줄바꿈 기회 추가
+                description = description.replace(/\. /g, '.<br>');
+                summaryDescription.innerHTML = description;
+            }
+            
+            const summaryConfidence = document.getElementById('summary-confidence');
+            if (summaryConfidence) {
+                summaryConfidence.textContent = `${data.confidence}%`;
+            }
+            
+            const summaryRarity = document.getElementById('summary-rarity');
+            if (summaryRarity) {
+                const rarityText = data.rarity || data.rarityText?.replace('> ', '') || '로딩 중...';
+                summaryRarity.textContent = rarityText;
+            }
+            
+            
+            // 헤더 업데이트
+            const matrixType = document.getElementById('matrix-type');
+            if (matrixType) {
+                matrixType.textContent = data.headerTitle;
+            }
+            
+            // 타입 라벨과 이름 업데이트
+            const typeLabel = document.querySelector('.type-label');
+            const typeName = document.getElementById('type-name');
+            
+            if (typeLabel && typeName) {
+                const typeCode = data.typeCode || data.typeName.split(' ')[0];
+                const fullName = data.typeName.split('(')[1]?.replace(')', '') || 'Unknown';
+                
+                typeLabel.textContent = `> MATRIX TYPE: ${typeCode}`;
+                typeName.innerHTML = `<span class="desktop-only">(</span>${fullName}<span class="desktop-only">)</span>`;
+            }
+            
+            // 신뢰도 업데이트
+            const neuralMatch = document.getElementById('neural-match');
+            if (neuralMatch) {
+                neuralMatch.textContent = `${data.confidence}%`;
+            }
+            
+            // 희귀도 업데이트
+            const rarityInfo = document.getElementById('rarity-info');
+            if (rarityInfo) {
+                rarityInfo.innerHTML = `> ${data.rarityText}`;
+            }
+            
+            // 프로필 카드 업데이트
+            const profileTitle = document.getElementById('profile-title');
+            if (profileTitle) {
+                profileTitle.textContent = data.profileTitle;
+            }
+            
+            const profileContent = document.getElementById('profile-content');
+            if (profileContent && data.profile) {
+                // profile이 문자열인 경우와 배열인 경우 모두 처리
+                if (Array.isArray(data.profile)) {
+                    profileContent.innerHTML = data.profile.map(line => 
+                        `<div class="profile-line">"${line}"</div>`
+                    ).join('');
+                } else if (typeof data.profile === 'string') {
+                    profileContent.innerHTML = `<div class="profile-line">"${data.profile}"</div>`;
+                }
+            }
+            
+            // 일상 루틴 업데이트
+            const routineSection = document.querySelector('.daily-routine');
+            if (routineSection && data.routine) {
+                const titleElement = routineSection.querySelector('.section-title');
+                if (titleElement) {
+                    titleElement.textContent = `> ${data.routineTitle}`;
+                }
+                
+                const routineItems = data.routine.map(item => {
+                    // item이 문자열인 경우와 객체인 경우 모두 처리
+                    if (typeof item === 'string') {
+                        return `<div class="routine-item success">• ${item}</div>`;
+                    } else if (item && item.text) {
+                        return `<div class="routine-item ${item.type || 'success'}">• ${item.text}</div>`;
+                    }
+                    return '';
+                }).join('');
+                routineSection.innerHTML = titleElement.outerHTML + routineItems;
+            }
+            
+            // 무기고 업데이트
+            const arsenalSection = document.querySelector('.arsenal');
+            if (arsenalSection && data.arsenal) {
+                const titleElement = arsenalSection.querySelector('.section-title');
+                if (titleElement) {
+                    titleElement.textContent = `> ${data.arsenalTitle}`;
+                }
+                
+                const arsenalItems = data.arsenal.map(item => 
+                    `<div class="arsenal-item">• ${item}</div>`
+                ).join('');
+                arsenalSection.innerHTML = titleElement.outerHTML + arsenalItems;
+            }
+            
+            // 강점 업데이트
+            const strengthsSection = document.querySelector('.strengths');
+            if (strengthsSection && data.strengths) {
+                const strengthItems = data.strengths.map(item => 
+                    `<div class="strength-item">✓ ${item}</div>`
+                ).join('');
+                const titleElement = strengthsSection.querySelector('.section-title');
+                strengthsSection.innerHTML = titleElement.outerHTML + strengthItems;
+            }
+            
+            // 약점 업데이트
+            const weaknessesSection = document.querySelector('.weaknesses');
+            if (weaknessesSection && data.weaknesses) {
+                const weaknessItems = data.weaknesses.map(item => 
+                    `<div class="weakness-item">${item}</div>`
+                ).join('');
+                const titleElement = weaknessesSection.querySelector('.section-title');
+                weaknessesSection.innerHTML = titleElement.outerHTML + weaknessItems;
+            }
+            
+            // 궁합 섹션 업데이트
+            const compatibilitySection = document.getElementById('compatibility-section');
+            if (compatibilitySection && data.compatibility) {
+                let compatibilityHTML = '<div class="compatibility-title">> 다른 타입과의 궁합:</div>';
+                compatibilityHTML += '<div class="compatibility-items">';
+                
+                if (data.compatibilityGood) {
+                    compatibilityHTML += `<div class="good-match">${data.compatibilityGood}</div>`;
+                }
+                if (data.compatibilityBad) {
+                    compatibilityHTML += `<div class="bad-match">${data.compatibilityBad}</div>`;
+                }
+                if (data.compatibilitySurprise) {
+                    compatibilityHTML += `<div class="surprise-match">${data.compatibilitySurprise}</div>`;
+                }
+                
+                compatibilityHTML += '</div>';
+                compatibilitySection.innerHTML = compatibilityHTML;
+            }
+            
+            // 메인 콘텐츠 섹션 생성
+            const mainContent = document.getElementById('main-content');
+            if (mainContent && data.routine && data.arsenal && data.strengths && data.weaknesses) {
+                let mainHTML = `
+                    <!-- 상단 로우 -->
+                    <div class="top-row">
+                        <!-- 일상 루틴 -->
+                        <div class="section daily-routine">
+                            <div class="section-title">${data.routineTitle || '> 일상 루틴:'}</div>
+                            ${data.routine.map(item => {
+                                if (typeof item === 'string') {
+                                    return `<div class="routine-item success">• ${item}</div>`;
+                                } else if (item && item.text) {
+                                    return `<div class="routine-item ${item.type || 'success'}">• ${item.text}</div>`;
+                                }
+                                return '';
+                            }).join('')}
+                        </div>
+                        
+                        <!-- 무기고 -->
+                        <div class="section arsenal">
+                            <div class="section-title">${data.arsenalTitle || '> 무기고:'}</div>
+                            ${data.arsenal.map(item => `<div class="arsenal-item">• ${item}</div>`).join('')}
+                        </div>
+                    </div>
+                    
+                    <!-- 하단 로우 -->
+                    <div class="bottom-row">
+                        <!-- 강점 -->
+                        <div class="section strengths">
+                            <div class="section-title">> 강점 분석:</div>
+                            ${data.strengths.map(item => `<div class="strength-item">${item}</div>`).join('')}
+                        </div>
+                        
+                        <!-- 약점 -->
+                        <div class="section weaknesses">
+                            <div class="section-title weak">> 약점 분석:</div>
+                            ${data.weaknesses.map(item => `<div class="weakness-item">${item}</div>`).join('')}
+                        </div>
+                    </div>
+                `;
+                mainContent.innerHTML = mainHTML;
+            }
+        }
+
+        // 기본 데이터 제거됨 - 오류 시 적절한 로딩 메시지 표시
+
+        // 구형 하드코딩된 데이터 제거됨 - 모든 데이터는 동적 로딩
+
+        // 구형 함수들 제거됨 - 모든 로딩은 ResultEngine을 통해 처리
+
+        // 액션 함수들
+        async function shareResult() {
+            // 저장된 결과 데이터를 사용하여 공유 페이지 이동
+            try {
+                if (!currentResultData) {
+                    console.error('결과 데이터가 없습니다.');
+                    alert('결과 데이터를 불러오는 중입니다. 잠시 후 다시 시도해주세요.');
+                    return;
+                }
+                
+                // Firebase ShareId를 우선적으로 사용하여 클린 URL 생성
+                const shareId = sessionStorage.getItem('matrixme-shareId');
+                
+                if (shareId) {
+                    // ShareId../../assets/firebase-service-D0raGRnh.js  const shareUrl = `/ko/share/${shareId}`;
+                    console.log('🔗 공유 페이지 이동 (클린 URL):', shareUrl);
+                    window.location.href = shareUrl;
+                } else {
+                    // ShareId가 없으면 Firebase에 새로 저장
+                    try {
+                        const { firebaseService } = await import('../../assets/js/firebase-service.js');
+                        if (firebaseService && typeof firebaseService.saveQuizResult === 'function') {
+                            const newShareId = await firebaseService.saveQuizResult(currentResultData);
+                            if (newShareId) {
+                                sessionStorage.setItem('matrixme-shareId', newShareId);
+                                const shareUrl = `/ko/share/${newShareId}`;
+                                console.log('🔗 새 ShareId 생성 후 공유:', shareUrl);
+                                window.location.href = shareUrl;
+                                return;
+                            }
+                        }
+                    } catch (firebaseError) {
+                        console.warn('Firebase 공유 실패, 파라미터 방식으로 fallback:', firebaseError);
+                    }
+                    
+                    // Firebase 실패시 파라미터 방식으로 fallback
+                    const params = new URLSearchParams();
+                    if (currentResultData.scores) {
+                        params.set('D', currentResultData.scores.D);
+                        params.set('E', currentResultData.scores.E);
+                        params.set('T', currentResultData.scores.T);
+                        params.set('C', currentResultData.scores.C);
+                    }
+                    params.set('type', currentResultData.typeCode);
+                    params.set('korean', currentResultData.korean || currentResultData.koreanName);
+                    params.set('score', currentResultData.maxScore || '100');
+                    
+                    const shareUrl = `/ko/share/?${params.toString()}`;
+                    console.log('🔗 공유 페이지 이동 (파라미터 fallback):', shareUrl);
+                    window.location.href = shareUrl;
+                }
+                
+            } catch (error) {
+                console.error('공유 URL 생성 실패:', error);
+                alert('공유 기능에 오류가 발생했습니다.');
+            }
+        }
+
+        function retakeTest() {
+            window.location.href = '../quiz/';
+        }
+
+
+        // 컬러 테마 관리 객체
+        const ColorManager = {
+            themes: [
+                { name: '민트 그린', color: '#00CC88' },
+                { name: '실버 화이트', color: '#D0D0D0' },
+                { name: '앰버 오렌지', color: '#FF8C00' },
+                { name: '네온 핑크', color: '#FF0080' },
+                { name: '아이스 블루', color: '#00AAFF' }
+            ],
+            currentIndex: 0,
+            
+            init() {
+                this.applyColor(this.themes[0].color);
+            },
+            
+            toggleColor() {
+                this.currentIndex = (this.currentIndex + 1) % this.themes.length;
+                const currentTheme = this.themes[this.currentIndex];
+                this.applyColor(currentTheme.color);
+            },
+            
+            applyColor(color) {
+                // 컬러 토글 버튼 색상 업데이트
+                const colorToggle = document.getElementById('ko-result-color-toggle');
+                if (colorToggle) {
+                    colorToggle.style.color = color;
+                    colorToggle.style.borderColor = color;
+                    colorToggle.style.textShadow = `0 0 8px ${color}`;
+                }
+                
+                // 언어 토글 버튼 색상 업데이트
+                const languageToggle = document.getElementById('ko-result-language-toggle');
+                if (languageToggle) {
+                    languageToggle.style.color = color;
+                    languageToggle.style.borderColor = color;
+                    languageToggle.style.textShadow = `0 0 8px ${color}`;
+                }
+            }
+        };
+
+        // 언어 토글 기능
+        function toggleLanguage() {
+            const currentPath = window.location.pathname;
+            
+            // 클린 URL인 경우 (/ko/result/ShareId)
+            if (currentPath.match(/^\/ko\/result\/[A-Za-z0-9]+$/)) {
+                const shareId = currentPath.split('/').pop();
+                window.location.href = `/en/result/${shareId}`;
+                return;
+            }
+            
+            // 파라미터 URL인 경우
+            const urlParams = new URLSearchParams(window.location.search);
+            const englishPath = currentPath.replace('/ko/', '/en/');
+            const newUrl = englishPath + '?' + urlParams.toString();
+            window.location.href = newUrl;
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 DOM 로드 완료, 초기화 시작');
+            
+            
+            // 새로운 동적 데이터 로딩 사용
+            loadResultData();
+            
+            // 컬러 매니저 초기화
+            ColorManager.init();
+            
+            // 로컬 스토리지에서 색상 상태 복원
+            const savedColorIndex = localStorage.getItem('matrixme-color-index');
+            if (savedColorIndex !== null) {
+                ColorManager.currentIndex = parseInt(savedColorIndex);
+                ColorManager.applyColor(ColorManager.themes[ColorManager.currentIndex].color);
+            }
+            
+            // 타이핑 효과 적용
+            const reportHeader = document.querySelector('.terminal-prompt');
+            typeWriter(reportHeader, '> MATRIX ME AI DNA Analysis Report', 30);
+            
+            // 컬러 토글 버튼 이벤트
+            document.getElementById('ko-result-color-toggle').addEventListener('click', () => {
+                ColorManager.toggleColor();
+                localStorage.setItem('matrixme-color-index', ColorManager.currentIndex);
+            });
+            
+            // 언어 토글 버튼 이벤트
+            const languageToggleBtn = document.getElementById('ko-result-language-toggle');
+            languageToggleBtn.addEventListener('click', toggleLanguage);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Me - Diagnosis Result</title>
+    <meta name="description" content="Check your AI personality type diagnosis result!">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Matrix Me - AI Personality Result">
+    <meta property="og:description" content="My AI personality type has been revealed!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://matrixme.app/en/result/">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Matrix Me - AI Personality Result">
+    <meta name="twitter:description" content="My AI personality type has been revealed!">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="AI test result, AI personality result, Control Freak, Early Bird, AI Addict, AI type">
+    
+    <!-- hreflang 태그 -->
+    <link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/result/">
+    <link rel="alternate" hreflang="en" href="https://matrixme.app/en/result/">
+    <link rel="alternate" hreflang="x-default" href="https://matrixme.app/en/result/">
+    
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Quiz",
+      "name": "Matrix Me AI Personality Test Result",
+      "description": "Discover your AI personality type result - one of 16 unique personality types",
+      "inLanguage": "en",
+      "about": {
+        "@type": "Thing",
+        "name": "AI Personality Type Result",
+        "description": "Individual AI tool usage patterns and characteristics analysis result"
+      },
+      "potentialAction": {
+        "@type": "ShareAction",
+        "name": "Share Your Result"
+      }
+    }
+    </script>
+    
+    <!-- Critical CSS inline to prevent FOUC -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #000000 !important;
+            color: #00FF00 !important;
+            font-family: 'Monaco', 'Menlo', 'Courier New', 'D2Coding', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: -1;
+        }
+    </style>
+    
+    <link rel="stylesheet" href="../../assets/css/terminal.css">
+    <link rel="stylesheet" href="../../assets/css/mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <span class="control red"></span>
+                <span class="control yellow"></span>
+                <span class="control green"></span>
+            </div>
+            <div class="terminal-title">
+                <span class="title-part1">Matrix Me Result Terminal</span>
+                <span class="title-separator"> </span>
+                <span class="title-part2">v2.1.0</span>
+            </div>
+            <div class="terminal-header-buttons">
+                <button class="terminal-color-toggle" id="en-result-color-toggle">
+                    ■
+                </button>
+            </div>
+        </div>
+        
+        <div class="terminal-content" id="terminal">
+            <!-- Loading Screen -->
+            <div id="loading-screen">
+                <div class="boot-line">AI DNA analysis result loading...</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">Decrypting data...</div>
+                <div class="boot-line">Type analysis complete...</div>
+                <div class="boot-line">Preparing result screen...</div>
+                <div class="boot-line"></div>
+                <div class="loading">
+                    <div class="cursor">_</div>
+                </div>
+            </div>
+
+            <!-- Result Display Screen -->
+            <div id="result-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line neon-strong">🎉 AI DNA Analysis Complete! 🎉</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">▶ Your AI Personality Type:</div>
+                <div class="boot-line"></div>
+                <div class="result-type-header">
+                    <div class="boot-line neon-strong" id="type-name">Analyzing...</div>
+                    <div class="boot-line text-secondary" id="type-korean">분석 중...</div>
+                </div>
+                <div class="boot-line"></div>
+                
+                <!-- Type Symbol Area -->
+                <div class="result-symbol" id="type-symbol">
+                    <!-- Type symbol will be dynamically inserted here -->
+                </div>
+                <div class="boot-line"></div>
+                
+                <!-- Result Description -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">📊 Detailed Analysis Result:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line" id="type-description">Loading description...</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">💯 Your Score: <span id="user-score" class="neon-text">0</span> points</div>
+                <div class="boot-line">🎯 Accuracy: <span id="accuracy" class="neon-text">95</span>%</div>
+                <div class="boot-line"></div>
+                
+                <!-- Profile Card (Figma Style) -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">🎭 Personality Profile:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div id="profile-lines">
+                    <!-- Profile lines will be dynamically inserted here -->
+                </div>
+                <div class="boot-line"></div>
+                
+                <!-- 2-Column Layout - Daily Routine & Arsenal -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">📅 Daily Routine & 🛠️ AI Arsenal:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div id="routine-arsenal">
+                    <!-- Daily routine and arsenal will be dynamically inserted here -->
+                </div>
+                <div class="boot-line"></div>
+                
+                <!-- Strengths & Weaknesses -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">💪 Strengths & ⚠️ Weaknesses Analysis:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div id="strengths-weaknesses">
+                    <!-- Strengths and weaknesses will be dynamically inserted here -->
+                </div>
+                <div class="boot-line"></div>
+                
+                <!-- Compatibility Section -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">💕 Compatibility with Other Types:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div id="compatibility-info">
+                    <!-- Compatibility info will be dynamically inserted here -->
+                </div>
+                <div class="boot-line"></div>
+                
+                <!-- Statistics -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">📈 Overall Type Distribution:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">🏆 TOP 3 Popular Types:</div>
+                <div class="boot-line">1st: AI Addict (28.4%)</div>
+                <div class="boot-line">2nd: Efficiency King (18.7%)</div>
+                <div class="boot-line">3rd: Early Bird (15.2%)</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">🔥 Same as your type: <span id="same-type-percent" class="neon-text">12.3</span>%</div>
+                <div class="boot-line">⭐ Rarity: <span id="rarity-level" class="neon-text">Common</span></div>
+                <div class="boot-line"></div>
+                
+                <!-- Action Buttons -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">Choose one of the following:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="share">
+                        <span class="option-letter">S</span>
+                        <span class="option-content">Share on Social Media</span>
+                    </div>
+                    <div class="quiz-option" data-action="retry">
+                        <span class="option-letter">R</span>
+                        <span class="option-content">Take Quiz Again</span>
+                    </div>
+                    <div class="quiz-option" data-action="all-types">
+                        <span class="option-letter">A</span>
+                        <span class="option-content">View All Types</span>
+                    </div>
+                    <div class="quiz-option" data-action="home">
+                        <span class="option-letter">H</span>
+                        <span class="option-content">Back to Home</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="result-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <!-- Share Screen -->
+            <div id="share-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line neon-strong">🚀 Share Your Result</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">Let your friends know about your AI personality type!</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">📱 Share Options:</div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="share-twitter">
+                        <span class="option-letter">T</span>
+                        <span class="option-content">Share on Twitter</span>
+                    </div>
+                    <div class="quiz-option" data-action="share-facebook">
+                        <span class="option-letter">F</span>
+                        <span class="option-content">Share on Facebook</span>
+                    </div>
+                    <div class="quiz-option" data-action="share-linkedin">
+                        <span class="option-letter">L</span>
+                        <span class="option-content">Share on LinkedIn</span>
+                    </div>
+                    <div class="quiz-option" data-action="copy-link">
+                        <span class="option-letter">C</span>
+                        <span class="option-content">Copy Link</span>
+                    </div>
+                    <div class="quiz-option" data-action="back-result">
+                        <span class="option-letter">B</span>
+                        <span class="option-content">Back to Result</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="boot-line">Share URL:</div>
+                <div class="boot-line text-secondary" id="share-url">https://matrixme.vercel.app/en/result/...</div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="share-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <!-- All Types Screen -->
+            <div id="all-types-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line neon-strong">🎯 All 16 AI Personality Types</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">All types diagnosable in Matrix Me:</div>
+                <div class="boot-line"></div>
+                <div id="all-types-list">
+                    <!-- All types list will be dynamically inserted here -->
+                </div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="back-result">
+                        <span class="option-letter">B</span>
+                        <span class="option-content">Back to Result</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="types-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <!-- Error Screen -->
+            <div id="error-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line text-error neon-strong">💥 Result Loading Error</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line text-error">Error: <span id="error-message">Unable to load result.</span></div>
+                <div class="boot-line"></div>
+                <div class="boot-line">Please choose one of the following:</div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="retry-quiz">
+                        <span class="option-letter">R</span>
+                        <span class="option-content">Take Quiz Again</span>
+                    </div>
+                    <div class="quiz-option" data-action="home">
+                        <span class="option-letter">H</span>
+                        <span class="option-content">Back to Home</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="error-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../../assets/js/sw-manager.js"></script>
+    <script type="module" src="../../assets/js/terminal.js"></script>
+    <script type="module" src="../../assets/js/typing.js"></script>
+    <script type="module" src="../../assets/js/quiz.js"></script>
+    <script type="module" src="../../assets/js/responsive-separator.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 컬러 테마 관리 객체
+            const ColorManager = {
+                themes: [
+                    { name: 'Mint Green', color: '#00CC88' },
+                    { name: 'Silver White', color: '#D0D0D0' },
+                    { name: 'Amber Orange', color: '#FF8C00' },
+                    { name: 'Neon Pink', color: '#FF0080' },
+                    { name: 'Ice Blue', color: '#00AAFF' }
+                ],
+                currentIndex: 0,
+                
+                init() {
+                    this.applyColor(this.themes[0].color);
+                },
+                
+                toggleColor() {
+                    this.currentIndex = (this.currentIndex + 1) % this.themes.length;
+                    const currentTheme = this.themes[this.currentIndex];
+                    this.applyColor(currentTheme.color);
+                },
+                
+                applyColor(color) {
+                    // RGB 변환 함수
+                    const hexToRgb = (hex) => {
+                        const r = parseInt(hex.slice(1, 3), 16);
+                        const g = parseInt(hex.slice(3, 5), 16);
+                        const b = parseInt(hex.slice(5, 7), 16);
+                        return `${r}, ${g}, ${b}`;
+                    };
+                    
+                    const rgbColor = hexToRgb(color);
+                    
+                    // CSS 변수 업데이트
+                    document.documentElement.style.setProperty('--text-primary', color);
+                    document.documentElement.style.setProperty('--text-success', color);
+                    document.documentElement.style.setProperty('--text-secondary', color);
+                    document.documentElement.style.setProperty('--text-primary-rgb', rgbColor);
+                    
+                    // 터미널 컨테이너 배경 네온 효과 업데이트
+                    const terminalContainer = document.querySelector('.terminal-container');
+                    if (terminalContainer) {
+                        terminalContainer.style.boxShadow = `
+                            0 0 20px rgba(${rgbColor}, 0.3),
+                            0 0 40px rgba(${rgbColor}, 0.1),
+                            0 0 80px rgba(${rgbColor}, 0.05)
+                        `;
+                    }
+                    
+                    // 컬러 토글 버튼 색상 업데이트
+                    const colorToggles = document.querySelectorAll('.terminal-color-toggle');
+                    colorToggles.forEach(toggle => {
+                        toggle.style.color = color;
+                        toggle.style.borderColor = color;
+                        toggle.style.textShadow = `0 0 8px ${color}`;
+                    });
+                    
+                    // 결과 페이지 전용 요소들 색상 업데이트
+                    const neonTexts = document.querySelectorAll('.neon-text, .neon-strong');
+                    neonTexts.forEach(text => {
+                        if (text) {
+                            text.style.color = color;
+                            text.style.textShadow = `0 0 5px ${color}, 0 0 10px ${color}, 0 0 15px ${color}, 0 0 20px ${color}`;
+                        }
+                    });
+                }
+            };
+            
+            const resultApp = new EnglishResultApp();
+            resultApp.initialize();
+            
+            // 컬러 매니저 초기화
+            ColorManager.init();
+            
+            // 로컬 스토리지에서 색상 상태 복원
+            const savedColorIndex = localStorage.getItem('matrixme-color-index');
+            if (savedColorIndex !== null) {
+                ColorManager.currentIndex = parseInt(savedColorIndex);
+                ColorManager.applyColor(ColorManager.themes[ColorManager.currentIndex].color);
+            }
+            
+            // 컬러 토글 버튼 기능
+            document.getElementById('en-result-color-toggle').addEventListener('click', () => {
+                ColorManager.toggleColor();
+                localStorage.setItem('matrixme-color-index', ColorManager.currentIndex);
+            });
+        });
+
+        class EnglishResultApp {
+            constructor() {
+                this.quizEngine = new QuizEngine('en');
+                this.terminal = new TerminalEngine(document.getElementById('terminal'));
+                this.currentScreen = 'loading';
+                this.resultData = null;
+                this.shareUrl = '';
+                this.isProcessing = false;
+            }
+
+            async initialize() {
+                try {
+                    await this.showLoadingScreen();
+                    await this.loadResultData();
+                    await this.showResultScreen();
+                } catch (error) {
+                    console.error('Initialization error:', error);
+                    this.showErrorScreen('Error occurred while loading result.');
+                }
+            }
+
+            async showLoadingScreen() {
+                this.currentScreen = 'loading';
+                document.getElementById('loading-screen').style.display = 'block';
+                await this.sleep(1500);
+                
+                // Hide other screens
+                document.getElementById('result-screen').style.display = 'none';
+                document.getElementById('share-screen').style.display = 'none';
+                document.getElementById('all-types-screen').style.display = 'none';
+                document.getElementById('error-screen').style.display = 'none';
+            }
+
+            async loadResultData() {
+                // Get result info from URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const type = urlParams.get('type');
+                const score = urlParams.get('score');
+                
+                if (!type) {
+                    throw new Error('Result type not specified.');
+                }
+                
+                // Load quiz data
+                await this.quizEngine.loadQuizData();
+                
+                // Configure result data
+                const typeData = this.quizEngine.quizData.types[type];
+                if (!typeData) {
+                    throw new Error(`Invalid type: ${type}`);
+                }
+                
+                this.resultData = {
+                    type: type,
+                    typeData: typeData,
+                    score: parseInt(score) || 0
+                };
+                
+                // Generate share URL
+                this.shareUrl = `${window.location.origin}/en/result/?type=${type}&score=${score}`;
+            }
+
+            async showResultScreen() {
+                this.currentScreen = 'result';
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('result-screen').style.display = 'block';
+                
+                // Display result data
+                this.displayResultData();
+                this.setupEventListeners();
+            }
+
+            displayResultData() {
+                if (!this.resultData) return;
+                
+                const { type, typeData, score } = this.resultData;
+                
+                // Display type information
+                document.getElementById('type-name').textContent = typeData.name;
+                document.getElementById('type-english').textContent = typeData.english || type;
+                document.getElementById('type-description').textContent = typeData.description;
+                document.getElementById('user-score').textContent = score;
+                
+                // Display type symbol
+                const typeSymbol = this.getTypeSymbol(type);
+                const symbolContainer = document.getElementById('type-symbol');
+                symbolContainer.innerHTML = `<div class="type-symbol-display" style="color: ${typeData.color}; font-size: 3em; text-align: center; margin: 20px 0;">${typeSymbol}</div>`;
+                
+                // Statistics (mock data)
+                const mockStats = this.generateMockStats(type);
+                document.getElementById('same-type-percent').textContent = mockStats.percentage;
+                document.getElementById('rarity-level').textContent = mockStats.rarity;
+                
+                // Set share URL
+                document.getElementById('share-url').textContent = this.shareUrl;
+                
+                // Update detailed Figma sections
+                this.updateProfileSection(type);
+                this.updateRoutineArsenalSection(type);
+                this.updateStrengthsWeaknessesSection(type);
+                this.updateCompatibilitySection(type);
+            }
+
+            getTypeDetailData(type) {
+                const typeDetailData = {
+                    'aiaddict': {
+                        profile: [
+                            "Can't breathe without AI! - Addict's Manifesto",
+                            "AI = My digital twin, AI-first approach to everything",
+                            "Subscription bomb ($200+/month) without hesitation"
+                        ],
+                        routine: [
+                            { text: '06:00 > "AI, plan my day"', type: 'success' },
+                            { text: '12:00 > "AI, recommend lunch menu"', type: 'success' },
+                            { text: '18:00 > "AI, what\'s for dinner?"', type: 'success' },
+                            { text: 'ERROR > Panic attack when ChatGPT is down', type: 'error' }
+                        ],
+                        arsenal: [
+                            'ChatGPT Plus: "Main Workstation"',
+                            'Claude: "Deep Analysis Tool"',
+                            'Midjourney: "Visual Creator"',
+                            'Zapier AI: "Ultimate Automation"'
+                        ],
+                        strengths: [
+                            'Overwhelming productivity - 10x human output',
+                            'Master of latest AI features',
+                            'Pioneer of future work style',
+                            'Expert in AI tool combinations'
+                        ],
+                        weaknesses: [
+                            'Extremely high AI dependency (addiction level)',
+                            'Panic attacks during system downtime',
+                            'Subscription bomb ($300+/month)'
+                        ],
+                        compatibility: {
+                            good: 'EVANGELIST, EARLY BIRD',
+                            bad: 'SCARED CAT, STEALTH EXPERT'
+                        }
+                    },
+                    'controlfreak': {
+                        profile: [
+                            "AI is just a tool, I am the master - Control Philosophy",
+                            "Perfect prompt engineering master",
+                            "100% manual review and refinement of outputs"
+                        ],
+                        routine: [
+                            { text: '08:00 > Refine prompt 3 times before execution', type: 'success' },
+                            { text: '14:00 > Meticulously polish AI outputs', type: 'success' },
+                            { text: '20:00 > Prepare tomorrow\'s prompts in advance', type: 'success' },
+                            { text: 'WARNING > Redo if not perfect', type: 'error' }
+                        ],
+                        arsenal: [
+                            'ChatGPT: "First Draft Generator"',
+                            'Claude: "Precision Analysis Tool"',
+                            'Custom GPTs: "Dedicated Workflows"',
+                            'Notion AI: "Document Organizer"'
+                        ],
+                        strengths: [
+                            'Perfect quality outputs',
+                            'Prompt engineering mastery',
+                            'Accurate understanding of AI limitations',
+                            'Efficient work processes'
+                        ],
+                        weaknesses: [
+                            'Perfectionism slows down speed',
+                            'Low AI trust (very suspicious)',
+                            'Slow adaptation to new AI tools'
+                        ],
+                        compatibility: {
+                            good: 'WISE COUNSEL, EFFICIENCY KING',
+                            bad: 'AI ADDICT, EVANGELIST'
+                        }
+                    },
+                    'earlybird': {
+                        profile: [
+                            "First to try everything! - Early Bird Spirit",
+                            "Beta tester of all new AI features",
+                            "Always on the cutting edge of AI trends"
+                        ],
+                        routine: [
+                            { text: '05:00 > Check for new AI tool updates', type: 'success' },
+                            { text: '10:00 > Try beta features first', type: 'success' },
+                            { text: '16:00 > Share discoveries with community', type: 'success' },
+                            { text: 'NOTE > Sometimes features break unexpectedly', type: 'error' }
+                        ],
+                        arsenal: [
+                            'OpenAI Beta: "Bleeding Edge Access"',
+                            'Anthropic Beta: "Early Access Program"',
+                            'GitHub Copilot: "Code Companion"',
+                            'Multiple AI APIs: "Diversified Portfolio"'
+                        ],
+                        strengths: [
+                            'Always ahead of the curve',
+                            'Excellent at spotting AI trends',
+                            'Strong community connections',
+                            'Adaptable to new technologies'
+                        ],
+                        weaknesses: [
+                            'Sometimes unstable beta features',
+                            'Tool-switching fatigue',
+                            'Overwhelming information flow'
+                        ],
+                        compatibility: {
+                            good: 'AI ADDICT, EVANGELIST',
+                            bad: 'TRADITIONALIST, SCARED CAT'
+                        }
+                    }
+                };
+                
+                return typeDetailData[type] || typeDetailData['aiaddict'];
+            }
+
+            updateProfileSection(type) {
+                const data = this.getTypeDetailData(type);
+                const profileContainer = document.getElementById('profile-lines');
+                
+                profileContainer.innerHTML = data.profile.map(line => 
+                    `<div class="boot-line">▶ "${line}"</div>`
+                ).join('');
+            }
+
+            updateRoutineArsenalSection(type) {
+                const data = this.getTypeDetailData(type);
+                const routineArsenalContainer = document.getElementById('routine-arsenal');
+                
+                const routineHTML = data.routine.map(item => {
+                    const colorClass = item.type === 'success' ? 'neon-text' : 'text-error';
+                    return `<div class="boot-line ${colorClass}">• ${item.text}</div>`;
+                }).join('');
+                
+                const arsenalHTML = data.arsenal.map(item => 
+                    `<div class="boot-line text-secondary">• ${item}</div>`
+                ).join('');
+                
+                routineArsenalContainer.innerHTML = `
+                    <div class="boot-line">📅 Daily Routine:</div>
+                    <div class="boot-line"></div>
+                    ${routineHTML}
+                    <div class="boot-line"></div>
+                    <div class="boot-line">🛠️ AI Arsenal:</div>
+                    <div class="boot-line"></div>
+                    ${arsenalHTML}
+                `;
+            }
+
+            updateStrengthsWeaknessesSection(type) {
+                const data = this.getTypeDetailData(type);
+                const strengthsWeaknessesContainer = document.getElementById('strengths-weaknesses');
+                
+                const strengthsHTML = data.strengths.map(item => 
+                    `<div class="boot-line neon-text">✓ ${item}</div>`
+                ).join('');
+                
+                const weaknessesHTML = data.weaknesses.map(item => 
+                    `<div class="boot-line text-error">✗ ${item}</div>`
+                ).join('');
+                
+                strengthsWeaknessesContainer.innerHTML = `
+                    <div class="boot-line">💪 Strengths:</div>
+                    <div class="boot-line"></div>
+                    ${strengthsHTML}
+                    <div class="boot-line"></div>
+                    <div class="boot-line">⚠️ Weaknesses:</div>
+                    <div class="boot-line"></div>
+                    ${weaknessesHTML}
+                `;
+            }
+
+            updateCompatibilitySection(type) {
+                const data = this.getTypeDetailData(type);
+                const compatibilityContainer = document.getElementById('compatibility-info');
+                
+                compatibilityContainer.innerHTML = `
+                    <div class="boot-line">🎉 Perfect Match: <span class="neon-text">${data.compatibility.good}</span></div>
+                    <div class="boot-line">🔥 Total Opposite: <span class="text-error">${data.compatibility.bad}</span></div>
+                `;
+            }
+
+            generateMockStats(type) {
+                const stats = {
+                    'controlfreak': { percentage: '8.7', rarity: 'Rare' },
+                    'earlybird': { percentage: '15.2', rarity: 'Common' },
+                    'traditionalist': { percentage: '12.4', rarity: 'Common' },
+                    'stealthexpert': { percentage: '3.8', rarity: 'Very Rare' },
+                    'efficiencyking': { percentage: '18.7', rarity: 'Common' },
+                    'vibechecker': { percentage: '6.3', rarity: 'Rare' },
+                    'aiaddict': { percentage: '28.4', rarity: 'Very Common' },
+                    'specialist': { percentage: '4.2', rarity: 'Very Rare' },
+                    'anxietybot': { percentage: '9.8', rarity: 'Rare' },
+                    'visionary': { percentage: '11.6', rarity: 'Common' },
+                    'minimalist': { percentage: '7.9', rarity: 'Rare' },
+                    'evangelist': { percentage: '13.2', rarity: 'Common' },
+                    'bridgebuilder': { percentage: '10.5', rarity: 'Rare' },
+                    'wisecounsel': { percentage: '14.7', rarity: 'Common' },
+                    'detective': { percentage: '5.1', rarity: 'Rare' },
+                    'scaredycat': { percentage: '2.9', rarity: 'Very Rare' }
+                };
+                
+                return stats[type] || { percentage: '10.0', rarity: 'Common' };
+            }
+
+            getTypeSymbol(type) {
+                const symbols = {
+                    'controlfreak': '♔',
+                    'earlybird': '⚡',
+                    'traditionalist': '📝',
+                    'stealthexpert': '🤫',
+                    'efficiencyking': '💎',
+                    'vibechecker': '🎵',
+                    'aiaddict': '🚀',
+                    'specialist': '🔨',
+                    'anxietybot': '😰',
+                    'visionary': '🌟',
+                    'minimalist': '◽',
+                    'evangelist': '🔥',
+                    'bridgebuilder': '🛡️',
+                    'wisecounsel': '🧙',
+                    'detective': '🔍',
+                    'scaredycat': '😱'
+                };
+                return symbols[type] || '🤖';
+            }
+
+            showShareScreen() {
+                this.currentScreen = 'share';
+                document.getElementById('result-screen').style.display = 'none';
+                document.getElementById('share-screen').style.display = 'block';
+            }
+
+            async showAllTypesScreen() {
+                this.currentScreen = 'all-types';
+                document.getElementById('result-screen').style.display = 'none';
+                document.getElementById('all-types-screen').style.display = 'block';
+                
+                // Display all types list
+                await this.displayAllTypes();
+            }
+
+            async displayAllTypes() {
+                const allTypesContainer = document.getElementById('all-types-list');
+                allTypesContainer.innerHTML = '';
+                
+                const types = Object.keys(this.quizEngine.quizData.types);
+                
+                types.forEach((type, index) => {
+                    const typeData = this.quizEngine.quizData.types[type];
+                    const line = document.createElement('div');
+                    line.className = 'boot-line';
+                    line.innerHTML = `${(index + 1).toString().padStart(2, '0')}. <span class="type-${type}" style="color: ${typeData.color}">${typeData.name}</span> - ${typeData.description}`;
+                    allTypesContainer.appendChild(line);
+                });
+            }
+
+            showErrorScreen(message) {
+                this.currentScreen = 'error';
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('result-screen').style.display = 'none';
+                document.getElementById('share-screen').style.display = 'none';
+                document.getElementById('all-types-screen').style.display = 'none';
+                document.getElementById('error-screen').style.display = 'block';
+                document.getElementById('error-message').textContent = message;
+            }
+
+            setupEventListeners() {
+                // Keyboard events
+                document.addEventListener('keydown', (e) => {
+                    if (this.isProcessing) return;
+                    
+                    const key = e.key.toLowerCase();
+                    
+                    if (this.currentScreen === 'result') {
+                        if (key === 's') {
+                            this.handleAction('share');
+                        } else if (key === 'r') {
+                            this.handleAction('retry');
+                        } else if (key === 'a') {
+                            this.handleAction('all-types');
+                        } else if (key === 'h') {
+                            this.handleAction('home');
+                        }
+                    } else if (this.currentScreen === 'share') {
+                        if (key === 't') {
+                            this.handleAction('share-twitter');
+                        } else if (key === 'f') {
+                            this.handleAction('share-facebook');
+                        } else if (key === 'l') {
+                            this.handleAction('share-linkedin');
+                        } else if (key === 'c') {
+                            this.handleAction('copy-link');
+                        } else if (key === 'b') {
+                            this.handleAction('back-result');
+                        }
+                    } else if (this.currentScreen === 'all-types') {
+                        if (key === 'b') {
+                            this.handleAction('back-result');
+                        }
+                    } else if (this.currentScreen === 'error') {
+                        if (key === 'r') {
+                            this.handleAction('retry-quiz');
+                        } else if (key === 'h') {
+                            this.handleAction('home');
+                        }
+                    }
+                });
+
+                // Mouse click events
+                document.addEventListener('click', (e) => {
+                    if (this.isProcessing) return;
+                    
+                    const option = e.target.closest('.quiz-option');
+                    if (!option) return;
+                    
+                    const action = option.dataset.action;
+                    if (action) {
+                        this.handleAction(action);
+                    }
+                });
+            }
+
+            async handleAction(action) {
+                if (this.isProcessing) return;
+                this.isProcessing = true;
+                
+                const inputId = {
+                    'result': 'result-input',
+                    'share': 'share-input',
+                    'all-types': 'types-input',
+                    'error': 'error-input'
+                }[this.currentScreen];
+                
+                const inputElement = document.getElementById(inputId);
+                if (inputElement) {
+                    inputElement.textContent = action;
+                }
+                
+                try {
+                    switch (action) {
+                        case 'share':
+                            await this.sleep(500);
+                            this.showShareScreen();
+                            break;
+                        case 'retry':
+                            await this.sleep(500);
+                            window.location.href = '../quiz/';
+                            break;
+                        case 'all-types':
+                            await this.sleep(500);
+                            await this.showAllTypesScreen();
+                            break;
+                        case 'home':
+                            await this.sleep(500);
+                            window.location.href = '/';
+                            break;
+                        case 'share-twitter':
+                            this.shareToTwitter();
+                            break;
+                        case 'share-facebook':
+                            this.shareToFacebook();
+                            break;
+                        case 'share-linkedin':
+                            this.shareToLinkedIn();
+                            break;
+                        case 'copy-link':
+                            await this.copyToClipboard();
+                            break;
+                        case 'back-result':
+                            await this.sleep(500);
+                            this.showResultScreen();
+                            break;
+                        case 'retry-quiz':
+                            await this.sleep(500);
+                            window.location.href = '../quiz/';
+                            break;
+                    }
+                } catch (error) {
+                    console.error('Action error:', error);
+                }
+                
+                this.isProcessing = false;
+            }
+
+            shareToTwitter() {
+                const text = `My AI personality type: ${this.resultData.typeData.name}! Find out your type at Matrix Me 🚀`;
+                const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(this.shareUrl)}`;
+                window.open(url, '_blank');
+            }
+
+            shareToFacebook() {
+                const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.shareUrl)}`;
+                window.open(url, '_blank');
+            }
+
+            shareToLinkedIn() {
+                const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(this.shareUrl)}`;
+                window.open(url, '_blank');
+            }
+
+            async copyToClipboard() {
+                try {
+                    await navigator.clipboard.writeText(this.shareUrl);
+                    document.getElementById('share-input').textContent = 'Link copied!';
+                    await this.sleep(1000);
+                    document.getElementById('share-input').textContent = '';
+                } catch (error) {
+                    console.error('Clipboard error:', error);
+                    document.getElementById('share-input').textContent = 'Copy failed';
+                }
+            }
+
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+    </script>
+</body>
+</html>

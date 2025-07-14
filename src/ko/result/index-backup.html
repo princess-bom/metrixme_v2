@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Me - 진단 결과</title>
+    <meta name="description" content="당신의 AI 활용 유형 진단 결과를 확인하세요!">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Matrix Me - AI 유형 진단 결과">
+    <meta property="og:description" content="나의 AI 활용 유형이 공개되었습니다!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://matrixme.app/ko/result/">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Matrix Me - AI 유형 진단 결과">
+    <meta name="twitter:description" content="나의 AI 활용 유형이 공개되었습니다!">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="AI 테스트 결과, AI 성향 진단 결과, AI 유형, 조종왕, 얼리버드, 완전체">
+    
+    <!-- hreflang 태그 -->
+    <link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/result/">
+    <link rel="alternate" hreflang="en" href="https://matrixme.app/en/result/">
+    <link rel="alternate" hreflang="x-default" href="https://matrixme.app/en/result/">
+    
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Quiz",
+      "name": "Matrix Me AI 활용 유형 진단 결과",
+      "description": "당신의 AI 활용 유형 진단 결과를 확인하세요 - 16가지 성향 중 하나",
+      "inLanguage": "ko",
+      "about": {
+        "@type": "Thing",
+        "name": "AI 활용 유형 결과",
+        "description": "개인의 AI 도구 사용 성향과 특성 분석 결과"
+      },
+      "potentialAction": {
+        "@type": "ShareAction",
+        "name": "결과 공유하기"
+      }
+    }
+    </script>
+    
+    <!-- Critical CSS inline to prevent FOUC -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #000000 !important;
+            color: #00FF00 !important;
+            font-family: 'Monaco', 'Menlo', 'Courier New', 'D2Coding', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: -1;
+        }
+    </style>
+    
+    <link rel="stylesheet" href="../../assets/css/terminal.css">
+    <link rel="stylesheet" href="../../assets/css/mobile.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <span class="control red"></span>
+                <span class="control yellow"></span>
+                <span class="control green"></span>
+            </div>
+            <div class="terminal-title">
+                <span class="title-part1">Matrix Me 결과 터미널</span>
+                <span class="title-separator"> </span>
+                <span class="title-part2">v2.1.0</span>
+            </div>
+            <div class="terminal-header-buttons">
+                <button class="terminal-color-toggle" id="ko-result-color-toggle">
+                    ■
+                </button>
+            </div>
+        </div>
+        
+        <div class="terminal-content" id="terminal">
+            <!-- 로딩 화면 -->
+            <div id="loading-screen">
+                <div class="boot-line">AI DNA 분석 결과 로딩 중...</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">데이터 복호화 중...</div>
+                <div class="boot-line">유형 분석 완료...</div>
+                <div class="boot-line">결과 화면 준비 중...</div>
+                <div class="boot-line"></div>
+                <div class="loading">
+                    <div class="cursor">_</div>
+                </div>
+            </div>
+
+            <!-- 결과 표시 화면 -->
+            <div id="result-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line neon-strong">🎉 AI DNA 분석 완료! 🎉</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">▶ 당신의 AI 활용 유형:</div>
+                <div class="boot-line"></div>
+                <div class="result-type-header">
+                    <div class="boot-line neon-strong" id="type-name">분석 중...</div>
+                    <div class="boot-line text-secondary" id="type-english">Analyzing...</div>
+                </div>
+                <div class="boot-line"></div>
+                
+                <!-- 타입 심볼 영역 -->
+                <div class="result-symbol" id="type-symbol">
+                    <!-- 타입 심볼이 동적으로 삽입됩니다 -->
+                </div>
+                <div class="boot-line"></div>
+                
+                <!-- 결과 설명 -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">📊 상세 분석 결과:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line" id="type-description">설명을 불러오는 중...</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">💯 당신의 점수: <span id="user-score" class="neon-text">0</span>점</div>
+                <div class="boot-line">🎯 정확도: <span id="accuracy" class="neon-text">95</span>%</div>
+                <div class="boot-line"></div>
+                
+                <!-- 통계 정보 -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">📈 전체 유형 분포:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">🏆 인기 TOP 3 유형:</div>
+                <div class="boot-line">1위: 완전체 (28.4%)</div>
+                <div class="boot-line">2위: 알짜배기 (18.7%)</div>
+                <div class="boot-line">3위: 얼리버드 (15.2%)</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">🔥 당신과 같은 유형: <span id="same-type-percent" class="neon-text">12.3</span>%</div>
+                <div class="boot-line">⭐ 희귀도: <span id="rarity-level" class="neon-text">일반</span></div>
+                <div class="boot-line"></div>
+                
+                <!-- 액션 버튼들 -->
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line">다음 중 하나를 선택하세요:</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="share">
+                        <span class="option-letter">S</span>
+                        <span class="option-content">SNS에 공유하기</span>
+                    </div>
+                    <div class="quiz-option" data-action="retry">
+                        <span class="option-letter">R</span>
+                        <span class="option-content">다시 진단하기</span>
+                    </div>
+                    <div class="quiz-option" data-action="all-types">
+                        <span class="option-letter">A</span>
+                        <span class="option-content">전체 유형 보기</span>
+                    </div>
+                    <div class="quiz-option" data-action="home">
+                        <span class="option-letter">H</span>
+                        <span class="option-content">홈으로 돌아가기</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="result-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <!-- 공유 화면 -->
+            <div id="share-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line neon-strong">🚀 결과 공유하기</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">친구들에게 당신의 AI 유형을 알려주세요!</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">📱 공유 옵션:</div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="share-twitter">
+                        <span class="option-letter">T</span>
+                        <span class="option-content">Twitter에 공유</span>
+                    </div>
+                    <div class="quiz-option" data-action="share-facebook">
+                        <span class="option-letter">F</span>
+                        <span class="option-content">Facebook에 공유</span>
+                    </div>
+                    <div class="quiz-option" data-action="share-kakaotalk">
+                        <span class="option-letter">K</span>
+                        <span class="option-content">카카오톡에 공유</span>
+                    </div>
+                    <div class="quiz-option" data-action="copy-link">
+                        <span class="option-letter">C</span>
+                        <span class="option-content">링크 복사</span>
+                    </div>
+                    <div class="quiz-option" data-action="back-result">
+                        <span class="option-letter">B</span>
+                        <span class="option-content">결과로 돌아가기</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="boot-line">공유 URL:</div>
+                <div class="boot-line text-secondary" id="share-url">https://matrixme.vercel.app/ko/result/...</div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="share-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <!-- 전체 유형 보기 화면 -->
+            <div id="all-types-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line neon-strong">🎯 전체 16가지 AI 유형</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">Matrix Me에서 진단 가능한 모든 유형들:</div>
+                <div class="boot-line"></div>
+                <div id="all-types-list">
+                    <!-- 전체 유형 목록이 동적으로 삽입됩니다 -->
+                </div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="back-result">
+                        <span class="option-letter">B</span>
+                        <span class="option-content">결과로 돌아가기</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="types-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <!-- 에러 화면 -->
+            <div id="error-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line text-error neon-strong">💥 결과 로딩 오류</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line text-error">오류: <span id="error-message">결과를 불러올 수 없습니다.</span></div>
+                <div class="boot-line"></div>
+                <div class="boot-line">다음 중 하나를 선택하세요:</div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="retry-quiz">
+                        <span class="option-letter">R</span>
+                        <span class="option-content">퀴즈 다시 하기</span>
+                    </div>
+                    <div class="quiz-option" data-action="home">
+                        <span class="option-letter">H</span>
+                        <span class="option-content">홈으로 돌아가기</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="error-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="../../assets/js/sw-manager.js"></script>
+    <script type="module" src="../../assets/js/terminal.js"></script>
+    <script type="module" src="../../assets/js/typing.js"></script>
+    <script type="module" src="../../assets/js/quiz.js"></script>
+    <script type="module" src="../../assets/js/responsive-separator.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 컬러 테마 관리 객체
+            const ColorManager = {
+                themes: [
+                    { name: '민트 그린', color: '#00CC88' },
+                    { name: '실버 화이트', color: '#D0D0D0' },
+                    { name: '앰버 오렌지', color: '#FF8C00' },
+                    { name: '네온 핑크', color: '#FF0080' },
+                    { name: '아이스 블루', color: '#00AAFF' }
+                ],
+                currentIndex: 0,
+                
+                init() {
+                    this.applyColor(this.themes[0].color);
+                },
+                
+                toggleColor() {
+                    this.currentIndex = (this.currentIndex + 1) % this.themes.length;
+                    const currentTheme = this.themes[this.currentIndex];
+                    this.applyColor(currentTheme.color);
+                },
+                
+                applyColor(color) {
+                    // RGB 변환 함수
+                    const hexToRgb = (hex) => {
+                        const r = parseInt(hex.slice(1, 3), 16);
+                        const g = parseInt(hex.slice(3, 5), 16);
+                        const b = parseInt(hex.slice(5, 7), 16);
+                        return `${r}, ${g}, ${b}`;
+                    };
+                    
+                    const rgbColor = hexToRgb(color);
+                    
+                    // CSS 변수 업데이트
+                    document.documentElement.style.setProperty('--text-primary', color);
+                    document.documentElement.style.setProperty('--text-success', color);
+                    document.documentElement.style.setProperty('--text-secondary', color);
+                    document.documentElement.style.setProperty('--text-primary-rgb', rgbColor);
+                    
+                    // 터미널 컨테이너 배경 네온 효과 업데이트
+                    const terminalContainer = document.querySelector('.terminal-container');
+                    if (terminalContainer) {
+                        terminalContainer.style.boxShadow = `
+                            0 0 20px rgba(${rgbColor}, 0.3),
+                            0 0 40px rgba(${rgbColor}, 0.1),
+                            0 0 80px rgba(${rgbColor}, 0.05)
+                        `;
+                    }
+                    
+                    // 컬러 토글 버튼 색상 업데이트
+                    const colorToggles = document.querySelectorAll('.terminal-color-toggle');
+                    colorToggles.forEach(toggle => {
+                        toggle.style.color = color;
+                        toggle.style.borderColor = color;
+                        toggle.style.textShadow = `0 0 8px ${color}`;
+                    });
+                    
+                    // 결과 페이지 전용 요소들 색상 업데이트
+                    const neonTexts = document.querySelectorAll('.neon-text, .neon-strong');
+                    neonTexts.forEach(text => {
+                        if (text) {
+                            text.style.color = color;
+                            text.style.textShadow = `0 0 5px ${color}, 0 0 10px ${color}, 0 0 15px ${color}, 0 0 20px ${color}`;
+                        }
+                    });
+                }
+            };
+            
+            const resultApp = new KoreanResultApp();
+            resultApp.initialize();
+            
+            // 컬러 매니저 초기화
+            ColorManager.init();
+            
+            // 로컬 스토리지에서 색상 상태 복원
+            const savedColorIndex = localStorage.getItem('matrixme-color-index');
+            if (savedColorIndex !== null) {
+                ColorManager.currentIndex = parseInt(savedColorIndex);
+                ColorManager.applyColor(ColorManager.themes[ColorManager.currentIndex].color);
+            }
+            
+            // 컬러 토글 버튼 기능
+            document.getElementById('ko-result-color-toggle').addEventListener('click', () => {
+                ColorManager.toggleColor();
+                localStorage.setItem('matrixme-color-index', ColorManager.currentIndex);
+            });
+        });
+
+        class KoreanResultApp {
+            constructor() {
+                this.quizEngine = new QuizEngine('ko');
+                this.terminal = new TerminalEngine(document.getElementById('terminal'));
+                this.currentScreen = 'loading';
+                this.resultData = null;
+                this.shareUrl = '';
+                this.isProcessing = false;
+            }
+
+            async initialize() {
+                try {
+                    await this.showLoadingScreen();
+                    await this.loadResultData();
+                    await this.showResultScreen();
+                } catch (error) {
+                    console.error('Initialization error:', error);
+                    this.showErrorScreen('결과를 불러오는 중 오류가 발생했습니다.');
+                }
+            }
+
+            async showLoadingScreen() {
+                this.currentScreen = 'loading';
+                document.getElementById('loading-screen').style.display = 'block';
+                await this.sleep(1500);
+                
+                // 다른 화면 숨기기
+                document.getElementById('result-screen').style.display = 'none';
+                document.getElementById('share-screen').style.display = 'none';
+                document.getElementById('all-types-screen').style.display = 'none';
+                document.getElementById('error-screen').style.display = 'none';
+            }
+
+            async loadResultData() {
+                // URL 파라미터에서 결과 정보 가져오기
+                const urlParams = new URLSearchParams(window.location.search);
+                const type = urlParams.get('type');
+                const score = urlParams.get('score');
+                
+                if (!type) {
+                    throw new Error('결과 타입이 지정되지 않았습니다.');
+                }
+                
+                // 퀴즈 데이터 로드
+                await this.quizEngine.loadQuizData();
+                
+                // 결과 데이터 구성
+                const typeData = this.quizEngine.quizData.types[type];
+                if (!typeData) {
+                    throw new Error(`유효하지 않은 타입: ${type}`);
+                }
+                
+                this.resultData = {
+                    type: type,
+                    typeData: typeData,
+                    score: parseInt(score) || 0
+                };
+                
+                // 공유 URL 생성
+                this.shareUrl = `${window.location.origin}/ko/result/?type=${type}&score=${score}`;
+            }
+
+            async showResultScreen() {
+                this.currentScreen = 'result';
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('result-screen').style.display = 'block';
+                
+                // 결과 데이터 표시
+                this.displayResultData();
+                this.setupEventListeners();
+            }
+
+            displayResultData() {
+                if (!this.resultData) return;
+                
+                const { type, typeData, score } = this.resultData;
+                
+                // 타입 정보 표시
+                document.getElementById('type-name').textContent = typeData.name;
+                document.getElementById('type-english').textContent = typeData.english || type;
+                document.getElementById('type-description').textContent = typeData.description;
+                document.getElementById('user-score').textContent = score;
+                
+                // 타입 심볼 표시
+                const typeSymbol = this.getTypeSymbol(type);
+                const symbolContainer = document.getElementById('type-symbol');
+                symbolContainer.innerHTML = `<div class="type-symbol-display" style="color: ${typeData.color}; font-size: 3em; text-align: center; margin: 20px 0;">${typeSymbol}</div>`;
+                
+                // 통계 정보 (모의 데이터)
+                const mockStats = this.generateMockStats(type);
+                document.getElementById('same-type-percent').textContent = mockStats.percentage;
+                document.getElementById('rarity-level').textContent = mockStats.rarity;
+                
+                // 공유 URL 설정
+                document.getElementById('share-url').textContent = this.shareUrl;
+            }
+
+            generateMockStats(type) {
+                const stats = {
+                    'ctrl': { percentage: '8.7', rarity: '희귀' },
+                    'beta': { percentage: '15.2', rarity: '일반' },
+                    'core': { percentage: '12.4', rarity: '일반' },
+                    'hide': { percentage: '3.8', rarity: '매우 희귀' },
+                    'pick': { percentage: '18.7', rarity: '흔함' },
+                    'vibe': { percentage: '6.3', rarity: '희귀' },
+                    'flow': { percentage: '28.4', rarity: '매우 흔함' },
+                    'sync': { percentage: '4.2', rarity: '매우 희귀' },
+                    'pure': { percentage: '9.8', rarity: '희귀' },
+                    'nova': { percentage: '11.6', rarity: '일반' },
+                    'echo': { percentage: '7.9', rarity: '희귀' },
+                    'hype': { percentage: '13.2', rarity: '일반' },
+                    'mesh': { percentage: '10.5', rarity: '희귀' },
+                    'sage': { percentage: '14.7', rarity: '일반' },
+                    'scan': { percentage: '5.1', rarity: '희귀' },
+                    'base': { percentage: '2.9', rarity: '매우 희귀' }
+                };
+                
+                return stats[type] || { percentage: '10.0', rarity: '일반' };
+            }
+
+            getTypeSymbol(type) {
+                const symbols = {
+                    'controlfreak': '♔',
+                    'earlybird': '⚡',
+                    'traditionalist': '📝',
+                    'stealthexpert': '🤫',
+                    'efficiencyking': '💎',
+                    'vibechecker': '🎵',
+                    'aiaddict': '🚀',
+                    'specialist': '🔨',
+                    'anxietybot': '😰',
+                    'visionary': '🌟',
+                    'minimalist': '◽',
+                    'evangelist': '🔥',
+                    'bridgebuilder': '🛡️',
+                    'wisecounsel': '🧙',
+                    'detective': '🔍',
+                    'scaredycat': '😱'
+                };
+                return symbols[type] || '🤖';
+            }
+
+            showShareScreen() {
+                this.currentScreen = 'share';
+                document.getElementById('result-screen').style.display = 'none';
+                document.getElementById('share-screen').style.display = 'block';
+            }
+
+            async showAllTypesScreen() {
+                this.currentScreen = 'all-types';
+                document.getElementById('result-screen').style.display = 'none';
+                document.getElementById('all-types-screen').style.display = 'block';
+                
+                // 전체 유형 목록 표시
+                await this.displayAllTypes();
+            }
+
+            async displayAllTypes() {
+                const allTypesContainer = document.getElementById('all-types-list');
+                allTypesContainer.innerHTML = '';
+                
+                const types = Object.keys(this.quizEngine.quizData.types);
+                
+                types.forEach((type, index) => {
+                    const typeData = this.quizEngine.quizData.types[type];
+                    const line = document.createElement('div');
+                    line.className = 'boot-line';
+                    line.innerHTML = `${(index + 1).toString().padStart(2, '0')}. <span class="type-${type}" style="color: ${typeData.color}">${typeData.name}</span> - ${typeData.description}`;
+                    allTypesContainer.appendChild(line);
+                });
+            }
+
+            showErrorScreen(message) {
+                this.currentScreen = 'error';
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('result-screen').style.display = 'none';
+                document.getElementById('share-screen').style.display = 'none';
+                document.getElementById('all-types-screen').style.display = 'none';
+                document.getElementById('error-screen').style.display = 'block';
+                document.getElementById('error-message').textContent = message;
+            }
+
+            setupEventListeners() {
+                // 키보드 이벤트
+                document.addEventListener('keydown', (e) => {
+                    if (this.isProcessing) return;
+                    
+                    const key = e.key.toLowerCase();
+                    
+                    if (this.currentScreen === 'result') {
+                        if (key === 's') {
+                            this.handleAction('share');
+                        } else if (key === 'r') {
+                            this.handleAction('retry');
+                        } else if (key === 'a') {
+                            this.handleAction('all-types');
+                        } else if (key === 'h') {
+                            this.handleAction('home');
+                        }
+                    } else if (this.currentScreen === 'share') {
+                        if (key === 't') {
+                            this.handleAction('share-twitter');
+                        } else if (key === 'f') {
+                            this.handleAction('share-facebook');
+                        } else if (key === 'k') {
+                            this.handleAction('share-kakaotalk');
+                        } else if (key === 'c') {
+                            this.handleAction('copy-link');
+                        } else if (key === 'b') {
+                            this.handleAction('back-result');
+                        }
+                    } else if (this.currentScreen === 'all-types') {
+                        if (key === 'b') {
+                            this.handleAction('back-result');
+                        }
+                    } else if (this.currentScreen === 'error') {
+                        if (key === 'r') {
+                            this.handleAction('retry-quiz');
+                        } else if (key === 'h') {
+                            this.handleAction('home');
+                        }
+                    }
+                });
+
+                // 마우스 클릭 이벤트
+                document.addEventListener('click', (e) => {
+                    if (this.isProcessing) return;
+                    
+                    const option = e.target.closest('.quiz-option');
+                    if (!option) return;
+                    
+                    const action = option.dataset.action;
+                    if (action) {
+                        this.handleAction(action);
+                    }
+                });
+            }
+
+            async handleAction(action) {
+                if (this.isProcessing) return;
+                this.isProcessing = true;
+                
+                const inputId = {
+                    'result': 'result-input',
+                    'share': 'share-input',
+                    'all-types': 'types-input',
+                    'error': 'error-input'
+                }[this.currentScreen];
+                
+                const inputElement = document.getElementById(inputId);
+                if (inputElement) {
+                    inputElement.textContent = action;
+                }
+                
+                try {
+                    switch (action) {
+                        case 'share':
+                            await this.sleep(500);
+                            this.showShareScreen();
+                            break;
+                        case 'retry':
+                            await this.sleep(500);
+                            window.location.href = '../quiz/';
+                            break;
+                        case 'all-types':
+                            await this.sleep(500);
+                            await this.showAllTypesScreen();
+                            break;
+                        case 'home':
+                            await this.sleep(500);
+                            window.location.href = '/';
+                            break;
+                        case 'share-twitter':
+                            this.shareToTwitter();
+                            break;
+                        case 'share-facebook':
+                            this.shareToFacebook();
+                            break;
+                        case 'share-kakaotalk':
+                            this.shareToKakaoTalk();
+                            break;
+                        case 'copy-link':
+                            await this.copyToClipboard();
+                            break;
+                        case 'back-result':
+                            await this.sleep(500);
+                            this.showResultScreen();
+                            break;
+                        case 'retry-quiz':
+                            await this.sleep(500);
+                            window.location.href = '../quiz/';
+                            break;
+                    }
+                } catch (error) {
+                    console.error('Action error:', error);
+                }
+                
+                this.isProcessing = false;
+            }
+
+            shareToTwitter() {
+                const text = `나의 AI 활용 유형: ${this.resultData.typeData.name}! Matrix Me에서 당신의 유형도 알아보세요 🚀`;
+                const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(this.shareUrl)}`;
+                window.open(url, '_blank');
+            }
+
+            shareToFacebook() {
+                const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(this.shareUrl)}`;
+                window.open(url, '_blank');
+            }
+
+            shareToKakaoTalk() {
+                // 카카오톡 공유 (실제 구현시 Kakao SDK 필요)
+                alert('카카오톡 공유 기능은 곧 추가될 예정입니다!');
+            }
+
+            async copyToClipboard() {
+                try {
+                    await navigator.clipboard.writeText(this.shareUrl);
+                    document.getElementById('share-input').textContent = '링크가 복사되었습니다!';
+                    await this.sleep(1000);
+                    document.getElementById('share-input').textContent = '';
+                } catch (error) {
+                    console.error('Clipboard error:', error);
+                    document.getElementById('share-input').textContent = '복사 실패';
+                }
+            }
+
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+    </script>
+</body>
+</html>

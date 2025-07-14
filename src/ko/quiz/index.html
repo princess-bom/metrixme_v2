@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png">
+    <title>Matrix Me - AI 유형 진단 퀴즈</title>
+    <meta name="description" content="20개 질문으로 당신의 AI 활용 유형을 진단하세요! 조종왕, 얼리버드, 완전체 등 16가지 유형 중 당신은?">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Matrix Me - AI 유형 진단 퀴즈">
+    <meta property="og:description" content="20개 질문으로 당신의 AI 활용 유형을 진단하세요!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://matrixme.app/ko/quiz/">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Matrix Me - AI 유형 진단 퀴즈">
+    <meta name="twitter:description" content="20개 질문으로 당신의 AI 활용 유형을 진단하세요!">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="AI 테스트, AI 성향 테스트, AI 퀴즈, 조종왕, 얼리버드, 완전체, AI 활용 유형">
+    
+    <!-- hreflang 태그 -->
+    <link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/quiz/">
+    <link rel="alternate" hreflang="en" href="https://matrixme.app/en/quiz/">
+    <link rel="alternate" hreflang="x-default" href="https://matrixme.app/en/quiz/">
+    
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Quiz",
+      "name": "Matrix Me AI 활용 유형 테스트",
+      "description": "20개 질문으로 16가지 AI 활용 성향을 진단하는 재미있는 성격 테스트",
+      "numberOfQuestions": 20,
+      "timeRequired": "PT5M",
+      "educationalLevel": "일반인",
+      "inLanguage": "ko",
+      "hasPart": {
+        "@type": "Question",
+        "name": "AI 활용 유형 진단 질문"
+      },
+      "about": {
+        "@type": "Thing",
+        "name": "AI 활용 성향",
+        "description": "개인의 인공지능 도구 사용 패턴과 성향"
+      }
+    }
+    </script>
+    
+    <!-- Critical CSS inline to prevent FOUC -->
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #000000 !important;
+            color: #00FF00 !important;
+            font-family: 'Monaco', 'Menlo', 'Courier New', 'D2Coding', monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* 모바일 최적화 */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+                min-height: 100vh;
+            }
+            
+            .terminal-container {
+                margin: 0;
+                width: 100%;
+                border-radius: 8px;
+            }
+            
+            .terminal-header {
+                padding: 12px 15px;
+            }
+            
+            .terminal-title {
+                font-size: 11px;
+            }
+            
+            .terminal-header-buttons {
+                display: flex;
+                gap: 6px;
+            }
+            
+            .terminal-color-toggle,
+            .terminal-language-toggle {
+                padding: 4px 8px !important;
+                font-size: 10px !important;
+                height: 20px !important;
+                line-height: 1 !important;
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                border-radius: 3px !important;
+                box-sizing: border-box !important;
+            }
+            
+            .terminal-content {
+                padding: 12px;
+                font-size: 12px;
+                min-height: auto;
+            }
+            
+            /* 로딩 화면 모바일 최적화 */
+            .boot-sequence {
+                padding: 10px 0;
+            }
+            
+            .boot-line {
+                font-size: 10px;
+                line-height: 1.4;
+                margin: 2px 0;
+            }
+            
+            /* 퀴즈 옵션 모바일 최적화 */
+            .quiz-option {
+                padding: 12px 8px;
+                margin: 6px 0;
+                font-size: 11px;
+            }
+            
+            .option-letter {
+                font-size: 12px;
+                min-width: 20px;
+            }
+            
+            /* 퀴즈 진행 화면 모바일 최적화 */
+            .matrix-input-line {
+                flex-direction: row;
+                gap: 8px;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            .matrix-input-left {
+                flex: 1;
+                margin-bottom: 0;
+            }
+            
+            .matrix-input-prompt {
+                font-size: 10px;
+            }
+            
+            .matrix-input-text {
+                font-size: 11px;
+            }
+            
+            .matrix-next-button, #matrix-next-btn {
+                width: 50px !important;
+                padding: 6px 8px !important;
+                font-size: 11px !important;
+                margin-top: 0 !important;
+                border-radius: 3px !important;
+                flex-shrink: 0;
+            }
+            
+            .matrix-next-button.show, #matrix-next-btn.show {
+                display: inline-block !important;
+            }
+            
+            /* 진행률 표시 모바일 최적화 */
+            .matrix-progress-text {
+                font-size: 10px;
+            }
+            
+            /* 질문 텍스트 모바일 최적화 */
+            #question-text {
+                font-size: 12px;
+                line-height: 1.5;
+                margin-bottom: 15px;
+            }
+            
+            /* 답변 옵션 컨테이너 모바일 최적화 */
+            #answer-options {
+                gap: 8px;
+            }
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: -1;
+        }
+        
+        /* 터미널 컨테이너 기본 스타일 (CSS 파일이 로드되지 않을 경우 대비) */
+        .terminal-container {
+            width: 100%;
+            max-width: 900px;
+            background: #1A1A1A;
+            border-radius: 12px;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 0, 0.3),
+                0 0 40px rgba(0, 255, 0, 0.1),
+                0 0 80px rgba(0, 255, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .terminal-header {
+            background: #0A0A0A;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .terminal-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .control.red { background: #FF5F57; }
+        .control.yellow { background: #FFBD2E; }
+        .control.green { background: #28CA42; }
+        
+        .terminal-title {
+            color: #00CCFF;
+            font-size: 13px;
+            font-weight: 500;
+            text-shadow: 0 0 10px currentColor;
+        }
+        
+        .terminal-content {
+            padding: 20px;
+            min-height: 500px;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #000000;
+        }
+
+        .terminal-language-toggle {
+            background: transparent !important;
+            border: 1px solid #00CCFF !important;
+            color: #00CCFF !important;
+            padding: 4px 8px !important;
+            border-radius: 3px !important;
+            font-family: inherit !important;
+            font-size: 10px !important;
+            font-weight: bold !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            opacity: 1 !important;
+            text-shadow: 0 0 8px #00CCFF !important;
+        }
+
+        .terminal-language-toggle::before,
+        .terminal-language-toggle::after {
+            content: none !important;
+        }
+
+        .terminal-language-toggle:hover {
+            background: #00CCFF !important;
+            color: #000 !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        .terminal-color-toggle {
+            background: transparent !important;
+            border: 1px solid #00CCFF !important;
+            color: #00CCFF !important;
+            padding: 4px 8px !important;
+            border-radius: 3px !important;
+            font-family: inherit !important;
+            font-size: 10px !important;
+            font-weight: bold !important;
+            cursor: pointer !important;
+            transition: all 0.2s ease !important;
+            opacity: 1 !important;
+            text-shadow: 0 0 8px #00CCFF !important;
+        }
+
+        .terminal-color-toggle::before,
+        .terminal-color-toggle::after {
+            content: none !important;
+        }
+
+        .terminal-color-toggle:hover {
+            background: #00CCFF !important;
+            color: #000 !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+    </style>
+    
+    <link rel="stylesheet" href="/assets/css/terminal.css">
+    <link rel="stylesheet" href="/assets/css/mobile.css">
+    <link rel="stylesheet" href="/assets/css/scroll-optimization.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-controls">
+                <span class="control red"></span>
+                <span class="control yellow"></span>
+                <span class="control green"></span>
+            </div>
+            <div class="terminal-title">
+                <span class="title-part1">MATRIX ME</span>
+                <span class="title-separator"> - </span>
+                <span class="title-part2">DNA Scanner Active</span>
+            </div>
+            <div class="terminal-header-buttons">
+                <button class="terminal-color-toggle" id="ko-quiz-color-toggle">
+                    C
+                </button>
+                <button class="terminal-language-toggle" id="ko-quiz-language-toggle">
+                    EN
+                </button>
+            </div>
+        </div>
+        
+        <div class="terminal-content" id="terminal">
+            <!-- 로딩 화면 -->
+            <div id="loading-screen">
+                <div class="boot-sequence">
+                    <div class="boot-line">Matrix Me Terminal v2.1.0</div>
+                    <div class="boot-line">Copyright (c) 2025 Matrix Me Project</div>
+                    <div class="boot-line">All rights reserved.</div>
+                    <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                    <div class="boot-line"></div>
+                    <div class="boot-line">AI DNA 스캔 시스템 초기화 중...</div>
+                    <div class="boot-line">［<span id="main-loading-progress">░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░</span>］ <span id="main-progress-percent">0</span>%</div>
+                    <div class="boot-line"></div>
+                    <div class="boot-line" id="main-completion-text" style="display: none;">시스템 준비 완료.</div>
+                </div>
+            </div>
+
+            <!-- 퀴즈 시작 화면 -->
+            <div id="quiz-start" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line quiz-title">Matrix Me - AI 유형 진단 퀴즈</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">당신의 AI 활용 유형을 16가지 중에서 정확히 진단합니다.</div>
+                <div class="boot-line">20개의 질문에 솔직하게 답해주세요.</div>
+                <div class="boot-line"></div>
+                <div class="boot-line"></div>
+                <div class="boot-line">⏱️ 예상 소요 시간: 3-5분</div>
+                <div class="boot-line">🎯 정확도: 95%</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">준비되셨나요?</div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="start">
+                        <span class="option-letter">Enter</span>
+                        <span class="option-content">진단 시작하기</span>
+                    </div>
+                    <div class="quiz-option" data-action="back">
+                        <span class="option-letter">ESC</span>
+                        <span class="option-content">메인으로 돌아가기</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="start-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+
+            <!-- 퀴즈 진행 화면 -->
+            <div id="quiz-progress" style="display: none;">
+                <div class="boot-line">
+                    <span>&gt; MATRIX ME AI DNA scan initiated...</span>
+                </div>
+                <div class="matrix-progress-section">
+                    <div class="matrix-progress-bar">
+                        <span class="matrix-progress-text">Matrix Progress:</span>
+                        <div class="matrix-progress-fill" id="matrix-progress-fill"></div>
+                        <span class="matrix-progress-text" id="matrix-progress-text">80% [16/20]</span>
+                    </div>
+                </div>
+                <div class="boot-line">&gt; Analyzing neural patterns...</div>
+                <div class="boot-line">&gt;</div>
+                
+                <div class="matrix-question-box">
+                    <div class="matrix-question-header">
+                        MATRIX QUERY #<span id="question-number">16</span>: ●●●
+                    </div>
+                    <div class="matrix-question-text" id="question-text">
+                        질문을 불러오는 중...
+                    </div>
+                </div>
+                
+                <div class="quiz-options" id="answer-options">
+                    <!-- 답변 옵션들이 동적으로 추가됩니다 -->
+                </div>
+                
+                <div class="matrix-input-section">
+                    <div class="matrix-input-line">
+                        <div class="matrix-input-left">
+                            <span class="matrix-input-prompt">&gt; Matrix input:</span>
+                            <span class="matrix-input-text" id="matrix-input-text">_</span>
+                        </div>
+                        <button class="matrix-next-button" id="matrix-next-btn" disabled>다음</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 결과 분석 화면 -->
+            <div id="quiz-analyzing" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line neon-strong">AI DNA 분석 진행 중...</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">▶ 답변 데이터 수집 완료...</div>
+                <div class="boot-line">▶ 행동 패턴 분석 중...</div>
+                <div class="boot-line">▶ AI 활용 성향 계산 중...</div>
+                <div class="boot-line">▶ 16개 유형 중 매칭 진행...</div>
+                <div class="boot-line">▶ 정확도 검증 중...</div>
+                <div class="boot-line"></div>
+                <div class="boot-line">분석 진행률:</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="analysis-progress" style="width: 0%"></div>
+                    <div class="progress-text" id="analysis-text">0%</div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="boot-line">잠시만 기다려주세요...</div>
+                <div class="boot-line"></div>
+                <div class="loading">
+                    <div class="cursor">_</div>
+                </div>
+            </div>
+
+            <!-- 에러 화면 -->
+            <div id="error-screen" style="display: none;">
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line text-error neon-strong">시스템 오류 발생</div>
+                <div class="boot-line separator-line">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+                <div class="boot-line"></div>
+                <div class="boot-line text-error">오류: <span id="error-message">알 수 없는 오류가 발생했습니다.</span></div>
+                <div class="boot-line"></div>
+                <div class="boot-line">다음 중 하나를 선택하세요:</div>
+                <div class="boot-line"></div>
+                <div class="quiz-options">
+                    <div class="quiz-option" data-action="retry">
+                        <span class="option-letter">R</span>
+                        <span class="option-content">다시 시도</span>
+                    </div>
+                    <div class="quiz-option" data-action="home">
+                        <span class="option-letter">H</span>
+                        <span class="option-content">홈으로 돌아가기</span>
+                    </div>
+                </div>
+                <div class="boot-line"></div>
+                <div class="input-line">
+                    <span class="prompt">root@matrix-me:~$ </span>
+                    <span class="input-text" id="error-input"></span>
+                    <span class="cursor">_</span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- 퀴즈 페이지에서는 서비스 워커 비활성화 -->
+    <script type="module" src="/assets/js/terminal.js"></script>
+    <script type="module" src="/assets/js/typing.js"></script>
+    <script type="module" src="/assets/js/responsive-separator.js"></script>
+    <script type="module" src="/assets/js/smooth-scroll-handler.js"></script>
+    
+    <!-- Firebase 서비스 -->
+    <script type="module" src="/assets/js/firebase-service.js"></script>
+    
+    <!-- 새로운 4축 시스템 컴포넌트들 -->
+    <script type="module" src="/assets/js/four-axis-engine.js"></script>
+    <script type="module" src="/assets/js/korean-type-mapping.js"></script>
+    <script type="module" src="/assets/js/quiz-state-manager.js"></script>
+    <script type="module" src="/assets/js/unified-quiz-controller.js"></script>
+    
+    <!-- 기존 퀴즈 엔진 (하위 호환성) -->
+    <script type="module" src="/assets/js/quiz.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 컬러 테마 관리 객체
+            const ColorManager = {
+                themes: [
+                    { name: '민트 그린', color: '#00CC88' },
+                    { name: '실버 화이트', color: '#D0D0D0' },
+                    { name: '앰버 오렌지', color: '#FF8C00' },
+                    { name: '네온 핑크', color: '#FF0080' },
+                    { name: '아이스 블루', color: '#00AAFF' }
+                ],
+                currentIndex: 0,
+                
+                init() {
+                    this.applyColor(this.themes[0].color);
+                },
+                
+                toggleColor() {
+                    this.currentIndex = (this.currentIndex + 1) % this.themes.length;
+                    const currentTheme = this.themes[this.currentIndex];
+                    this.applyColor(currentTheme.color);
+                },
+                
+                applyColor(color) {
+                    // RGB 변환 함수
+                    const hexToRgb = (hex) => {
+                        const r = parseInt(hex.slice(1, 3), 16);
+                        const g = parseInt(hex.slice(3, 5), 16);
+                        const b = parseInt(hex.slice(5, 7), 16);
+                        return `${r}, ${g}, ${b}`;
+                    };
+                    
+                    const rgbColor = hexToRgb(color);
+                    
+                    // CSS 변수 업데이트
+                    document.documentElement.style.setProperty('--text-primary', color);
+                    document.documentElement.style.setProperty('--text-success', color);
+                    document.documentElement.style.setProperty('--text-secondary', color);
+                    document.documentElement.style.setProperty('--text-primary-rgb', rgbColor);
+                    
+                    // 터미널 컨테이너 배경 네온 효과 업데이트
+                    const terminalContainer = document.querySelector('.terminal-container');
+                    if (terminalContainer) {
+                        terminalContainer.style.boxShadow = `
+                            0 0 20px rgba(${rgbColor}, 0.3),
+                            0 0 40px rgba(${rgbColor}, 0.1),
+                            0 0 80px rgba(${rgbColor}, 0.05)
+                        `;
+                    }
+                    
+                    // 컬러 토글 버튼 색상 업데이트
+                    const colorTogglesCustom = document.querySelectorAll('.terminal-color-toggle');
+                    colorTogglesCustom.forEach(toggle => {
+                        toggle.style.color = color;
+                        toggle.style.borderColor = color;
+                        toggle.style.textShadow = `0 0 8px ${color}`;
+                    });
+                    
+                    // 언어 토글 버튼 색상 업데이트
+                    const languageToggles = document.querySelectorAll('.terminal-language-toggle');
+                    languageToggles.forEach(toggle => {
+                        toggle.style.color = color;
+                        toggle.style.borderColor = color;
+                        toggle.style.textShadow = `0 0 8px ${color}`;
+                    });
+                    
+                    // 컬러 토글 버튼 색상 업데이트 (퀴즈 진행 화면용)
+                    const colorToggles = document.querySelectorAll('.terminal-color-toggle');
+                    colorToggles.forEach(toggle => {
+                        toggle.style.color = color;
+                        toggle.style.borderColor = color;
+                        toggle.style.textShadow = `0 0 8px ${color}`;
+                    });
+                    
+                    // 프로그래스 바 색상 업데이트
+                    const progressElements = document.querySelectorAll('#loading-progress, #analysis-progress, .matrix-progress-fill');
+                    progressElements.forEach(element => {
+                        if (element) {
+                            element.style.color = color;
+                            element.style.backgroundColor = color;
+                            element.style.textShadow = `0 0 10px ${color}`;
+                        }
+                    });
+                    
+                    // 프로그래스 텍스트 색상 업데이트
+                    const progressTexts = document.querySelectorAll('.matrix-progress-text, #analysis-text');
+                    progressTexts.forEach(text => {
+                        if (text) {
+                            text.style.color = color;
+                            text.style.textShadow = `0 0 8px ${color}`;
+                        }
+                    });
+                    
+                    // 로딩 화면 요소들 색상 업데이트
+                    const loadingElements = document.querySelectorAll('#loading-progress, #progress-percent, #completion-text, #loading-text');
+                    loadingElements.forEach(element => {
+                        if (element) {
+                            element.style.color = color;
+                            element.style.textShadow = `0 0 10px ${color}`;
+                        }
+                    });
+                    
+                    // 로딩 텍스트 색상 업데이트
+                    const loadingText = document.getElementById('loading-text');
+                    if (loadingText) {
+                        loadingText.style.color = color;
+                        loadingText.style.textShadow = `0 0 10px ${color}`;
+                    }
+                    
+                    // 완료 텍스트 색상 업데이트
+                    const completionText = document.getElementById('completion-text');
+                    if (completionText) {
+                        completionText.style.color = color;
+                        completionText.style.textShadow = `0 0 15px ${color}`;
+                    }
+                    
+                    // 1. 한영 토글키 색상 업데이트
+                    const languageToggle = document.getElementById('language-toggle');
+                    if (languageToggle) {
+                        languageToggle.style.color = color;
+                        languageToggle.style.borderColor = color;
+                        languageToggle.style.textShadow = `0 0 8px ${color}`;
+                    }
+                    
+                    // 4. 네온 효과 제거된 버전의 제목 색상 업데이트
+                    const quizTitle = document.querySelector('.quiz-title');
+                    if (quizTitle) {
+                        quizTitle.style.color = color;
+                        quizTitle.style.textShadow = `0 0 5px ${color}`;
+                    }
+                    
+                    const neonStrong = document.querySelectorAll('.neon-strong');
+                    neonStrong.forEach(element => {
+                        if (element) {
+                            element.style.color = color;
+                            element.style.textShadow = `0 0 5px ${color}`;
+                        }
+                    });
+                    
+                    // 5. Matrix Input 요소들 색상 업데이트
+                    const matrixInputElements = document.querySelectorAll('.matrix-input-prompt, .matrix-input-text, #matrix-input-text');
+                    matrixInputElements.forEach(element => {
+                        if (element) {
+                            element.style.color = color;
+                            element.style.textShadow = `0 0 8px ${color}`;
+                        }
+                    });
+                    
+                    // 6. 다음 버튼 색상 업데이트
+                    const nextButtons = document.querySelectorAll('#matrix-next-btn, .matrix-next-button');
+                    nextButtons.forEach(nextButton => {
+                        if (nextButton) {
+                            nextButton.style.setProperty('color', color, 'important');
+                            nextButton.style.setProperty('border-color', color, 'important');
+                            nextButton.style.setProperty('text-shadow', `0 0 8px ${color}`, 'important');
+                        }
+                    });
+                    
+                    // 동적으로 생성되는 다음 버튼을 위한 CSS 스타일
+                    const nextButtonStyle = document.createElement('style');
+                    nextButtonStyle.textContent = `
+                        .matrix-next-button, #matrix-next-btn {
+                            color: ${color} !important;
+                            border-color: ${color} !important;
+                            text-shadow: 0 0 8px ${color} !important;
+                        }
+                        .matrix-next-button.show, #matrix-next-btn.show {
+                            display: inline-block !important;
+                        }
+                    `;
+                    
+                    // 기존 다음 버튼 스타일 제거 후 새로운 스타일 추가
+                    const existingNextStyle = document.getElementById('dynamic-next-button-styles');
+                    if (existingNextStyle) {
+                        existingNextStyle.remove();
+                    }
+                    nextButtonStyle.id = 'dynamic-next-button-styles';
+                    document.head.appendChild(nextButtonStyle);
+                    
+                    // 7. 퀴즈 옵션 보기 색상 업데이트 (네온 효과 제거)
+                    const quizOptions = document.querySelectorAll('.quiz-option');
+                    quizOptions.forEach(option => {
+                        if (option) {
+                            option.style.color = color;
+                            option.style.textShadow = 'none';
+                            option.style.borderColor = color;
+                        }
+                    });
+                    
+                    // 8. 선택된 보기 체크 표시 색상 업데이트
+                    const selectedOptions = document.querySelectorAll('.quiz-option.selected');
+                    selectedOptions.forEach(option => {
+                        if (option) {
+                            option.style.backgroundColor = `rgba(${rgbColor}, 0.1)`;
+                            option.style.color = color;
+                            option.style.borderColor = color;
+                        }
+                    });
+                    
+                    // 9. 보기 호버 효과 색상 업데이트
+                    const style = document.createElement('style');
+                    style.textContent = `
+                        .quiz-option:hover {
+                            background-color: rgba(${rgbColor}, 0.05) !important;
+                            color: ${color} !important;
+                            border-color: ${color} !important;
+                            text-shadow: none !important;
+                        }
+                        .quiz-option.selected {
+                            background-color: rgba(${rgbColor}, 0.1) !important;
+                            color: ${color} !important;
+                            border-color: ${color} !important;
+                            text-shadow: none !important;
+                        }
+                    `;
+                    
+                    // 기존 스타일 태그 제거 후 새로운 스타일 추가
+                    const existingStyle = document.getElementById('dynamic-quiz-styles');
+                    if (existingStyle) {
+                        existingStyle.remove();
+                    }
+                    style.id = 'dynamic-quiz-styles';
+                    document.head.appendChild(style);
+                    
+                    // 7. 답변 저장 중 메시지 색상 업데이트 (displayQuestion에서 업데이트됨)
+                    // 이미 matrix-input-text에서 처리됨
+                }
+            };
+            
+            // === 새로운 4축 시스템 초기화 ===
+            // 컴포넌트들이 로드될 때까지 잠시 대기 (모듈 로딩 시간 고려)
+            let componentCheckAttempts = 0;
+            const maxAttempts = 50; // 5초 최대 대기
+            
+            function waitForComponents() {
+                componentCheckAttempts++;
+                
+                if (window.UnifiedQuizController && window.FourAxisEngine && window.KoreanTypeMapping && window.QuizStateManager) {
+                    console.log('모든 컴포넌트 로드 완료, 4축 시스템으로 초기화');
+                    // 새로운 통합 컨트롤러 사용
+                    window.quizApp = new UnifiedQuizController('ko');
+                    window.quizApp.initialize().catch(error => {
+                        console.error('4축 시스템 초기화 실패, 기존 시스템으로 fallback:', error);
+                        initializeLegacyQuiz();
+                    });
+                } else if (componentCheckAttempts >= maxAttempts) {
+                    console.warn('컴포넌트 로딩 타임아웃, 기존 시스템으로 fallback');
+                    initializeLegacyQuiz();
+                } else {
+                    console.log(`컴포넌트 로딩 중... (${componentCheckAttempts}/${maxAttempts})`, {
+                        UnifiedQuizController: !!window.UnifiedQuizController,
+                        FourAxisEngine: !!window.FourAxisEngine,
+                        KoreanTypeMapping: !!window.KoreanTypeMapping,
+                        QuizStateManager: !!window.QuizStateManager
+                    });
+                    // 아직 로드되지 않았으면 100ms 후 다시 체크
+                    setTimeout(waitForComponents, 100);
+                }
+            }
+            
+            // 4축 시스템 우선 시도
+            waitForComponents();
+            
+            // 기존 시스템 초기화 함수 (fallback)
+            function initializeLegacyQuiz() {
+                if (window.KoreanQuizApp) {
+                    window.quizApp = new KoreanQuizApp();
+                    
+                    // URL 파라미터로 상태 복원 확인
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const questionIndex = urlParams.get('q');
+                    const answers = urlParams.get('a');
+                    
+                    if (questionIndex !== null && answers !== null) {
+                        // 먼저 정상 초기화 후 상태 복원
+                        window.quizApp.initialize().then(() => {
+                            return window.quizApp.restoreFromUrl(parseInt(questionIndex), answers.split(','));
+                        }).then(() => {
+                            // URL 파라미터 제거 (새로고침 시 정상 시작되도록)
+                            window.history.replaceState(null, '', window.location.pathname);
+                        }).catch(error => {
+                            console.error('Restore failed, falling back to normal init:', error);
+                            window.quizApp.initialize();
+                        });
+                    } else {
+                        window.quizApp.initialize();
+                    }
+                }
+            }
+            
+            // 컬러 매니저 초기화
+            ColorManager.init();
+            
+            // 로컬 스토리지에서 색상 상태 복원
+            const savedColorIndex = localStorage.getItem('matrixme-color-index');
+            if (savedColorIndex !== null) {
+                ColorManager.currentIndex = parseInt(savedColorIndex);
+                ColorManager.applyColor(ColorManager.themes[ColorManager.currentIndex].color);
+            }
+            
+            // 컬러 토글 버튼 기능
+            document.getElementById('ko-quiz-color-toggle').addEventListener('click', () => {
+                ColorManager.toggleColor();
+                localStorage.setItem('matrixme-color-index', ColorManager.currentIndex);
+            });
+            
+            // === 개선된 언어 토글 기능 ===
+            function toggleLanguage() {
+                if (window.quizApp && typeof window.quizApp.generateLanguageToggleUrl === 'function') {
+                    // 새로운 4축 시스템의 상태 관리자 사용
+                    const newUrl = window.quizApp.generateLanguageToggleUrl();
+                    window.location.href = newUrl;
+                } else {
+                    // 기존 시스템 fallback
+                    let newUrl = window.location.pathname.replace('/ko/', '/en/');
+                    
+                    // 퀴즈 진행 중이면 현재 상태를 URL에 포함
+                    if (typeof window.quizApp !== 'undefined' && window.quizApp.quizEngine && window.quizApp.quizEngine.isStarted) {
+                        const currentQ = window.quizApp.quizEngine.currentQuestion;
+                        const currentAnswers = window.quizApp.quizEngine.answers || [];
+                        
+                        // 답안 배열을 문자열로 변환
+                        const answerStrings = currentAnswers.map(answer => {
+                            if (typeof answer === 'object') {
+                                return answer.letter || answer.value || 'a';
+                            }
+                            return answer.toString();
+                        });
+                        
+                        if (currentQ !== undefined && answerStrings.length > 0) {
+                            const params = new URLSearchParams();
+                            params.set('q', currentQ.toString());
+                            params.set('a', answerStrings.join(','));
+                            newUrl += '?' + params.toString();
+                        }
+                    }
+                    
+                    window.location.href = newUrl;
+                }
+            }
+            
+            // 언어 토글 버튼 연결
+            const languageToggleBtn = document.getElementById('ko-quiz-language-toggle');
+            languageToggleBtn.addEventListener('click', toggleLanguage);
+            
+            // 퀴즈 진행 화면의 컬러 토글 기능 (존재하는 경우)
+            const quizColorToggle = document.getElementById('quiz-color-toggle');
+            if (quizColorToggle) {
+                quizColorToggle.addEventListener('click', () => {
+                    ColorManager.toggleColor();
+                    localStorage.setItem('matrixme-color-index', ColorManager.currentIndex);
+                });
+            }
+            
+            
+        });
+
+        class KoreanQuizApp {
+            constructor() {
+                this.quizEngine = new QuizEngine('ko');
+                this.terminal = new TerminalEngine(document.getElementById('terminal'));
+                this.typing = new TypingEngine();
+                this.currentScreen = 'loading';
+                this.selectedAnswer = null;
+                this.isProcessing = false;
+                this.keydownHandler = null;
+                this.clickHandler = null;
+            }
+
+            async initialize() {
+                try {
+                    await this.quizEngine.loadQuizData();
+                    
+                    // 언어 토글로 온 경우 상태 복원
+                    if (sessionStorage.getItem('languageToggle') === 'true') {
+                        await this.showLoadingScreen(true); // 상태 복원 모드
+                        await this.restoreQuizState();
+                    } else {
+                        await this.showLoadingScreen(false); // 일반 모드
+                    }
+                } catch (error) {
+                    console.error('Initialization error:', error);
+                    this.showErrorScreen('퀴즈 데이터를 불러오는 중 오류가 발생했습니다.');
+                }
+            }
+
+            async showLoadingScreen(isRestoreMode = false) {
+                this.currentScreen = 'loading';
+                document.getElementById('loading-screen').style.display = 'block';
+                
+                // 다른 화면 숨기기
+                document.getElementById('quiz-start').style.display = 'none';
+                document.getElementById('quiz-progress').style.display = 'none';
+                document.getElementById('quiz-analyzing').style.display = 'none';
+                document.getElementById('error-screen').style.display = 'none';
+                
+                // 메인 로딩 애니메이션 실행
+                await this.animateMainLoading();
+                
+                // 상태 복원 모드가 아닐 때만 퀴즈 시작 화면으로 이동
+                if (!isRestoreMode) {
+                    await this.showStartScreen();
+                }
+            }
+
+            async animateMainLoading() {
+                const progressElement = document.getElementById('main-loading-progress');
+                const percentElement = document.getElementById('main-progress-percent');
+                const completionText = document.getElementById('main-completion-text');
+                
+                const steps = [
+                    { progress: '░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░', percent: 0, delay: 0 },
+                    { progress: '██████░░░░░░░░░░░░░░░░░░░░░░░░░░░', percent: 20, delay: 500 },
+                    { progress: '█████████████░░░░░░░░░░░░░░░░░░░░', percent: 40, delay: 1000 },
+                    { progress: '███████████████████░░░░░░░░░░░░░░', percent: 60, delay: 1500 },
+                    { progress: '██████████████████████████░░░░░░░', percent: 80, delay: 2000 },
+                    { progress: '█████████████████████████████████', percent: 100, delay: 2500 }
+                ];
+                
+                for (const step of steps) {
+                    await this.sleep(step.delay === 0 ? 300 : 800);
+                    progressElement.textContent = step.progress;
+                    percentElement.textContent = step.percent;
+                }
+                
+                // 100% 완료 후 1초 뒤에 완료 메시지 표시
+                await this.sleep(1000);
+                completionText.style.display = 'block';
+                
+                // 추가 1초 대기
+                await this.sleep(1000);
+            }
+
+            async showStartScreen() {
+                this.currentScreen = 'start';
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('quiz-start').style.display = 'block';
+                
+                this.setupEventListeners();
+            }
+
+            async showQuizScreen() {
+                this.currentScreen = 'quiz';
+                document.getElementById('quiz-start').style.display = 'none';
+                document.getElementById('quiz-progress').style.display = 'block';
+                
+                this.quizEngine.startQuiz();
+                this.quizEngine.isStarted = true; // 이것이 누락되었습니다!
+                await this.displayQuestion();
+                this.setupEventListeners();
+            }
+
+            async displayQuestion() {
+                const question = this.quizEngine.getCurrentQuestion();
+                if (!question) {
+                    await this.showAnalyzing();
+                    return;
+                }
+
+                const progress = this.quizEngine.getProgress();
+                
+                // 진행률 업데이트
+                document.getElementById('question-number').textContent = progress.current + 1;
+                document.getElementById('matrix-progress-text').textContent = `${progress.percentage}% [${progress.current + 1}/${progress.total}]`;
+                document.getElementById('matrix-progress-fill').style.setProperty('--progress-width', `${progress.percentage}%`);
+                
+                // 질문 표시
+                document.getElementById('question-text').textContent = question.question;
+                
+                // 답변 옵션 표시
+                const optionsContainer = document.getElementById('answer-options');
+                optionsContainer.innerHTML = '';
+                
+                question.answers.forEach((answer, index) => {
+                    const option = document.createElement('div');
+                    option.className = 'quiz-option';
+                    option.dataset.letter = answer.letter;
+                    option.innerHTML = `
+                        <span class="option-letter">${answer.letter.toUpperCase()})</span>
+                        <span class="option-content">${answer.text}</span>
+                    `;
+                    optionsContainer.appendChild(option);
+                });
+                
+                this.selectedAnswer = null;
+                document.getElementById('matrix-input-text').textContent = '_';
+                const nextBtn = document.getElementById('matrix-next-btn');
+                nextBtn.disabled = true;
+                nextBtn.classList.remove('show');
+                
+                // 스무스 스크롤 핸들러가 있으면 질문 전환 애니메이션 실행
+                if (window.smoothScrollHandler && typeof window.smoothScrollHandler.animateQuestionTransition === 'function') {
+                    setTimeout(() => {
+                        window.smoothScrollHandler.animateQuestionTransition();
+                    }, 100);
+                }
+            }
+
+            async showAnalyzing() {
+                this.currentScreen = 'analyzing';
+                document.getElementById('quiz-progress').style.display = 'none';
+                document.getElementById('quiz-analyzing').style.display = 'block';
+                
+                // 분석 진행률 애니메이션
+                const progressBar = document.getElementById('analysis-progress');
+                const progressText = document.getElementById('analysis-text');
+                
+                for (let i = 0; i <= 100; i += 5) {
+                    progressBar.style.width = `${i}%`;
+                    progressText.textContent = `${i}%`;
+                    await this.sleep(100);
+                }
+                
+                // 결과 계산
+                const result = this.quizEngine.calculateResult();
+                this.quizEngine.saveResult(result);
+                
+                // 퀴즈 완료 - sessionStorage 정리 더 이상 불필요
+                
+                // 결과 페이지로 이동
+                await this.sleep(1000);
+                const shareUrl = this.quizEngine.generateShareUrl(result);
+                window.location.href = `../result/?type=${result.type}&score=${result.maxScore}`;
+            }
+
+            showErrorScreen(message) {
+                this.currentScreen = 'error';
+                document.getElementById('loading-screen').style.display = 'none';
+                document.getElementById('quiz-start').style.display = 'none';
+                document.getElementById('quiz-progress').style.display = 'none';
+                document.getElementById('quiz-analyzing').style.display = 'none';
+                document.getElementById('error-screen').style.display = 'block';
+                document.getElementById('error-message').textContent = message;
+            }
+
+            setupEventListeners() {
+                // 기존 이벤트 리스너 제거하여 중복 방지
+                this.removeEventListeners();
+                
+                // 키보드 이벤트
+                this.keydownHandler = (e) => {
+                    if (this.isProcessing) return;
+                    
+                    const key = e.key.toLowerCase();
+                    
+                    if (this.currentScreen === 'start') {
+                        if (key === 'enter') {
+                            this.startQuiz();
+                        } else if (key === 'escape') {
+                            window.location.href = '/';
+                        }
+                    } else if (this.currentScreen === 'quiz') {
+                        if (['a', 'b', 'c', 'd', 'e'].includes(key)) {
+                            this.selectAnswer(key);
+                        } else if (key === 'enter' && this.selectedAnswer) {
+                            this.submitAnswer();
+                        } else if (key === 'escape') {
+                            this.goBack();
+                        }
+                    } else if (this.currentScreen === 'error') {
+                        if (key === 'r') {
+                            location.reload();
+                        } else if (key === 'h') {
+                            window.location.href = '/';
+                        }
+                    }
+                };
+                
+                // 마우스 클릭 이벤트
+                this.clickHandler = (e) => {
+                    if (this.isProcessing) return;
+                    
+                    const option = e.target.closest('.quiz-option');
+                    const nextBtn = e.target.closest('.matrix-next-button');
+                    
+                    if (option) {
+                        const action = option.dataset.action;
+                        const letter = option.dataset.letter;
+                        
+                        if (action === 'start') {
+                            this.startQuiz();
+                        } else if (action === 'back') {
+                            window.location.href = '/';
+                        } else if (action === 'retry') {
+                            location.reload();
+                        } else if (action === 'home') {
+                            window.location.href = '/';
+                        } else if (letter) {
+                            this.selectAnswer(letter);
+                        }
+                    } else if (nextBtn && !nextBtn.disabled) {
+                        this.submitAnswer();
+                    }
+                };
+                
+                document.addEventListener('keydown', this.keydownHandler);
+                document.addEventListener('click', this.clickHandler);
+            }
+            
+            removeEventListeners() {
+                if (this.keydownHandler) {
+                    document.removeEventListener('keydown', this.keydownHandler);
+                }
+                if (this.clickHandler) {
+                    document.removeEventListener('click', this.clickHandler);
+                }
+            }
+
+            async startQuiz() {
+                if (this.isProcessing) return;
+                this.isProcessing = true;
+                
+                document.getElementById('start-input').textContent = 'start';
+                await this.sleep(500);
+                document.getElementById('start-input').textContent = '퀴즈 시작 중...';
+                await this.sleep(1000);
+                
+                await this.showQuizScreen();
+                this.isProcessing = false;
+            }
+
+            selectAnswer(letter) {
+                if (this.isProcessing) return;
+                
+                // 기존 선택 해제
+                document.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.classList.remove('selected');
+                });
+                
+                // 새로운 선택
+                const selectedOption = document.querySelector(`[data-letter="${letter}"]`);
+                if (selectedOption) {
+                    selectedOption.classList.add('selected');
+                    this.selectedAnswer = letter;
+                    document.getElementById('matrix-input-text').textContent = letter.toUpperCase() + ' _';
+                    const nextBtn = document.getElementById('matrix-next-btn');
+                    nextBtn.disabled = false;
+                    nextBtn.style.removeProperty('display');
+                    nextBtn.style.removeProperty('visibility');
+                    nextBtn.style.removeProperty('opacity');
+                    nextBtn.classList.add('show');
+                    
+                    // 다음 버튼으로 스무스 스크롤
+                    if (window.smoothScrollHandler && typeof window.smoothScrollHandler.scrollToNextButton === 'function') {
+                        setTimeout(() => {
+                            window.smoothScrollHandler.scrollToNextButton();
+                        }, 100);
+                    }
+                }
+            }
+
+            async submitAnswer() {
+                if (this.isProcessing || !this.selectedAnswer) return;
+                this.isProcessing = true;
+                
+                try {
+                    const result = this.quizEngine.submitAnswer(this.selectedAnswer);
+                    
+                    // 답변 확인 표시
+                    document.getElementById('matrix-input-text').textContent = '답변 저장 중...';
+                    const nextBtn = document.getElementById('matrix-next-btn');
+                    nextBtn.disabled = true;
+                    nextBtn.classList.remove('show');
+                    await this.sleep(800);
+                    
+                    if (result.isComplete) {
+                        await this.showAnalyzing();
+                    } else {
+                        await this.displayQuestion();
+                    }
+                } catch (error) {
+                    console.error('Answer submission error:', error);
+                    this.showErrorScreen('답변 처리 중 오류가 발생했습니다.');
+                }
+                
+                this.isProcessing = false;
+            }
+
+            goBack() {
+                if (this.quizEngine.currentQuestion > 0) {
+                    this.quizEngine.goToPreviousQuestion();
+                    this.displayQuestion();
+                } else {
+                    window.location.href = '/';
+                }
+            }
+
+            // 퀴즈 상태 복원 (언어 토글 시)
+            async restoreQuizState() {
+                try {
+                    const savedState = JSON.parse(sessionStorage.getItem('quizState'));
+                    if (!savedState) {
+                        await this.showStartScreen();
+                        return;
+                    }
+                    
+                    // 퀴즈 엔진 상태 복원
+                    this.quizEngine.currentQuestionIndex = savedState.currentQuestionIndex;
+                    this.quizEngine.answers = savedState.answers || [];
+                    this.quizEngine.isStarted = savedState.isStarted;
+                    this.currentScreen = savedState.currentScreen;
+                    this.selectedAnswer = savedState.selectedAnswer;
+                    
+                    // 화면 상태에 따라 적절한 화면 표시
+                    if (savedState.currentScreen === 'quiz') {
+                        document.getElementById('loading-screen').style.display = 'none';
+                        document.getElementById('quiz-start').style.display = 'none';
+                        document.getElementById('quiz-progress').style.display = 'block';
+                        await this.displayQuestion();
+                        this.setupEventListeners();
+                    } else if (savedState.currentScreen === 'analyzing') {
+                        await this.showAnalyzing();
+                    } else {
+                        await this.showStartScreen();
+                    }
+                    
+                    // 언어 토글 플래그 제거
+                    sessionStorage.removeItem('languageToggle');
+                    
+                } catch (error) {
+                    console.error('State restoration error:', error);
+                    await this.showStartScreen();
+                }
+            }
+
+            async restoreFromUrl(questionIndex, answers) {
+                try {
+                    // 상태 복원
+                    this.quizEngine.currentQuestion = questionIndex;
+                    this.quizEngine.answers = answers.filter(a => a !== '');
+                    this.quizEngine.isStarted = true;
+                    
+                    // 퀴즈 화면으로 이동
+                    await this.showQuizScreen();
+                    
+                } catch (error) {
+                    console.error('URL restoration error:', error);
+                    await this.showStartScreen();
+                }
+            }
+
+            sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
+        }
+    </script>
+</body>
+</html>

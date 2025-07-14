@@ -1,0 +1,8 @@
+# SPA 라우팅 지원 - 클린 URL
+/ko/result/* /ko/result/index.html 200
+/en/result/* /en/result/index.html 200
+/ko/share/* /ko/share/index.html 200
+/en/share/* /en/share/index.html 200
+
+# 기본 라우팅
+/* /index.html 200

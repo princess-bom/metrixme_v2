@@ -1,0 +1,269 @@
+{
+  "language": "en",
+  "title": "Matrix Me - AI Personality Quiz (4-Axis System)",
+  "description": "Discover your AI usage personality type through 4-axis analysis. D(Dependency) - E(Exploration) - T(Trust) - C(Control) system.",
+  "version": "3.0.0",
+  "systemType": "four-axis",
+  "questions": [
+    {
+      "id": 1,
+      "axis": "D",
+      "section": "D-Axis: AI Dependency Measurement",
+      "question": "It's Friday night, you're ordering pizza online, but there are 30 different options!\nYou're starving, the place closes at 11 PM, and it's already 10:30 PM.\nDecision paralysis is real. What's your move?",
+      "answers": [
+        {"letter": "a", "text": "Go with something I've ordered before - trust my past choices", "scores": {"D": 1, "E": 1, "T": 3, "C": 4}},
+        {"letter": "b", "text": "Quickly read descriptions and pick based on ingredients I like", "scores": {"D": 1, "E": 2, "T": 2, "C": 4}},
+        {"letter": "c", "text": "\"Hey AI, what's good at this pizza place?\" - use as a starting point", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "Ask AI to recommend based on my preferences and dietary needs", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"AI, just order me something good!\" - complete delegation", "scores": {"D": 5, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 2,
+      "axis": "D",
+      "section": "D-Axis: AI Dependency Measurement",
+      "question": "You have an important presentation at 9 AM tomorrow,\nand you've literally done ZERO preparation.\nIt's 2 AM, you're holding a coffee, thinking \"How did I get here?\"\nWhat's your survival strategy?",
+      "answers": [
+        {"letter": "a", "text": "\"No shortcuts!\" - pull an all-nighter and do it properly myself", "scores": {"D": 1, "E": 1, "T": 1, "C": 5}},
+        {"letter": "b", "text": "Research online, gather materials, and build it step by step", "scores": {"D": 1, "E": 2, "T": 2, "C": 4}},
+        {"letter": "c", "text": "Ask AI for an outline, then I'll flesh it out with my own content", "scores": {"D": 3, "E": 3, "T": 3, "C": 4}},
+        {"letter": "d", "text": "Have AI create 70%, then I'll customize the remaining 30%", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"AI, please save my career\" - generate the whole thing", "scores": {"D": 5, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 3,
+      "axis": "D",
+      "section": "D-Axis: AI Dependency Measurement",
+      "question": "Your friend proposes a challenge:\n\"Let's go 24 hours without using any AI tools!\"\nYour honest first reaction is?",
+      "answers": [
+        {"letter": "a", "text": "\"Easy! I barely use that stuff anyway\" - accept confidently", "scores": {"D": 1, "E": 1, "T": 2, "C": 4}},
+        {"letter": "b", "text": "\"Might be inconvenient, but doable\" - slight concern", "scores": {"D": 2, "E": 2, "T": 3, "C": 3}},
+        {"letter": "c", "text": "\"Hmm, today might be rough\" - starting to worry", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"Wait, really? But I have work to do!\" - panic mode activated", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"That's impossible! How am I supposed to function?!\" - absolute refusal", "scores": {"D": 5, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 4,
+      "axis": "D",
+      "section": "D-Axis: AI Dependency Measurement",
+      "question": "You need to send an important message (job application, business inquiry, etc.)\nand you've been staring at a blank screen for 30 minutes.\nEven \"Hello\" feels wrong. What do you do?",
+      "answers": [
+        {"letter": "a", "text": "Take a deep breath and write it from the heart - authenticity wins", "scores": {"D": 1, "E": 1, "T": 2, "C": 5}},
+        {"letter": "b", "text": "Look up examples online and adapt them to my situation", "scores": {"D": 1, "E": 2, "T": 3, "C": 4}},
+        {"letter": "c", "text": "Ask AI for suggestions, then rewrite it in my own voice", "scores": {"D": 3, "E": 3, "T": 3, "C": 4}},
+        {"letter": "d", "text": "Get AI to write a few options and pick the best one", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "Let AI craft the perfect message and send it as-is", "scores": {"D": 5, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 5,
+      "axis": "D",
+      "section": "D-Axis: AI Dependency Measurement",
+      "question": "You just moved to a new area and need to find a good place for dinner tonight.\nYou don't know anyone locally and all the streets look the same.\nYour approach?",
+      "answers": [
+        {"letter": "a", "text": "Walk around and see which places look busy and inviting", "scores": {"D": 1, "E": 2, "T": 2, "C": 5}},
+        {"letter": "b", "text": "Check Google Maps reviews and ratings carefully", "scores": {"D": 2, "E": 2, "T": 3, "C": 4}},
+        {"letter": "c", "text": "Ask AI for recommendations and then research the top suggestions", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "Get AI recommendations and head to the highest-rated option", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"AI, find me the closest great restaurant with directions\"", "scores": {"D": 5, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 6,
+      "axis": "E",
+      "section": "E-Axis: AI Exploration Measurement",
+      "question": "You wake up to notifications everywhere: \"GPT-5 is here!\"\nComments are going wild with \"This changes everything!\"\nand \"AI revolution is real!\" Your reaction?",
+      "answers": [
+        {"letter": "a", "text": "\"Cool story, not my problem\" - swipe away and check other news", "scores": {"D": 1, "E": 1, "T": 2, "C": 4}},
+        {"letter": "b", "text": "\"Interesting, maybe I'll check it out later if I need it\"", "scores": {"D": 2, "E": 2, "T": 2, "C": 3}},
+        {"letter": "c", "text": "\"Hmm, what's different about this one?\" - click to read more", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"I NEED to try this right now!\" - immediately start testing", "scores": {"D": 4, "E": 4, "T": 4, "C": 2}},
+        {"letter": "e", "text": "Already signed up for beta access months ago", "scores": {"D": 4, "E": 5, "T": 4, "C": 2}}
+      ]
+    },
+    {
+      "id": 7,
+      "axis": "E",
+      "section": "E-Axis: AI Exploration Measurement",
+      "question": "Your friend excitedly shows you their phone:\n\"Dude, this AI app is insane! Just take a photo\nand it tells you everything about what you're looking at!\"\nWhat's your response?",
+      "answers": [
+        {"letter": "a", "text": "\"That's... nice. I'm good with what I have\" - politely uninterested", "scores": {"D": 1, "E": 1, "T": 2, "C": 4}},
+        {"letter": "b", "text": "\"Interesting tech, but isn't this just Google Lens?\" - cautiously skeptical", "scores": {"D": 2, "E": 2, "T": 1, "C": 3}},
+        {"letter": "c", "text": "\"Show me how it works\" - curious but not rushing to download", "scores": {"D": 2, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"Send me the link! I want to try this\" - immediate download", "scores": {"D": 3, "E": 4, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"Oh, that one? Yeah, I've been using it for months. Try this one instead...\"", "scores": {"D": 4, "E": 5, "T": 4, "C": 2}}
+      ]
+    },
+    {
+      "id": 8,
+      "axis": "E",
+      "section": "E-Axis: AI Exploration Measurement",
+      "question": "You're reviewing your monthly expenses and realize\nyour AI tool subscriptions add up to... more than you expected.\nYour budget reaction?",
+      "answers": [
+        {"letter": "a", "text": "$0 - I stick to free versions or don't use AI tools", "scores": {"D": 1, "E": 1, "T": 2, "C": 4}},
+        {"letter": "b", "text": "Under $15 - just one essential subscription", "scores": {"D": 2, "E": 2, "T": 3, "C": 3}},
+        {"letter": "c", "text": "$20-40 - a few carefully selected tools", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "$50-80 - I need variety for different tasks", "scores": {"D": 4, "E": 4, "T": 4, "C": 2}},
+        {"letter": "e", "text": "$100+ - I prefer not to look at the exact number...", "scores": {"D": 5, "E": 5, "T": 4, "C": 1}}
+      ]
+    },
+    {
+      "id": 9,
+      "axis": "E",
+      "section": "E-Axis: AI Exploration Measurement",
+      "question": "Honestly counting ALL AI-related apps on your phone\n(ChatGPT, translation apps, photo editors with AI, etc.),\nhow many do you have?",
+      "answers": [
+        {"letter": "a", "text": "Maybe 1-2, if any - I don't really seek these out", "scores": {"D": 1, "E": 1, "T": 2, "C": 4}},
+        {"letter": "b", "text": "3-4 basic ones - just the essentials", "scores": {"D": 2, "E": 2, "T": 3, "C": 3}},
+        {"letter": "c", "text": "5-8 apps - different tools for different purposes", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "10-15 apps - I like having options", "scores": {"D": 4, "E": 4, "T": 4, "C": 2}},
+        {"letter": "e", "text": "20+ apps - I need a separate folder (or three)", "scores": {"D": 5, "E": 5, "T": 4, "C": 1}}
+      ]
+    },
+    {
+      "id": 10,
+      "axis": "E",
+      "section": "E-Axis: AI Exploration Measurement",
+      "question": "It's Saturday afternoon, you're home with no specific plans,\nmindlessly scrolling your phone.\nWhat are you most likely to end up doing?",
+      "answers": [
+        {"letter": "a", "text": "Watch Netflix, read a book, or play a non-AI game", "scores": {"D": 1, "E": 1, "T": 3, "C": 4}},
+        {"letter": "b", "text": "Browse YouTube for interesting videos about whatever", "scores": {"D": 2, "E": 2, "T": 3, "C": 3}},
+        {"letter": "c", "text": "\"Wonder what new AI tools are out there?\" - start browsing", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "Watch AI tutorials or read about new features", "scores": {"D": 4, "E": 4, "T": 4, "C": 2}},
+        {"letter": "e", "text": "Discover a new AI tool and spend 3 hours experimenting", "scores": {"D": 4, "E": 5, "T": 4, "C": 2}}
+      ]
+    },
+    {
+      "id": 11,
+      "axis": "T",
+      "section": "T-Axis: AI Trust Measurement",
+      "question": "You ask ChatGPT \"Who won the last World Cup?\"\nand it responds with complete confidence, giving you specific details.\nBut something feels off - you think you remember differently.\nWhat do you do?",
+      "answers": [
+        {"letter": "a", "text": "Immediately fact-check with 3+ reliable sources before believing anything", "scores": {"D": 2, "E": 2, "T": 1, "C": 5}},
+        {"letter": "b", "text": "\"Better double-check this\" - quick Google search to verify", "scores": {"D": 2, "E": 2, "T": 2, "C": 4}},
+        {"letter": "c", "text": "Trust it for casual conversation, verify for important stuff", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"AI seems confident, probably right\" - go with it", "scores": {"D": 3, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"If AI says so, it must be accurate\" - complete trust", "scores": {"D": 4, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 12,
+      "axis": "T",
+      "section": "T-Axis: AI Trust Measurement",
+      "question": "AI enthusiastically recommended a \"highly-rated local burger place.\"\nYou went there and it was genuinely terrible -\noverpriced, cold food, rude service. Your reaction?",
+      "answers": [
+        {"letter": "a", "text": "\"Never trusting AI recommendations again\" - back to doing my own research", "scores": {"D": 1, "E": 1, "T": 1, "C": 5}},
+        {"letter": "b", "text": "\"AI isn't perfect, I'll cross-reference next time\" - lesson learned", "scores": {"D": 2, "E": 2, "T": 2, "C": 4}},
+        {"letter": "c", "text": "\"Bad luck this time, but usually AI suggestions are decent\"", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"Maybe my taste is different? AI recommendations usually work\"", "scores": {"D": 3, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"I must have misunderstood the recommendation somehow\"", "scores": {"D": 4, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 13,
+      "axis": "T",
+      "section": "T-Axis: AI Trust Measurement",
+      "question": "You're preparing a crucial presentation for your boss\nand AI provided some impressive statistics.\nIf you're wrong, it could be really bad for your career.\nWhat's your verification process?",
+      "answers": [
+        {"letter": "a", "text": "Check every single number against official sources - no exceptions", "scores": {"D": 2, "E": 2, "T": 1, "C": 5}},
+        {"letter": "b", "text": "Verify the key statistics and main claims thoroughly", "scores": {"D": 2, "E": 2, "T": 2, "C": 4}},
+        {"letter": "c", "text": "Spot-check the most important numbers", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"AI data is usually pretty accurate\" - minor verification only", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"AI wouldn't give me wrong data for something this important\"", "scores": {"D": 4, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 14,
+      "axis": "T",
+      "section": "T-Axis: AI Trust Measurement",
+      "question": "Friends are debating whether AI will replace most human jobs soon.\nSomeone asks your opinion. What's your honest take?",
+      "answers": [
+        {"letter": "a", "text": "\"AI is just a tool with clear limitations - humans are irreplaceable\"", "scores": {"D": 1, "E": 1, "T": 1, "C": 5}},
+        {"letter": "b", "text": "\"Some jobs might change, but humans will always be needed\"", "scores": {"D": 2, "E": 2, "T": 2, "C": 4}},
+        {"letter": "c", "text": "\"It's complicated - probably yes for some things, no for others\"", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"AI is already better than humans at many tasks\"", "scores": {"D": 4, "E": 4, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"Absolutely! AI works 24/7 and doesn't make emotional decisions\"", "scores": {"D": 4, "E": 4, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 15,
+      "axis": "T",
+      "section": "T-Axis: AI Trust Measurement",
+      "question": "You casually mentioned a personal problem to an AI,\nand it gave you incredibly insightful, helpful advice that really resonated.\nYour reaction?",
+      "answers": [
+        {"letter": "a", "text": "\"Lucky coincidence - it's just pattern matching\"", "scores": {"D": 1, "E": 1, "T": 1, "C": 5}},
+        {"letter": "b", "text": "\"Interesting perspective, though I shouldn't read too much into it\"", "scores": {"D": 2, "E": 2, "T": 2, "C": 4}},
+        {"letter": "c", "text": "\"Wow, AI is smarter than I thought\" - starting to trust more", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"AI really gets it! This is genuinely helpful\"", "scores": {"D": 4, "E": 4, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"AI understands me better than I understand myself\"", "scores": {"D": 4, "E": 4, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 16,
+      "axis": "C",
+      "section": "C-Axis: AI Control Measurement",
+      "question": "You asked AI for project ideas and got 10 solid suggestions.\nNow you need to decide how to use them.\nWhat's your typical approach?",
+      "answers": [
+        {"letter": "a", "text": "Take them all apart and rebuild everything my way", "scores": {"D": 3, "E": 3, "T": 2, "C": 5}},
+        {"letter": "b", "text": "Pick 2-3 favorites and heavily modify them to fit my vision", "scores": {"D": 3, "E": 3, "T": 3, "C": 4}},
+        {"letter": "c", "text": "Choose one good idea and make some personal adjustments", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "Find the most complete suggestion and polish it up", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"Number 7 is perfect!\" - implement exactly as suggested", "scores": {"D": 4, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 17,
+      "axis": "C",
+      "section": "C-Axis: AI Control Measurement",
+      "question": "When you need AI to help with something,\nwhat's your typical request style?",
+      "answers": [
+        {"letter": "a", "text": "Super detailed instructions: \"Write exactly this way, include these points, avoid that tone...\"", "scores": {"D": 3, "E": 3, "T": 2, "C": 5}},
+        {"letter": "b", "text": "Clear guidelines: \"Here's what I need, with these requirements and preferences\"", "scores": {"D": 3, "E": 3, "T": 3, "C": 4}},
+        {"letter": "c", "text": "Basic direction: \"Create something like this, focus on these main points\"", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "Simple request: \"Make me a good one\"", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "Complete trust: \"You know what I need!\"", "scores": {"D": 4, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 18,
+      "axis": "C",
+      "section": "C-Axis: AI Control Measurement",
+      "question": "Important deadline in 1 hour. AI delivered something that's about 70% of what you wanted - good enough to pass, but not perfect. Your move?",
+      "answers": [
+        {"letter": "a", "text": "\"70% isn't good enough\" - rewrite everything to 90%+ standard", "scores": {"D": 3, "E": 3, "T": 2, "C": 5}},
+        {"letter": "b", "text": "Spend the full hour improving it to 80-85% quality", "scores": {"D": 3, "E": 3, "T": 3, "C": 4}},
+        {"letter": "c", "text": "Quick fixes for the most obvious issues and submit", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"This is pretty good\" - minor tweaks and done", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"70% from AI is better than anything I'd write!\" - submit as-is", "scores": {"D": 4, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 19,
+      "axis": "C",
+      "section": "C-Axis: AI Control Measurement",
+      "question": "Working on a group project where AI could help. What's your usual role with AI tools?",
+      "answers": [
+        {"letter": "a", "text": "\"I'll review everything AI produces before we use it\" - quality control", "scores": {"D": 3, "E": 3, "T": 2, "C": 5}},
+        {"letter": "b", "text": "\"Let's use AI for drafts, then we'll refine everything together\"", "scores": {"D": 3, "E": 3, "T": 3, "C": 4}},
+        {"letter": "c", "text": "\"AI can handle some parts, we'll handle others\" - balanced approach", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "\"AI can do most of it, we'll just review and approve\"", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "\"Let AI handle everything, we'll just put our names on it\"", "scores": {"D": 4, "E": 3, "T": 5, "C": 1}}
+      ]
+    },
+    {
+      "id": 20,
+      "axis": "C",
+      "section": "C-Axis: AI Control Measurement",
+      "question": "What percentage quality does an AI output need to reach\nbefore you're comfortable using it?",
+      "answers": [
+        {"letter": "a", "text": "90%+ or I'm rewriting it myself", "scores": {"D": 2, "E": 2, "T": 2, "C": 5}},
+        {"letter": "b", "text": "80% is good enough, not everything needs to be perfect", "scores": {"D": 3, "E": 3, "T": 3, "C": 4}},
+        {"letter": "c", "text": "70% works fine - saves time even if not ideal", "scores": {"D": 3, "E": 3, "T": 3, "C": 3}},
+        {"letter": "d", "text": "60% is great - way better than starting from scratch", "scores": {"D": 4, "E": 3, "T": 4, "C": 2}},
+        {"letter": "e", "text": "50% is amazing - I'm grateful AI did anything at all!", "scores": {"D": 4, "E": 3, "T": 5, "C": 1}}
+      ]
+    }
+  ]
+}

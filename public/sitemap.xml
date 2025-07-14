@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- 메인 페이지 -->
+  <url>
+    <loc>https://matrixme.app/</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://matrixme.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matrixme.app/en/" />
+  </url>
+  
+  <url>
+    <loc>https://matrixme.app/en/</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://matrixme.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matrixme.app/en/" />
+  </url>
+  
+  <!-- 한국어 퀴즈 페이지 -->
+  <url>
+    <loc>https://matrixme.app/ko/quiz/</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/quiz/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matrixme.app/en/quiz/" />
+  </url>
+  
+  <!-- 영어 퀴즈 페이지 -->
+  <url>
+    <loc>https://matrixme.app/en/quiz/</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/quiz/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matrixme.app/en/quiz/" />
+  </url>
+  
+  <!-- 한국어 결과 페이지 -->
+  <url>
+    <loc>https://matrixme.app/ko/result/</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/result/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matrixme.app/en/result/" />
+  </url>
+  
+  <!-- 영어 결과 페이지 -->
+  <url>
+    <loc>https://matrixme.app/en/result/</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/result/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://matrixme.app/en/result/" />
+  </url>
+  
+</urlset>

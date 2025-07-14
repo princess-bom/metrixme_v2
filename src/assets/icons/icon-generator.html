@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PWA Icon Generator</title>
+</head>
+<body>
+    <h1>Matrix Me PWA Icon Generator</h1>
+    <p>이 페이지는 PWA용 아이콘을 생성합니다.</p>
+    <button onclick="generateAllIcons()">Generate All Icons</button>
+    
+    <script>
+        function generateIcon(size) {
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Black background
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Green border (terminal style)
+            ctx.strokeStyle = '#00FF00';
+            ctx.lineWidth = Math.max(2, size / 32);
+            ctx.strokeRect(ctx.lineWidth, ctx.lineWidth, size - 2 * ctx.lineWidth, size - 2 * ctx.lineWidth);
+            
+            // Matrix M character
+            ctx.fillStyle = '#00FF00';
+            ctx.font = `bold ${size * 0.6}px monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('M', size / 2, size / 2);
+            
+            // Add subtle glow effect
+            ctx.shadowColor = '#00FF00';
+            ctx.shadowBlur = size / 20;
+            ctx.fillText('M', size / 2, size / 2);
+            
+            return canvas.toDataURL('image/png');
+        }
+        
+        function downloadIcon(dataUrl, filename) {
+            const a = document.createElement('a');
+            a.href = dataUrl;
+            a.download = filename;
+            a.click();
+        }
+        
+        function generateAllIcons() {
+            const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+            
+            sizes.forEach((size, index) => {
+                setTimeout(() => {
+                    const dataUrl = generateIcon(size);
+                    downloadIcon(dataUrl, `icon-${size}x${size}.png`);
+                }, index * 200);
+            });
+        }
+    </script>
+</body>
+</html>

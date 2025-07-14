@@ -1,0 +1,744 @@
+/**
+ * Matrix Me 디자인 시스템
+ * 기존 terminal.css를 통합한 완전한 디자인 시스템
+ */
+
+/* 기본 리셋 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 기본 바디 스타일 */
+body {
+  font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Courier New', 'D2Coding', monospace;
+  font-size: 14px;
+  line-height: 1.4;
+  background: #000000;
+  color: #00FF00;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+:root {
+    /* =========================
+       색상 시스템 - 기존 terminal.css와 호환성 유지
+    ========================= */
+    
+    /* 기본 색상 */
+    --color-black: #000000;
+    --color-dark-gray: #0A0A0A;
+    --color-gray: #333333;
+    --color-light-gray: #666666;
+    --color-white: #FFFFFF;
+    
+    /* 기존 CSS와 호환을 위한 네온 색상 */
+    --neon-green: #00FF00;
+    --neon-cyan: #00CCFF;
+    --neon-blue: #00AAFF;
+    --neon-yellow: #FFFF00;
+    --neon-orange: #FF8C00;
+    --neon-pink: #FF0080;
+    --neon-purple: #CC00FF;
+    --neon-red: #FF4444;
+    
+    /* 네온 색상 - RGB 값 (투명도 적용용) */
+    --neon-green-rgb: 0, 255, 0;
+    --neon-cyan-rgb: 0, 204, 255;
+    --neon-blue-rgb: 0, 170, 255;
+    --neon-yellow-rgb: 255, 255, 0;
+    --neon-orange-rgb: 255, 140, 0;
+    --neon-pink-rgb: 255, 0, 128;
+    --neon-purple-rgb: 204, 0, 255;
+    --neon-red-rgb: 255, 68, 68;
+    
+    /* 테마 색상 (ColorManager에서 동적으로 변경) */
+    --theme-primary: #00CC88;
+    --theme-primary-rgb: 0, 204, 136;
+    
+    /* 배경 색상 - 기존 스타일 덮어쓰지 않도록 주의 */
+    --bg-primary: #000000;
+    --bg-secondary: #0A0A0A;
+    --bg-tertiary: #111111;
+    --bg-card: #1a1a1a;
+    --bg-terminal: #000000;
+    --bg-input: #0a0a0a;
+    
+    /* 기존 terminal.css 색상 체계 유지 */
+    --text-primary: #00FF00;        /* 네온 그린 */
+    --text-primary-rgb: 0, 255, 0;  /* RGB 값 */
+    --text-secondary: #00CCFF;      /* 사이버 블루 */
+    --text-warning: #FF0066;        /* 분홍/마젠타 (질문 박스) */
+    --text-success: #00FF88;        /* 밝은 그린 (진행바) */
+    --text-error: #FF3333;          /* 빨간색 (경고/상태) */
+    --text-muted: #666666;          /* 회색 (미선택 답) */
+    --text-selected: #00FF00;       /* 선택된 답 테두리 */
+    --text-info: #00CCFF;
+    
+    /* 터미널 컨트롤 색상 */
+    --control-red: #FF5F57;
+    --control-yellow: #FFBD2E;
+    --control-green: #28CA42;
+    
+    /* 테두리 색상 */
+    --border-primary: #333333;
+    --border-secondary: #222222;
+    --border-accent: #00CCFF;
+    --border-success: #00FF00;
+    --border-error: #FF4444;
+    --border-warning: #FFFF00;
+    
+    /* =========================
+       간격 시스템
+    ========================= */
+    
+    /* 기본 간격 */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+    --spacing-4xl: 40px;
+    --spacing-5xl: 48px;
+    --spacing-6xl: 64px;
+    
+    /* 컴포넌트별 간격 */
+    --padding-button: 4px 8px;
+    --padding-input: 8px 12px;
+    --padding-card: 20px;
+    --padding-terminal: 20px;
+    --padding-header: 12px 20px;
+    
+    /* 여백 */
+    --margin-section: 20px;
+    --margin-component: 12px;
+    --margin-element: 8px;
+    
+    /* =========================
+       폰트 시스템
+    ========================= */
+    
+    /* 폰트 패밀리 */
+    --font-mono: 'JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', monospace;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    
+    /* 폰트 크기 */
+    --font-size-xs: 10px;
+    --font-size-sm: 12px;
+    --font-size-md: 14px;
+    --font-size-lg: 16px;
+    --font-size-xl: 18px;
+    --font-size-2xl: 20px;
+    --font-size-3xl: 24px;
+    --font-size-4xl: 28px;
+    --font-size-5xl: 32px;
+    
+    /* 폰트 두께 */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    
+    /* 라인 높이 */
+    --line-height-tight: 1.2;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.6;
+    --line-height-loose: 1.8;
+    
+    /* =========================
+       컴포넌트 크기
+    ========================= */
+    
+    /* 버튼 크기 */
+    --button-height-sm: 28px;
+    --button-height-md: 32px;
+    --button-height-lg: 40px;
+    
+    /* 입력 필드 크기 */
+    --input-height-sm: 32px;
+    --input-height-md: 36px;
+    --input-height-lg: 44px;
+    
+    /* 터미널 제어 버튼 크기 */
+    --control-size: 12px;
+    --control-size-mobile: 8px;
+    
+    /* =========================
+       효과 시스템
+    ========================= */
+    
+    /* 그림자 */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+    
+    /* 네온 글로우 효과 */
+    --glow-sm: 0 0 5px currentColor;
+    --glow-md: 0 0 10px currentColor;
+    --glow-lg: 0 0 15px currentColor;
+    --glow-xl: 0 0 20px currentColor;
+    
+    /* 터미널 글로우 효과 */
+    --terminal-glow: 0 0 20px rgba(0, 255, 0, 0.3);
+    --terminal-glow-strong: 0 0 40px rgba(0, 255, 0, 0.5);
+    
+    /* 전환 효과 */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+    --transition-bounce: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* =========================
+       반응형 브레이크포인트
+    ========================= */
+    
+    /* 브레이크포인트 값 */
+    --breakpoint-mobile: 767px;
+    --breakpoint-tablet: 1024px;
+    --breakpoint-desktop: 1200px;
+    
+    /* =========================
+       Z-Index 시스템
+    ========================= */
+    
+    --z-index-dropdown: 1000;
+    --z-index-modal: 1050;
+    --z-index-tooltip: 1100;
+    --z-index-notification: 1200;
+    
+    /* =========================
+       애니메이션 시스템
+    ========================= */
+    
+    /* 애니메이션 지속 시간 */
+    --animation-duration-fast: 0.2s;
+    --animation-duration-normal: 0.3s;
+    --animation-duration-slow: 0.5s;
+    
+    /* 애니메이션 타이밍 */
+    --animation-timing-ease: ease;
+    --animation-timing-ease-in: ease-in;
+    --animation-timing-ease-out: ease-out;
+    --animation-timing-ease-in-out: ease-in-out;
+    
+    /* =========================
+       AI 타입별 색상 시스템
+    ========================= */
+    
+    /* 16가지 AI 타입 색상 */
+    --ai-type-1: #00CC88;  /* 민트 그린 */
+    --ai-type-2: #D0D0D0;  /* 실버 화이트 */
+    --ai-type-3: #FF8C00;  /* 앰버 오렌지 */
+    --ai-type-4: #FF0080;  /* 네온 핑크 */
+    --ai-type-5: #00AAFF;  /* 아이스 블루 */
+    --ai-type-6: #9966FF;  /* 바이올렛 퍼플 */
+    --ai-type-7: #FF6B35;  /* 코랄 오렌지 */
+    --ai-type-8: #00FFAA;  /* 에메랄드 그린 */
+    --ai-type-9: #FFD700;  /* 골드 옐로우 */
+    --ai-type-10: #FF1493; /* 딥 핑크 */
+    --ai-type-11: #00CED1; /* 다크 터키 */
+    --ai-type-12: #FF69B4; /* 핫 핑크 */
+    --ai-type-13: #32CD32; /* 라임 그린 */
+    --ai-type-14: #FF4500; /* 오렌지 레드 */
+    --ai-type-15: #8A2BE2; /* 블루 바이올렛 */
+    --ai-type-16: #00FF7F; /* 스프링 그린 */
+}
+
+/* =========================
+   유틸리티 클래스
+========================= */
+
+/* 텍스트 색상 유틸리티 - 기존 클래스와 충돌 방지 */
+.text-primary-ds { color: var(--text-primary-alt); }
+.text-secondary-ds { color: var(--text-secondary-alt); }
+.text-tertiary-ds { color: var(--text-tertiary-alt); }
+.text-terminal-ds { color: var(--text-terminal-alt); }
+.text-error-ds { color: var(--text-error); }
+.text-success-ds { color: var(--text-success); }
+.text-warning-ds { color: var(--text-warning); }
+.text-info-ds { color: var(--text-info); }
+
+/* 배경 색상 유틸리티 - 기존 클래스와 충돌 방지 */
+.bg-primary-ds { background-color: var(--bg-primary); }
+.bg-secondary-ds { background-color: var(--bg-secondary); }
+.bg-tertiary-ds { background-color: var(--bg-tertiary); }
+.bg-card-ds { background-color: var(--bg-card); }
+
+/* 네온 효과 유틸리티 */
+.neon-glow-sm { text-shadow: var(--glow-sm); }
+.neon-glow-md { text-shadow: var(--glow-md); }
+.neon-glow-lg { text-shadow: var(--glow-lg); }
+.neon-glow-xl { text-shadow: var(--glow-xl); }
+
+/* 간격 유틸리티 */
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+
+.m-xs { margin: var(--spacing-xs); }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+.m-xl { margin: var(--spacing-xl); }
+
+/* 폰트 유틸리티 */
+.font-mono { font-family: var(--font-mono); }
+.font-sans { font-family: var(--font-sans); }
+
+.font-xs { font-size: var(--font-size-xs); }
+.font-sm { font-size: var(--font-size-sm); }
+.font-md { font-size: var(--font-size-md); }
+.font-lg { font-size: var(--font-size-lg); }
+.font-xl { font-size: var(--font-size-xl); }
+
+.font-normal { font-weight: var(--font-weight-normal); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* 전환 효과 유틸리티 */
+.transition-fast { transition: all var(--transition-fast); }
+.transition-normal { transition: all var(--transition-normal); }
+.transition-slow { transition: all var(--transition-slow); }
+
+/* =========================
+   모바일 반응형 조정
+========================= */
+
+@media (max-width: 767px) {
+    :root {
+        /* 모바일에서 폰트 크기 조정 */
+        --font-size-xs: 8px;
+        --font-size-sm: 10px;
+        --font-size-md: 12px;
+        --font-size-lg: 14px;
+        --font-size-xl: 16px;
+        
+        /* 모바일에서 간격 조정 */
+        --spacing-xs: 2px;
+        --spacing-sm: 4px;
+        --spacing-md: 8px;
+        --spacing-lg: 12px;
+        --spacing-xl: 16px;
+        
+        /* 모바일에서 패딩 조정 */
+        --padding-button: 2px 4px;
+        --padding-input: 4px 8px;
+        --padding-card: 15px;
+        --padding-terminal: 15px;
+        --padding-header: 10px 15px;
+        
+        /* 모바일에서 컴포넌트 크기 조정 */
+        --button-height-sm: 24px;
+        --button-height-md: 28px;
+        --button-height-lg: 32px;
+        
+        --input-height-sm: 28px;
+        --input-height-md: 32px;
+        --input-height-lg: 36px;
+        
+        --control-size: 8px;
+    }
+}
+
+/* =========================
+   다크 모드 대응
+========================= */
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* 다크 모드에서는 기본 설정 유지 */
+        /* Matrix Me는 기본적으로 다크 테마 */
+    }
+}
+
+/* =========================
+   고대비 모드 대응
+========================= */
+
+@media (prefers-contrast: high) {
+    :root {
+        /* 고대비 모드에서 색상 강화 */
+        --text-primary: #FFFFFF;
+        --text-secondary: #E0E0E0;
+        --border-primary: #FFFFFF;
+        --border-secondary: #CCCCCC;
+    }
+}
+
+/* =========================
+   애니메이션 감소 모드 대응
+========================= */
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        /* 애니메이션 지속 시간 단축 */
+        --animation-duration-fast: 0.01s;
+        --animation-duration-normal: 0.01s;
+        --animation-duration-slow: 0.01s;
+        
+        --transition-fast: 0.01s ease;
+        --transition-normal: 0.01s ease;
+        --transition-slow: 0.01s ease;
+    }
+}
+
+/* =========================
+   터미널 컴포넌트 스타일
+========================= */
+
+.terminal-container {
+  width: 1024px;
+  max-width: 1024px;
+  background: #1A1A1A;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 0, 0.3),
+    0 0 40px rgba(0, 255, 0, 0.1),
+    0 0 80px rgba(0, 255, 0, 0.05);
+  overflow: visible;
+  position: relative;
+}
+
+.terminal-header {
+  background: #0A0A0A;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #333;
+  position: relative;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.control {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.control:hover {
+  opacity: 0.8;
+}
+
+.control.red {
+  background: var(--control-red);
+}
+
+.control.yellow {
+  background: var(--control-yellow);
+}
+
+.control.green {
+  background: var(--control-green);
+}
+
+.terminal-title {
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-shadow: 0 0 10px currentColor;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.title-part1,
+.title-part2,
+.title-separator {
+  display: inline;
+}
+
+.terminal-header-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.terminal-color-toggle,
+.terminal-language-toggle {
+  background: transparent !important;
+  border: 1px solid var(--text-primary) !important;
+  border-radius: 2px !important;
+  padding: 4px 8px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  font-family: inherit !important;
+  font-size: 10px !important;
+  font-weight: normal !important;
+  color: var(--text-primary) !important;
+  text-shadow: 0 0 8px var(--text-primary) !important;
+  opacity: 0.7 !important;
+  display: inline-block !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  text-align: center !important;
+}
+
+.terminal-color-toggle:hover,
+.terminal-language-toggle:hover {
+  background: rgba(var(--text-primary-rgb), 0.1) !important;
+  box-shadow: 0 0 10px rgba(var(--text-primary-rgb), 0.3) !important;
+  opacity: 1 !important;
+  transform: scale(1.05) !important;
+}
+
+.terminal-content {
+  padding: 20px;
+  min-height: 500px;
+  font-size: 14px;
+  line-height: 1.6;
+  background: #000000;
+}
+
+.boot-sequence {
+  animation: fadeIn 0.5s ease-in;
+}
+
+.boot-line {
+  margin-bottom: 4px;
+  color: var(--text-primary);
+  text-shadow: 0 0 5px currentColor;
+}
+
+.boot-line:empty {
+  margin-bottom: 8px;
+}
+
+.separator-line {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ascii-art {
+  color: var(--text-secondary);
+  font-size: 10px;
+  line-height: 1.2;
+  margin: 16px 0;
+  text-align: center;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.language-options {
+  margin: 12px 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 4px 0;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.option:hover {
+  background: rgba(var(--text-primary-rgb), 0.1);
+  border-color: var(--text-primary);
+  box-shadow: 0 0 10px rgba(var(--text-primary-rgb), 0.3);
+}
+
+.option-key {
+  color: var(--text-warning);
+  font-weight: bold;
+  min-width: 32px;
+  text-align: center;
+  text-shadow: 0 0 8px currentColor;
+}
+
+.option-text {
+  color: var(--text-primary);
+  text-shadow: 0 0 5px currentColor;
+}
+
+.input-line {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 16px;
+  position: relative;
+}
+
+.prompt {
+  color: var(--text-success);
+  font-weight: bold;
+  text-shadow: 0 0 8px currentColor;
+}
+
+.input-text {
+  color: var(--text-primary);
+  text-shadow: 0 0 5px currentColor;
+}
+
+.cursor {
+  color: var(--text-primary);
+  animation: blink 1s infinite;
+  text-shadow: 0 0 8px currentColor;
+}
+
+/* 로딩 화면 스타일 */
+#main-loading-text,
+#loading-text {
+  color: var(--text-primary);
+  text-shadow: 0 0 10px var(--text-primary);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+#main-progress-line,
+#progress-line {
+  color: var(--text-secondary);
+  font-family: monospace;
+  letter-spacing: 0px;
+  text-shadow: 0 0 8px currentColor;
+}
+
+#main-loading-progress,
+#loading-progress {
+  color: var(--text-success);
+  text-shadow: 0 0 10px var(--text-success);
+  font-weight: bold;
+}
+
+#main-progress-percent,
+#progress-percent {
+  color: var(--text-warning);
+  text-shadow: 0 0 8px var(--text-warning);
+  font-weight: bold;
+}
+
+#main-completion-text,
+#completion-text {
+  color: var(--text-success);
+  text-shadow: 0 0 15px var(--text-success);
+  font-weight: bold;
+  animation: glow 1s ease-in-out;
+}
+
+/* 애니메이션 */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+@keyframes glow {
+  0% { 
+    opacity: 0;
+    text-shadow: 0 0 5px var(--text-success);
+  }
+  100% { 
+    opacity: 1;
+    text-shadow: 0 0 15px var(--text-success);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 반응형 */
+@media (max-width: 1023px) {
+  body {
+    padding: 20px;
+  }
+  
+  .terminal-container {
+    width: 100%;
+    max-width: calc(100vw - 40px);
+    min-width: 320px;
+  }
+  
+  .terminal-header {
+    width: 100% !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+    padding: 12px 20px !important;
+    border-radius: 12px 12px 0 0 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .terminal-container {
+    width: min(375px, calc(100vw - 32px));
+    max-width: calc(100vw - 32px);
+    border-radius: 8px;
+    height: min(100dvh, calc(100vh - 140px));
+    display: flex;
+    flex-direction: column;
+    padding-top: max(16px, env(safe-area-inset-top));
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
+  }
+  
+  .terminal-header {
+    padding: 10px 16px;
+  }
+  
+  .terminal-title {
+    font-size: 11px;
+    white-space: normal;
+    line-height: 1.2;
+  }
+  
+  .title-separator {
+    display: none;
+  }
+  
+  .title-part1::after {
+    content: "\A";
+    white-space: pre;
+  }
+  
+  .terminal-content {
+    padding: 16px;
+    font-size: 12px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  .terminal-header-buttons {
+    gap: 6px;
+  }
+  
+  .terminal-color-toggle,
+  .terminal-language-toggle {
+    padding: 3px 6px !important;
+    font-size: 9px !important;
+  }
+  
+  .control {
+    width: 8px;
+    height: 8px;
+  }
+}

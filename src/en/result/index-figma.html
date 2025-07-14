@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Me - Diagnosis Result</title>
+    <meta name="description" content="Check your AI personality type diagnosis result!">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Matrix Me - AI Personality Result">
+    <meta property="og:description" content="My AI personality type has been revealed!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://matrixme.app/en/result/">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Matrix Me - AI Personality Result">
+    <meta name="twitter:description" content="My AI personality type has been revealed!">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="AI test result, AI personality result, Control Freak, Early Bird, AI Addict, AI type">
+    
+    <!-- hreflang 태그 -->
+    <link rel="alternate" hreflang="ko" href="https://matrixme.app/ko/result/">
+    <link rel="alternate" hreflang="en" href="https://matrixme.app/en/result/">
+    <link rel="alternate" hreflang="x-default" href="https://matrixme.app/en/result/">
+    
+    <!-- JSON-LD 구조화 데이터 -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Quiz",
+      "name": "Matrix Me AI Personality Test Result",
+      "description": "Discover your AI personality type result - one of 16 unique personality types",
+      "inLanguage": "en",
+      "about": {
+        "@type": "Thing",
+        "name": "AI Personality Type Result",
+        "description": "Individual AI tool usage patterns and characteristics analysis result"
+      },
+      "potentialAction": {
+        "@type": "ShareAction",
+        "name": "Share Your Result"
+      }
+    }
+    </script>
+    
+    <!-- Figma Design CSS -->
+    <style>
+        :root {
+            /* 피그마 정확한 컬러 팔레트 */
+            --bg-terminal: #0a0a0a;
+            --bg-header: #111111;
+            --bg-content: #000000;
+            --bg-card: #1a1a1a;
+            
+            /* 네온 컬러 */
+            --neon-cyan: #00ccff;
+            --neon-blue: #1e90ff;
+            --neon-green: #00ff88;
+            --neon-yellow: #ffd700;
+            --neon-pink: #ff0066;
+            --neon-red: #ff3333;
+            
+            /* 텍스트 */
+            --text-primary: #ffffff;
+            --text-secondary: #e6e6fa;
+            --text-terminal: #00ff00;
+            --text-muted: #888888;
+            
+            /* 테두리 */
+            --border-default: #333333;
+            --border-blue: #1e90ff;
+            --border-green: #00ff88;
+            --border-cyan: #00ccff;
+            --border-pink: #ff0066;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', 'Monaco', 'Courier New', monospace;
+            background: var(--bg-content);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* 메인 터미널 윈도우 */
+        .terminal-window {
+            width: 1000px;
+            height: 905px;
+            background: var(--bg-terminal);
+            border: 1px solid var(--border-default);
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', 'Monaco', 'Courier New', monospace;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 터미널 헤더 */
+        .terminal-header {
+            width: 952px;
+            height: 32px;
+            background: var(--bg-header);
+            border: 1px solid var(--border-default);
+            border-bottom: none;
+            margin: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+        }
+
+        .terminal-title {
+            display: flex;
+            align-items: center;
+        }
+
+        .traffic-lights {
+            display: flex;
+            gap: 6px;
+        }
+
+        .light {
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+        }
+
+        .light.red { background: var(--neon-red); }
+        .light.yellow { background: var(--neon-yellow); }
+        .light.green { background: var(--neon-green); }
+
+        .title-text {
+            color: var(--neon-green);
+            font-size: 14px;
+            font-weight: 500;
+            margin-left: 16px;
+        }
+
+        .matrix-type {
+            color: var(--neon-blue);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* 콘텐츠 영역 */
+        .content-area {
+            padding: 0 24px 24px 24px;
+            height: calc(905px - 80px);
+            overflow-y: auto;
+        }
+
+        /* 레포트 헤더 */
+        .report-header {
+            margin-bottom: 20px;
+        }
+
+        .terminal-prompt {
+            color: var(--text-terminal);
+            font-size: 16px;
+            line-height: 19.2px;
+            margin-bottom: 6px;
+        }
+
+        .completion-status {
+            color: var(--neon-green);
+            font-size: 16px;
+            line-height: 19.2px;
+            margin-bottom: 6px;
+        }
+
+        .terminal-cursor {
+            color: var(--text-terminal);
+            font-size: 16px;
+            line-height: 19.2px;
+        }
+
+        .terminal-cursor::after {
+            content: "_";
+            color: var(--neon-green);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* 타입 결과 섹션 */
+        .type-result {
+            margin-bottom: 20px;
+        }
+
+        .type-info {
+            margin-bottom: 12px;
+        }
+
+        .type-label {
+            color: var(--neon-cyan);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .type-name {
+            color: var(--neon-blue);
+            font-size: 18px;
+            font-weight: 700;
+            margin-left: 16px;
+            text-shadow: 
+                0 0 5px var(--neon-blue),
+                0 0 10px var(--neon-blue),
+                0 0 15px var(--neon-blue);
+        }
+
+        .probability {
+            margin-bottom: 12px;
+        }
+
+        .match-label {
+            color: var(--neon-cyan);
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .percentage {
+            color: var(--neon-blue);
+            font-size: 16px;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        .status {
+            color: var(--neon-green);
+            font-size: 16px;
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        .rarity {
+            color: var(--neon-yellow);
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        /* 프로필 카드 */
+        .profile-card {
+            background: var(--bg-card);
+            border: 2px solid var(--neon-blue);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 20px rgba(30, 144, 255, 0.3);
+        }
+
+        .profile-title {
+            color: var(--neon-blue);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .profile-line {
+            color: var(--text-primary);
+            font-size: 16px;
+            line-height: 19.2px;
+            margin-bottom: 10px;
+        }
+
+        /* 2열 레이아웃 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            color: var(--neon-cyan);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .section-title.weak {
+            color: var(--neon-pink);
+        }
+
+        /* 일상 루틴 */
+        .routine-item {
+            font-size: 14px;
+            line-height: 16.8px;
+            margin-bottom: 8px;
+        }
+
+        .routine-item.success {
+            color: var(--neon-green);
+        }
+
+        .routine-item.error {
+            color: var(--neon-red);
+        }
+
+        /* 무기고 */
+        .arsenal-item {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 16.8px;
+            margin-bottom: 8px;
+        }
+
+        /* 강점/약점 */
+        .strength-item {
+            color: var(--neon-green);
+            font-size: 14px;
+            line-height: 16.8px;
+            margin-bottom: 8px;
+        }
+
+        .weakness-item {
+            color: var(--neon-red);
+            font-size: 14px;
+            line-height: 16.8px;
+            margin-bottom: 8px;
+        }
+
+        /* 궁합 섹션 */
+        .compatibility {
+            margin-bottom: 20px;
+        }
+
+        .compatibility-title {
+            color: var(--neon-pink);
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .good-match {
+            color: var(--neon-yellow);
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .bad-match {
+            color: var(--neon-pink);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* 액션 버튼들 */
+        .action-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            background: var(--bg-card);
+            border: 2px solid;
+            border-radius: 4px;
+            padding: 14px 24px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            will-change: transform;
+        }
+
+        .btn-share {
+            border-color: var(--neon-green);
+            color: var(--neon-green);
+        }
+
+        .btn-retest {
+            border-color: var(--neon-cyan);
+            color: var(--neon-cyan);
+        }
+
+        .btn-others {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-1px);
+        }
+
+        /* 반응형 디자인 */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .terminal-window {
+                width: calc(100% - 40px);
+                height: auto;
+                margin: 20px;
+            }
+            
+            .terminal-header {
+                width: calc(100% - 48px);
+            }
+            
+            .title-text {
+                font-size: 12px;
+            }
+            
+            .matrix-type {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .terminal-window {
+                width: calc(100% - 20px);
+                height: auto;
+                margin: 10px;
+                font-size: 14px;
+            }
+            
+            .terminal-header {
+                width: calc(100% - 32px);
+                height: 28px;
+                margin: 16px;
+                padding: 0 12px;
+            }
+            
+            .traffic-lights {
+                gap: 4px;
+            }
+            
+            .light {
+                width: 8px;
+                height: 8px;
+                border-radius: 4px;
+            }
+            
+            .title-text {
+                font-size: 10px;
+                margin-left: 8px;
+            }
+            
+            .matrix-type {
+                font-size: 10px;
+            }
+            
+            .type-name {
+                font-size: 16px;
+            }
+            
+            .profile-card {
+                padding: 16px;
+            }
+            
+            .section-title {
+                font-size: 14px;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 12px 16px;
+                font-size: 14px;
+            }
+        }
+
+        /* 네온 글로우 효과 */
+        .neon-glow {
+            text-shadow: 
+                0 0 5px currentColor,
+                0 0 10px currentColor,
+                0 0 15px currentColor;
+        }
+
+        /* GPU 가속 최적화 */
+        .terminal-window {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+    </style>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="terminal-window">
+        <!-- 터미널 헤더 -->
+        <div class="terminal-header">
+            <div class="terminal-title">
+                <div class="traffic-lights">
+                    <div class="light red"></div>
+                    <div class="light yellow"></div>
+                    <div class="light green"></div>
+                </div>
+                <span class="title-text">MATRIX ME - DNA Analysis Complete</span>
+            </div>
+            <div class="matrix-type" id="matrix-type">AI ADDICT MATRIX</div>
+        </div>
+        
+        <!-- 콘텐츠 영역 -->
+        <div class="content-area">
+            <!-- 레포트 헤더 -->
+            <div class="report-header">
+                <div class="terminal-prompt">> MATRIX ME AI DNA Analysis Report</div>
+                <div class="completion-status">> Neural pattern recognition: COMPLETE</div>
+                <div class="terminal-cursor">></div>
+            </div>
+            
+            <!-- 타입 결과 섹션 -->
+            <div class="type-result">
+                <div class="type-info">
+                    <span class="type-label">> MATRIX TYPE:</span>
+                    <span class="type-name" id="type-name">AI ADDICT (Total AI Integration)</span>
+                </div>
+                <div class="probability">
+                    <span class="match-label">> Neural Match:</span>
+                    <span class="percentage" id="neural-match">96%</span>
+                    <span class="status">CONFIRMED</span>
+                </div>
+                <div class="rarity" id="rarity-info">> Rarity: Legendary Type (Top 1%) - True AI Native!</div>
+            </div>
+            
+            <!-- 프로필 카드 -->
+            <div class="profile-card">
+                <div class="profile-title" id="profile-title">MATRIX PROFILE - AI ADDICT TYPE:</div>
+                <div class="profile-content" id="profile-content">
+                    <div class="profile-line">> "Can't breathe without AI!" - Addict's Manifesto</div>
+                    <div class="profile-line">> AI = My digital twin, AI-first approach to everything</div>
+                    <div class="profile-line">> Subscription bomb ($200+/month) without hesitation</div>
+                </div>
+            </div>
+            
+            <!-- 2열 레이아웃 (메인 콘텐츠) -->
+            <div class="main-content">
+                <div class="left-column">
+                    <!-- 일상 루틴 -->
+                    <div class="section daily-routine">
+                        <div class="section-title">> AI Addict Daily Routine:</div>
+                        <div class="routine-item success">• 06:00 > "AI, plan my day"</div>
+                        <div class="routine-item success">• 12:00 > "AI, recommend lunch menu"</div>
+                        <div class="routine-item success">• 18:00 > "AI, what's for dinner?"</div>
+                        <div class="routine-item error">• ERROR > Panic attack when ChatGPT is down</div>
+                    </div>
+                    
+                    <!-- 무기고 -->
+                    <div class="section arsenal">
+                        <div class="section-title">> AI Addict's Arsenal:</div>
+                        <div class="arsenal-item">• ChatGPT Plus: "Main Workstation"</div>
+                        <div class="arsenal-item">• Claude: "Deep Analysis Tool"</div>
+                        <div class="arsenal-item">• Midjourney: "Visual Creator"</div>
+                        <div class="arsenal-item">• Zapier AI: "Ultimate Automation"</div>
+                    </div>
+                </div>
+                
+                <div class="right-column">
+                    <!-- 강점 -->
+                    <div class="section strengths">
+                        <div class="section-title">> Strength Analysis:</div>
+                        <div class="strength-item">✓ Overwhelming productivity - 10x human output</div>
+                        <div class="strength-item">✓ Master of latest AI features</div>
+                        <div class="strength-item">✓ Pioneer of future work style</div>
+                        <div class="strength-item">✓ Expert in AI tool combinations</div>
+                    </div>
+                    
+                    <!-- 약점 -->
+                    <div class="section weaknesses">
+                        <div class="section-title weak">> Weakness Analysis:</div>
+                        <div class="weakness-item">✗ Extremely high AI dependency (addiction level)</div>
+                        <div class="weakness-item">✗ Panic attacks during system downtime</div>
+                        <div class="weakness-item">✗ Subscription bomb ($300+/month)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 궁합 섹션 -->
+            <div class="compatibility">
+                <div class="compatibility-title">> Compatibility with Other Types:</div>
+                <div class="compatibility-items">
+                    <div class="good-match">🎉 Perfect Match: EVANGELIST, EARLY BIRD</div>
+                    <div class="bad-match">🔥 Total Opposite: SCARED CAT, STEALTH EXPERT</div>
+                </div>
+            </div>
+            
+            <!-- 액션 버튼들 -->
+            <div class="action-buttons">
+                <button class="btn btn-share" onclick="shareResult()">
+                    <span>[SHARE MATRIX]</span>
+                </button>
+                <button class="btn btn-retest" onclick="retakeTest()">
+                    <span>[RESCAN DNA]</span>
+                </button>
+                <button class="btn btn-others" onclick="viewAllTypes()">
+                    <span>[VIEW ALL TYPES]</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 타이핑 효과 함수
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.textContent = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+
+        // 타입별 데이터 매핑 (영어)
+        const typeData = {
+            'aiaddict': {
+                name: 'AI ADDICT (Total AI Integration)',
+                description: 'True AI Native who can\'t breathe without AI',
+                rarity: 'Legendary Type (Top 1%)',
+                profile: [
+                    'Can\'t breathe without AI! - Addict\'s Manifesto',
+                    'AI = My digital twin, AI-first approach to everything',
+                    'Subscription bomb ($200+/month) without hesitation'
+                ],
+                routine: [
+                    { text: '06:00 > "AI, plan my day"', type: 'success' },
+                    { text: '12:00 > "AI, recommend lunch menu"', type: 'success' },
+                    { text: '18:00 > "AI, what\'s for dinner?"', type: 'success' },
+                    { text: 'ERROR > Panic attack when ChatGPT is down', type: 'error' }
+                ],
+                arsenal: [
+                    'ChatGPT Plus: "Main Workstation"',
+                    'Claude: "Deep Analysis Tool"',
+                    'Midjourney: "Visual Creator"',
+                    'Zapier AI: "Ultimate Automation"'
+                ],
+                strengths: [
+                    'Overwhelming productivity - 10x human output',
+                    'Master of latest AI features',
+                    'Pioneer of future work style',
+                    'Expert in AI tool combinations'
+                ],
+                weaknesses: [
+                    'Extremely high AI dependency (addiction level)',
+                    'Panic attacks during system downtime',
+                    'Subscription bomb ($300+/month)'
+                ],
+                compatibility: {
+                    good: 'EVANGELIST, EARLY BIRD',
+                    bad: 'SCARED CAT, STEALTH EXPERT'
+                }
+            },
+            'controlfreak': {
+                name: 'CONTROL FREAK (Precision Master)',
+                description: 'Master who precisely controls AI like a tool',
+                rarity: 'Craftsman Type (Top 8%)',
+                profile: [
+                    'AI is just a tool, I am the master - Control Philosophy',
+                    'Perfect prompt engineering master',
+                    '100% manual review and refinement of outputs'
+                ],
+                routine: [
+                    { text: '08:00 > Refine prompt 3 times before execution', type: 'success' },
+                    { text: '14:00 > Meticulously polish AI outputs', type: 'success' },
+                    { text: '20:00 > Prepare tomorrow\'s prompts in advance', type: 'success' },
+                    { text: 'WARNING > Redo if not perfect', type: 'error' }
+                ],
+                arsenal: [
+                    'ChatGPT: "First Draft Generator"',
+                    'Claude: "Precision Analysis Tool"',
+                    'Custom GPTs: "Dedicated Workflows"',
+                    'Notion AI: "Document Organizer"'
+                ],
+                strengths: [
+                    'Perfect quality outputs',
+                    'Prompt engineering mastery',
+                    'Accurate understanding of AI limitations',
+                    'Efficient work processes'
+                ],
+                weaknesses: [
+                    'Perfectionism slows down speed',
+                    'Low AI trust (very suspicious)',
+                    'Slow adaptation to new AI tools'
+                ],
+                compatibility: {
+                    good: 'WISE COUNSEL, EFFICIENCY KING',
+                    bad: 'AI ADDICT, EVANGELIST'
+                }
+            }
+        };
+
+        // URL에서 타입 정보 추출
+        function getResultType() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('type') || 'aiaddict';
+        }
+
+        // 결과 데이터 로딩 및 표시
+        function loadResultData() {
+            const resultType = getResultType();
+            const data = typeData[resultType] || typeData['aiaddict'];
+            
+            // 헤더 업데이트
+            document.getElementById('matrix-type').textContent = `${data.name.split('(')[0].trim()} MATRIX`;
+            
+            // 타입 이름 업데이트
+            document.getElementById('type-name').textContent = data.name;
+            
+            // 희귀도 업데이트
+            document.getElementById('rarity-info').textContent = `> Rarity: ${data.rarity} - ${data.description}!`;
+            
+            // 프로필 카드 업데이트
+            document.getElementById('profile-title').textContent = `MATRIX PROFILE - ${data.name.split('(')[0].trim()} TYPE:`;
+            const profileContent = document.getElementById('profile-content');
+            profileContent.innerHTML = data.profile.map(line => 
+                `<div class="profile-line">> "${line}"</div>`
+            ).join('');
+            
+            // 일상 루틴 업데이트
+            const routineSection = document.querySelector('.daily-routine');
+            routineSection.querySelector('.section-title').textContent = `> ${data.name.split('(')[0].trim()} Daily Routine:`;
+            const routineItems = data.routine.map(item => 
+                `<div class="routine-item ${item.type}">• ${item.text}</div>`
+            ).join('');
+            routineSection.innerHTML = routineSection.querySelector('.section-title').outerHTML + routineItems;
+            
+            // 무기고 업데이트
+            const arsenalSection = document.querySelector('.arsenal');
+            arsenalSection.querySelector('.section-title').textContent = `> ${data.name.split('(')[0].trim()}'s Arsenal:`;
+            const arsenalItems = data.arsenal.map(item => 
+                `<div class="arsenal-item">• ${item}</div>`
+            ).join('');
+            arsenalSection.innerHTML = arsenalSection.querySelector('.section-title').outerHTML + arsenalItems;
+            
+            // 강점 업데이트
+            const strengthsSection = document.querySelector('.strengths');
+            const strengthItems = data.strengths.map(item => 
+                `<div class="strength-item">✓ ${item}</div>`
+            ).join('');
+            strengthsSection.innerHTML = strengthsSection.querySelector('.section-title').outerHTML + strengthItems;
+            
+            // 약점 업데이트
+            const weaknessesSection = document.querySelector('.weaknesses');
+            const weaknessItems = data.weaknesses.map(item => 
+                `<div class="weakness-item">✗ ${item}</div>`
+            ).join('');
+            weaknessesSection.innerHTML = weaknessesSection.querySelector('.section-title').outerHTML + weaknessItems;
+            
+            // 궁합 업데이트
+            const compatibilitySection = document.querySelector('.compatibility-items');
+            compatibilitySection.innerHTML = `
+                <div class="good-match">🎉 Perfect Match: ${data.compatibility.good}</div>
+                <div class="bad-match">🔥 Total Opposite: ${data.compatibility.bad}</div>
+            `;
+        }
+
+        // 액션 함수들
+        function shareResult() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Matrix Me - My AI Personality Test Result',
+                    text: 'My AI personality type has been revealed!',
+                    url: window.location.href
+                });
+            } else {
+                // 클립보드 복사 폴백
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    alert('Result link copied to clipboard!');
+                });
+            }
+        }
+
+        function retakeTest() {
+            window.location.href = '../quiz/';
+        }
+
+        function viewAllTypes() {
+            alert('View all types feature coming soon!');
+        }
+
+        // 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            loadResultData();
+            
+            // 타이핑 효과 적용
+            const reportHeader = document.querySelector('.terminal-prompt');
+            typeWriter(reportHeader, '> MATRIX ME AI DNA Analysis Report', 30);
+        });
+    </script>
+</body>
+</html>
