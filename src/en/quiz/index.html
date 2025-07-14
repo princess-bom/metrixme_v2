@@ -70,22 +70,10 @@
             box-sizing: border-box;
         }
 
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+        /* body 정렬은 terminal.css에서 관리 - 중복 제거 */
 
-        /* 모바일 최적화 */
-        @media (max-width: 768px) {
-            body {
-                padding: 5px;
-                display: flex;
-                align-items: flex-start;
-                justify-content: center;
-                min-height: 100vh;
-            }
+        /* 모바일 최적화 - 미디어 쿼리 767px로 통일 */
+        @media (max-width: 767px) {
             
             .terminal-container {
                 margin: 0;

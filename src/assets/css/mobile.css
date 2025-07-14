@@ -1,5 +1,5 @@
-/* 모바일 터미널 최적화 */
-@media (max-width: 768px) {
+/* 모바일 터미널 최적화 - 767px로 통일 */
+@media (max-width: 767px) {
   body {
     padding: 10px;
     font-size: 12px;

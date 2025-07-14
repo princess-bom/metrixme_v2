@@ -10,7 +10,7 @@
   box-sizing: border-box;
 }
 
-/* 기본 바디 스타일 */
+/* 기본 바디 스타일 - terminal.css에서 정렬 관리하므로 제거 */
 body {
   font-family: 'JetBrains Mono', 'Monaco', 'Menlo', 'Courier New', 'D2Coding', monospace;
   font-size: 14px;
@@ -19,10 +19,7 @@ body {
   color: #00FF00;
   overflow-x: hidden;
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  /* display, align-items, justify-content, padding은 terminal.css에서 관리 */
 }
 
 :root {
